@@ -1,0 +1,129 @@
+% ****** Start of file apssamp.tex ******
+%
+%   This file is part of the APS files in the REVTeX 4.2 distribution.
+%   Version 4.2a of REVTeX, December 2014
+%
+%   Copyright (c) 2014 The American Physical Society.
+%
+%   See the REVTeX 4 README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.2
+%
+% See the REVTeX 4 README file
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex apssamp.tex
+%  2)  bibtex apssamp
+%  3)  latex apssamp.tex
+%  4)  latex apssamp.tex
+%
+\documentclass[superscriptaddress,unsortedaddress,
+%runinaddress,
+%frontmatterverbose, 
+%preprint,
+%preprintnumbers,
+%nofootinbib,
+%nobibnotes,
+%bibnotes,
+ amsmath,amssymb,
+ aps,
+%pra,
+%prb,
+%rmp,
+%prstab,
+%prstper,
+%floatfix,
+]{revtex4-2}
+
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{physics}
+\usepackage{lipsum}
+\usepackage{subfig}
+% \usepackage{braket}
+
+%\newcommand\abs[1]{\left|#1\right|}
+%\newcommand\bra[1]{\left| #1 \right \rangle}
+%\newcommand\ket[1]{\left \langle #1 \right |}
+
+\begin{document}
+
+
+\title{Predicting Solid State Qubit Candidates}
+
+\author{Oliver Lerstøl Hebnes}
+\affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+\author{Marianne Etzelm\"uller Bathen}
+\affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
+\author{Øyvind Sigmundson Schøyen}
+\affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+\author{Sebastian G. Winther-Larsen}
+\affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+\author{Morten Hjorth-Jensen}
+\affiliation{Facility for Rare Ion Beams and Department of Physics and Astronomy, Michigan State University, East Lansing, MI 48824, USA}
+\affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+\author{Lasse Vines}
+\affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
+
+\begin{abstract}
+
+Semiconductor materials provide a compelling platform for quantum
+technology, and a vast amount of materials and their properties can be
+found in high-throughput databases.  However, filtering among these
+materials in order to find novel candidates for quantum technology is
+a challenge. Therefore, we provide a framework for the automatic
+discovery of promising solid-state material hosts using machine
+learning methods.
+
+We have developed data extraction tools for numerous material science
+databases, and constructed over $4800$ physics-informed features for a
+dataset consisting of more than $25000$ materials.  Furthermore, we
+have developed and implemented three data mining approaches, termed
+\textit{the Ferrenti approach}, \textit{the augmented Ferrenti
+  approach} and \textit{the insightful approach} for defining three
+distinct training sets for the supervised machine learning algorithms
+logistic regression, decision tree, random forest and gradient boost
+to be trained on.
+
+We find a lack of consistent results for the Ferrenti approach and the
+augmented Ferrenti approach due to an overly broad formulation of the
+training set, whereas the restrictions set in the insightful approach
+proved suitable. All models agreed on $214$ predicted candidates, with
+examples such as ZnGeP$_2$, MgSe, CdS, BP, BC$_2$N, BP, Ge, GeC, InP,
+and InAs. All approaches and all models agreed on a subset of $47$
+eligible candidates of $8$ elemental, $29$ binary, and $10$ tertiary
+compounds.
+
+\end{abstract}
+
+\pacs{02.70.Ss, 31.15.A-, 31.15.bw, 71.15.-m, 73.21.La}
+
+
+
+
+\maketitle
+
+\section{Introduction}
+
+
+\section{Theoretical Background and Experimental Data} 
+
+\section{Results and Discussions}
+
+\section{Conclusions and Perspectives}
+
+
+\begin{acknowledgments}
+
+The work of MHJ is supported by the U.S. Department of Energy,
+Office of Science, office of Nuclear Physics under grant
+No. DE-SC0021152 and U.S. National Science Foundation Grants
+No. PHY-1404159 and PHY-2013047.
+
+\end{acknowledgments}
+
+\bibliography{apssamp}% Produces the bibliography via BibTeX.
+\end{document}
+
