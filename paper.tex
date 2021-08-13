@@ -56,7 +56,7 @@
 \author{Oliver Lerstøl Hebnes}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
 \author{Marianne Etzelm\"uller Bathen}
-\affiliation{Advanced Power Semiconductor Laboratory,ETH Zürich,  8092  Zürich,  Switzerland}
+\affiliation{Advanced Power Semiconductor Laboratory, ETH Zürich, 8092  Zürich,  Switzerland}
 \affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
 \author{Øyvind Sigmundson Schøyen}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
@@ -78,6 +78,7 @@ a challenge. Therefore, we provide a framework for the automatic
 discovery of promising solid-state material hosts using machine
 learning methods.
 
+%Main message 1: develop methodology for data mining and machine learning for materials properties 
 We have developed data extraction tools for numerous material science
 databases, and constructed over $4800$ physics-informed features for a
 dataset consisting of more than $25000$ materials.  Furthermore, we
@@ -88,6 +89,7 @@ distinct training sets for the supervised machine learning algorithms
 logistic regression, decision tree, random forest and gradient boost
 to be trained on.
 
+% Main message 2: Use method to propose new materials that are promising quantum hosts 
 We find a lack of consistent results for the Ferrenti approach and the
 augmented Ferrenti approach due to an overly broad formulation of the
 training set, whereas the restrictions set in the insightful approach
@@ -106,11 +108,12 @@ compounds.
 
 \maketitle
 
-%Where to submit? 
-% npj Quantum Information  or npj Computational Materials are options I am familiar with 
-% 
+%Submit to npj Computational Materials
 
-\section{Introduction}
+%Marianne: I have now structured the paper according to other papers in this journal 
+%I think we can make a supplementary material if we see that we need it, it is quite common for the journal 
+
+\section*{Introduction}%Oliver and Morten and Marianne (semiconductor portion)
 To sustain the digital world’s increasing computational demand, alternatives to the classical computer must be explored. The quantum computer, together with the complementary quantum technologies of sensing and communication, is becoming a frontrunner in the race for solutions. 
 Discuss recent benchmarks for quantum computing \cite{Arute_2019}. 
 
@@ -121,37 +124,78 @@ Unfortunately, there are substantial challenges associated with the modern quant
 
 The fourth science paradigm introduces the potential of targeted search for promising material systems to act as qubit hosts. 
 Herein, we provide a framework for the automatic discovery of promising solid-state material hosts using machine learning methods. 
-Initial database building similar to Ferrenti et al []. 
+Initial database building similar to Ferrenti et al \cite{Ferrenti2020}. 
 
-\section{Theoretical Background and Experimental Data} 
-%subsections are potential topics, not necessarily subsections we will actually include 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/ht-workflow.jpg}
+    \caption{Placeholder for workflow. Morten: can you please add the other schematic figure we discussed as placeholder? Sebastian makes our own versions of these schematic figures (I can make some VESTA files with materials). }
+    \label{fig:ht-workflow}
+\end{figure}
 
-\subsection{Quantum host material requirements}
+\section*{Theoretical Background and Experimental Data} 
+%Subsections are potential topics, not necessarily subsections we will actually include. 
+%We can probably merge a few of the subsections in the end, or even move some theory to the supplementary 
+
+%Not all papers have a theory chapter, but since we are speaking to two quite different communities, it might be nice to include some basics. 
+
+\subsection*{Quantum Host Material Requirements} %Marianne and Lasse 
 %What parameters are we looking for? 
+Discuss experimental data and the semiconductor platform. 
 
-\subsection{The semiconductor platform}
+%\subsection*{The semiconductor platform} %Marianne and Lasse 
 %Experimental findings 
 
-\subsection{Introduction to DFT} 
-%Data formats 
+\subsection*{Density Functional Theory Output} %Marianne 
+Data formats, limitations etc.  
 
-\subsection{Databases} 
+\subsection*{Material Informatics} %Øyvind (Oliver)    
+%Data mining, screening 
+
+\subsection*{Machine Learning} % Morten 
+
+\section*{Results}
+Includes discussion of results.  
+
+\subsection*{Information Flow}  %Sebastian/Oyvind (Marianne) 
+Includes results from data mining and description of the three approaches. 
+%MEB: Since Methods are at the end, I propose to put part of this discussion in the Results section. 
+%This is because it is an important result of the work, and also because it is important to understand the rest of the paper 
+
+\subsection*{Optimization of Machine Learning Models} %Morten (Oliver input in round 2)
+
+\subsection*{Predicting Novel Material Hosts for Quantum Technology} %Oyvind (Oliver input in round 2) 
+\subsubsection*{The Ferrenti approach} 
+\subsubsection*{The augmented Ferrenti approach} 
+\subsubsection*{The insightful approach} 
+\subsubsection*{Comparing the approaches}  
+
+\section*{Discussion} % All - last thing we write  
+Shorter section, includes summary, concluding remarks and is quite heavy on outlook.  
+
+\section*{Methods}
+%Methodology comes after concluding remarks, and is structured into subsections 
+
+\subsection*{Databases} %Oliver and Øyvind 
 %Materials project, AFLOW, Open Quantum, JARVIS 
+Mining.  
 
-\section{Methodology}
-\subsection{Materials informatics} 
-Mining 
+\subsection*{Material Informatics} %Oliver and Øyvind 
+Screening and workflow and approaches.  
 
-Screening 
+\subsection*{Machine Learning} %Sebastian/Morten   
+Insight gaining. 
 
-\subsection{Machine learning} 
+\section*{Data availability} 
+%We can put something else, standard text 
+The data that support the plots within this paper and other findings of this study are
+available from the corresponding authors upon reasonable request.
 
+\section*{Code availability} 
+The codes developed in this study are available from the authors upon reasonable
+request.
 
-\section{Results and Discussion}
-\subsection{}
-
-\section{Conclusions and Perspectives}
-
+\bibliography{apssamp}% Produces the bibliography via BibTeX.
 
 \begin{acknowledgments}
 
@@ -165,6 +209,20 @@ MEB acknowledges support by an ETH Zurich Postdoctoral Fellowship.
 
 \end{acknowledgments}
 
-\bibliography{apssamp}% Produces the bibliography via BibTeX.
+\section*{Author contributions} 
+%Copied in from another paper 
+S.-M.J. conceived the idea and developed the simulation model. T.H.L. performed
+computer simulation. S.Y.B. and S.D.H. fabricated devices. D.-W.S., S.L., H.W.C. and
+J.-W.J. supported measurement of device performances. Y.-H.S. and X.-B.F.
+synthesised QD materials. S.Z. and J.Y. supported experiments. C.S. and Y.K.
+supported computer simulation. L.G.O. and G.A. supported data analysis. J.M.K.
+guided this work. S.-M.J., T.H.L. and S.Y.B. contributed equally. 
+All the authors
+contributed to the preparation of the manuscript.
+
+\section*{Competing interests}
+The authors declare no competing interests.
+
+
 \end{document}
 
