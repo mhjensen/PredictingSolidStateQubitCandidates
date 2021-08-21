@@ -134,17 +134,88 @@ Initial database building similar to Ferrenti et al \cite{Ferrenti2020}.
 \end{figure}
 
 \section*{Theoretical Background and Experimental Data} 
-
 %Not all papers have a theory chapter, but since we are speaking to two quite different communities, it might be nice to include some basics. 
+Quantum technologies, including sensing, communication and computing, 
+are intriguing because of the new capabilities they offer. 
+However, realization of large-scale fabrication for these techniques requires further technological development. 
+The superconducting electronics platform that is currently employed for quantum computers necessitates millikelvin temperatures and may prove challenging to scale. 
+Instead, recent developments have seen/heralded the rise of semiconductors as host materials for a variety of quantum devices. Much easier to combine with existing devices, and RT operation has been shown. 
+However, the ideal host has yet to be identified, and the requirements for acting as a good host remain unclear. 
+Different methods are needed. 
 
-\subsection*{Quantum Host Material Requirements} %Marianne and Lasse 
+\subsection*{Semiconductors as a Quantum Host} %Marianne and Lasse 
+The key feature when considering a quantum object for application is coherence, which is again tightly connected to the concept of coherence. 
+For all applications, the basic requirement is a two-level quantum system which is quite isolated so the levels remain stable. 
+Also need to control the qubit state via initialization, manipulation and read-out. 
+Requirements \cite{DiVincenzo2000,Weber2010}: 
+\begin{itemize}
+    \item A scalable physical system with well-characterized qubits
+    \item Reliable qubit initialization protocols 
+    \item Need quantum gates to operate on qubits 
+    \item Qubit state coherence time must exceed gate operation time 
+    \item Need to read out qubit state after operation. 
+\end{itemize}
+
+%Discuss experimental data and the semiconductor platform. 
+Semiconductors embody point defects that may trap charge carriers, causing deep energy levels to appear within the fundamental band gap. 
+Importantly, such deep levels can trap carriers in localized states that are essentially isolated from the surroundings, making them suitable for QT. 
+A prime example is the nitrogen-vacancy center in diamond, which has been proposed 
+as a contender for both qubit, sensing and communication applications \cite{Doherty_2013}. 
+The NV center is a room temperature single-photon source emitting in the visible portion of the spectrum, exhibiting entangled photons that have been separated by ... km []. 
+Moreover, the NV center in its negative charge state traps an electron in a localized and high-spin $S=1$ state that can be coherently controlled and with RT spin coherence of 1 ms []. 
+Qubit operations and entanglement have been demonstrated []. 
+However, emission wavelength is not ideally compatible with fiber optic technology (need telecom range), spin coherence is good but could be better, and sensing is good. 
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{c|c|c|c}
+    Material & Band gap (eV) & Defect candidates & Reference \\
+    \hline
+    Diamond  & $5.5$  & N$_\mathrm{C}V_\mathrm{C}$, Si$_\mathrm{C}V_\mathrm{C}$, Ge$_\mathrm{C}V_\mathrm{C}$ & \cite{Balasubramanian_2009,Rogers_2014,Bhaskar_2018} \\  
+    4H-SiC & $3.3$ & $V_\mathrm{Si}$, $V_\mathrm{Si}V_\mathrm{C}$, C$_\mathrm{Si}V_\mathrm{C}$, N$_\mathrm{C}V_\mathrm{Si}$ & \cite{Widmann2014,Christle_2015,Castelletto_2014,Zargaleh_2018} \\ 
+    Si & $1.1$ & P, G, unidentified & \cite{Muhonen_2014,Durand_2020,Redjem2020} \\ 
+    (2D) \textit{h}-BN & $6.0$ & Unidentified defects & \cite{Tran_2016,Tran_2016b,Hayee_2020} \\ 
+    ZnO & $3.4$ & Unidentified defects & \cite{Morfa2012} \\ 
+    ZnS & $3.6$ (zincblende) & Unidentified defects & \cite{Stewart2019} \\ 
+    GaAs & $1.4$ & Quantum dots & \cite{Bluhm2010} \\ 
+    GaN & $3.4$ & Quantum dots, unidentified defects & \cite{Roux2017,Berhane2018} \\
+    AlN & $6.0$ & Unidentified defects & \cite{Xue2020}\\
+    \end{tabular}
+    \caption{Overview of materials and defects that have been demonstrated to exhibit QT-compatible characteristics such as single-photon emission and coherent spin manipulation.}
+    \label{tab:qt-materials}
+\end{table}
+
+ ZnS [74], GaAs [75],
+GaN [76, 77 , 80] and AlN [78, 79],  [81]. 
+
+%QT requirements. 
 %What parameters are we looking for? 
-Discuss experimental data and the semiconductor platform. 
+Table \ref{tab:qt-materials} contains an overview of known semiconductor materials with demonstrated quantum compatible characteristics. 
+Not all defects are identified, and challenges due 
+to the specific materials complicate the implementation of defects for QT. 
+There are some common denominators for the materials: 
+\begin{itemize}
+    \item Wide band gap to facilitate localized deep levels (physical)
+    \item Low spin orbit coupling to extend spin coherence times (physical) 
+    \item Low el-phonon coupling for sharp ZPLs (physical) 
+    \item Availability as high-quality, bulk, or thin-film single crystals (practical)
+    \item Constituent elements with naturally occurring isotopes of zero nuclear spin (practical). 
+\end{itemize}
+Note the division between physical and practical requirements in the list above. 
+The physical ones refer to some fundamental aspect of the material that permits specific properties to manifest, while practical refers to some more external influence that provides more easy measurement and detection of said properties. 
+It is the former that we are interested in. 
 
-%\subsection*{The semiconductor platform} %Marianne and Lasse 
-%Experimental findings 
+Different defect and material types may suit different needs. 
+Therefore, we need a bigger bank of candidates. 
+Also, we do not fully understand exactly what constitutes a good quantum host material. 
+So far, detection of QT compatibility has been slow, as a signal is detected and then identified in a specific material. 
+We are looking for a top-down approach to instead predict promising materials, and guide experiments. 
+For this, we first need a large dataset. 
 
 \subsection*{Density Functional Theory Output} %Marianne 
+Density functional theory has been exceptionally successful in predicting solid-state material properties 
+such as 
+
 Data formats, limitations etc.  
 
 Density functional theory is a versatile and powerful theoretical approach, enabling targeted study of semiconductor materials with many atoms. 
