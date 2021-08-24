@@ -43,6 +43,8 @@
 \usepackage{lipsum}
 \usepackage{subfig}
 % \usepackage{braket}
+\usepackage{siunitx}
+\sisetup{separate-uncertainty}
 
 %\newcommand\abs[1]{\left|#1\right|}
 %\newcommand\bra[1]{\left| #1 \right \rangle}
@@ -55,16 +57,21 @@
 
 \author{Oliver Lerstøl Hebnes}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+
 \author{Marianne Etzelm\"uller Bathen}
 \affiliation{Advanced Power Semiconductor Laboratory, ETH Zürich, 8092  Zürich,  Switzerland}
 \affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
+
 \author{Øyvind Sigmundson Schøyen}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+
 \author{Sebastian G. Winther-Larsen}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+
 \author{Morten Hjorth-Jensen}
 \affiliation{Facility for Rare Ion Beams and Department of Physics and Astronomy, Michigan State University, East Lansing, MI 48824, USA}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+
 \author{Lasse Vines}
 \affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
 
@@ -126,50 +133,61 @@ The fourth science paradigm introduces the potential of targeted search for prom
 Herein, we provide a framework for the automatic discovery of promising solid-state material hosts using machine learning methods. 
 Initial database building similar to Ferrenti et al \cite{Ferrenti2020}. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
-    \includegraphics[width=\textwidth]{figures/ht-workflow.jpg}
-    \caption{Placeholder for workflow. Morten: can you please add the other schematic figure we discussed as placeholder? Sebastian makes our own versions of these schematic figures (I can make some VESTA files with materials). }
-    \label{fig:ht-workflow}
+    \includegraphics[width=0.9\textwidth]{figures/paradigms.png}
+    \caption{[PLACEHOLDER] Schematic over paradigms in science.}
+    \label{fig:paradigm}
 \end{figure}
 
 \section*{Theoretical Background and Experimental Data} 
 %Not all papers have a theory chapter, but since we are speaking to two quite different communities, it might be nice to include some basics. 
+
+%Some of this can also be copied into the introduction 
+
 Quantum technologies, including sensing, communication and computing, 
 are intriguing because of the new capabilities they offer. 
 However, realization of large-scale fabrication for these techniques requires further technological development. 
 The superconducting electronics platform that is currently employed for quantum computers necessitates millikelvin temperatures and may prove challenging to scale. 
-Instead, recent developments have seen/heralded the rise of semiconductors as host materials for a variety of quantum devices. Much easier to combine with existing devices, and RT operation has been shown. 
-However, the ideal host has yet to be identified, and the requirements for acting as a good host remain unclear. 
-Different methods are needed. 
+Instead, recent developments have seen/heralded the rise of semiconductors as possible host materials for a variety of quantum devices. Semiconductor quantum dots or point defects could prove easier to combine with existing devices, and room temperature operation of prototype communication and computing devices has been shown.  
+However, this technology is still in the early stages, and the issues left to address include scalable and reproducible device fabrication, identification of ideally suited host candidates, and, importantly, understanding the requirements for a material to act as a good host remain unclear. 
+%Different methods are needed. 
 
 \subsection*{Semiconductors as a Quantum Host} %Marianne and Lasse 
-The key feature when considering a quantum object for application is coherence, which is again tightly connected to the concept of coherence. 
-For all applications, the basic requirement is a two-level quantum system which is quite isolated so the levels remain stable. 
-Also need to control the qubit state via initialization, manipulation and read-out. 
-Requirements \cite{DiVincenzo2000,Weber2010}: 
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/qubit.png}
+    \caption{[PLACEHOLDER] Schematic of classical versus quantum bits. }
+    \label{fig:qt}
+\end{figure}
+
+Quantum tehcnologies commonly rely on a quantum bit or qubit as the basis for operation. 
+For all applications, the basic requirement is a two-level quantum system which is quite isolated from the environment, ensuring long-term stability between operations. In other words, we search for systems which exhibit a high degree of coherence. 
+However, stability is not enough. The qubit state must be controlled via repeatable initialization, manipulation and read-out. 
+A set of requirements were formulated by DiVincenzo for the case of qubits and quantum computing \cite{DiVincenzo2000}. Below, these are rephrased to encompass qubit requirements for all three QT application areas:  
 \begin{itemize}
     \item A scalable physical system with well-characterized qubits
     \item Reliable qubit initialization protocols 
-    \item Need quantum gates to operate on qubits 
+    \item Quantum gates and protocols to operate on and control qubit states  
     \item Qubit state coherence time must exceed gate operation time 
-    \item Need to read out qubit state after operation. 
+    \item Qubit state read-out after operation, preferably optically.  
 \end{itemize}
 
 %Discuss experimental data and the semiconductor platform. 
 Semiconductors embody point defects that may trap charge carriers, causing deep energy levels to appear within the fundamental band gap. 
-Importantly, such deep levels can trap carriers in localized states that are essentially isolated from the surroundings, making them suitable for QT. 
-A prime example is the nitrogen-vacancy center in diamond, which has been proposed 
-as a contender for both qubit, sensing and communication applications \cite{Doherty_2013}. 
-The NV center is a room temperature single-photon source emitting in the visible portion of the spectrum, exhibiting entangled photons that have been separated by ... km []. 
-Moreover, the NV center in its negative charge state traps an electron in a localized and high-spin $S=1$ state that can be coherently controlled and with RT spin coherence of 1 ms []. 
-Qubit operations and entanglement have been demonstrated []. 
-However, emission wavelength is not ideally compatible with fiber optic technology (need telecom range), spin coherence is good but could be better, and sensing is good. 
+Importantly, deep level defects can trap carriers in localized states that are essentially isolated from the surroundings, making them suitable for QT. 
+A prime example is the nitrogen-vacancy (NV) center in diamond, which has been proposed 
+as a contender for both computing, sensing and communication applications \cite{Doherty_2013}. 
+The NV center is a room temperature single-photon source emitting in the visible portion of the spectrum, and has been employed for optical imaging of living cells \cite{Lesage_2013}.  
+Moreover, the NV center in its negative charge state traps an electron in a localized and high-spin $S=1$ state that can be coherently controlled and with RT spin coherence times above \SI{1}{\milli\second}, 
+leading to demonstrations of entanglement and teleportation of two NV center spins \cite{Bernien2013,Pfaff_2014}. 
+However, despite these promising discoveries, diamond may not be the ideal candidate host. The NV center, for instance, emits in the visible, which is not compatible with the telecom wavelengths needed to integrate with optical fiber technology, and the poor scalability of diamond devices may prove non-competitive in the long run. 
 
-\begin{table}[t]
+\begin{table}[h]
     \centering
     \begin{tabular}{c|c|c|c}
-    Material & Band gap (eV) & Defect candidates & Reference \\
+    Material & Band gap (eV) & Defect candidates & References \\
     \hline
     Diamond  & $5.5$  & N$_\mathrm{C}V_\mathrm{C}$, Si$_\mathrm{C}V_\mathrm{C}$, Ge$_\mathrm{C}V_\mathrm{C}$ & \cite{Balasubramanian_2009,Rogers_2014,Bhaskar_2018} \\  
     4H-SiC & $3.3$ & $V_\mathrm{Si}$, $V_\mathrm{Si}V_\mathrm{C}$, C$_\mathrm{Si}V_\mathrm{C}$, N$_\mathrm{C}V_\mathrm{Si}$ & \cite{Widmann2014,Christle_2015,Castelletto_2014,Zargaleh_2018} \\ 
@@ -185,46 +203,65 @@ However, emission wavelength is not ideally compatible with fiber optic technolo
     \label{tab:qt-materials}
 \end{table}
 
- ZnS [74], GaAs [75],
-GaN [76, 77 , 80] and AlN [78, 79],  [81]. 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/NV.png}
+    \caption{[PLACEHOLDER] Schematic representation of the electronic structure of the NV center in diamond.}
+    \label{fig:defects-dft}
+\end{figure}
 
 %QT requirements. 
 %What parameters are we looking for? 
-Table \ref{tab:qt-materials} contains an overview of known semiconductor materials with demonstrated quantum compatible characteristics. 
-Not all defects are identified, and challenges due 
-to the specific materials complicate the implementation of defects for QT. 
-There are some common denominators for the materials: 
+Table \ref{tab:qt-materials} contains an overview of known semiconductor materials with demonstrated quantum compatible characteristics. In this context we consider single-photon emission and coherent spin manipulation for systems related to point defects primarily, but also self-assembled or lithographically structured quantum dots. 
+Most of the defects in the table have yet to be identified, and different materials challenges complicate the implementation of defects for QT. 
+A set of common denominators for materials that contain quantum emitters was summarized by Weber et al \cite{Weber2010}: 
 \begin{itemize}
     \item Wide band gap to facilitate localized deep levels (physical)
     \item Low spin orbit coupling to extend spin coherence times (physical) 
-    \item Low el-phonon coupling for sharp ZPLs (physical) 
+    \item Low el-phonon coupling for sharp emission lines (physical) 
     \item Availability as high-quality, bulk, or thin-film single crystals (practical)
     \item Constituent elements with naturally occurring isotopes of zero nuclear spin (practical). 
 \end{itemize}
 Note the division between physical and practical requirements in the list above. 
-The physical ones refer to some fundamental aspect of the material that permits specific properties to manifest, while practical refers to some more external influence that provides more easy measurement and detection of said properties. 
-It is the former that we are interested in. 
+The physical criteria refer to some fundamental aspect of the material that permits specific properties to manifest, while practical refers to the external influences that simplify measurement and detection of the interesting properties. 
+In this work, we will focus most on the former set of criteria, as understanding them better may give further insights into the makings of a solid QT platform. 
 
-Different defect and material types may suit different needs. 
-Therefore, we need a bigger bank of candidates. 
-Also, we do not fully understand exactly what constitutes a good quantum host material. 
-So far, detection of QT compatibility has been slow, as a signal is detected and then identified in a specific material. 
-We are looking for a top-down approach to instead predict promising materials, and guide experiments. 
-For this, we first need a large dataset. 
+In addition to obtaining greater understanding of  exactly what constitutes a good quantum host material, we must recognize that different defect and material types may suit different needs. Therefore, we aim to develop a bigger bank of candidate defects and materials. 
+So far, detection of QT compatibility in semiconductors has been slow going, as a signal is detected and then identified in a specific material.  
+Instead, we are looking for a top-down approach to  \textit{predict} promising materials, enabling a guiding of experimental efforts. 
+%For this, we first need a large dataset. 
 
 \subsection*{Density Functional Theory Output} %Marianne 
-Density functional theory has been exceptionally successful in predicting solid-state material properties 
-such as 
+Density functional theory (DFT) is a versatile and powerful theoretical approach that has been exceptionally successful in predicting solid-state material properties such as stability of different phases, lattice parameters and band gaps. 
+Using DFT calculations we are able to accurately investigate semiconductor materials with many atoms while keeping efficiency and cost in mind.  
 
-Data formats, limitations etc.  
+DFT is based on the Hohenberg-Kohn \cite{Hohenberg1964} and Kohn-Sham \cite{Kohn1965} theorems and provides a method for iteratively solving the Schrodinger equation based on initial guesses for the atomic potentials. 
+The foundation for DFT centers around the electronic density providing all ground-state properties of the system, provided that the external potential can be exactly described. 
+The fundamental challenge of DFT calculations is that this potential, as expressed by the exchange-correlation functional, can be exactly computed for only very few and simple systems.
 
-Density functional theory is a versatile and powerful theoretical approach, enabling targeted study of semiconductor materials with many atoms. 
-Proven successful for material properties such as thermal stability, lattice parameters and band gap. 
+In the case of solid state materials the XC functional is not known and must instead be approximated. 
+Herein, we will consider three classes of functionals based on different fundamental assumptions. The local density approximation (LDA) takes the homogeneous electron gas as a starting point, while the more advanced general gradient approximation (GGA) includes also the gradient in local electron gas variations. 
+These local or semi-local functionals yield satisfactory results on geometrical concerns but tend to underestimate energies such as the band gap or defect energy levels due to a self-interaction error (i.e., an electron can interact with itself). 
+More recent developments have seen the widespread use of hybrid functionals such as the HSE06 incorporating a portion of Hartree-Fock exact exchange \cite{Heyd2003},  albeit at a much greater computational cost. 
+See, e.g., this review \cite{Freysoldt2014} for further details on different functionals for semiconductor and defect calculations. 
 
+Despite the limitations imposed by the approximate nature of the XC functional, and the band gap error of LDA and GGA level functionals, 
+DFT can be a powerful tool when predicting, designing and interpreting experiments. 
+Herein, we employ databases containing DFT calculations of material properties to gain insight into the fundamental mechanisms behind observed quantum characteristics, and predict novel candidate QT hosts. 
+The calculations we employ were performed using the GGA-level Perdew-Burke-Erznerhof (PBE) functional \cite{Perdew1996}, which can underestimate the band gap of semiconductor materials.  
+Nonetheless, a larger data set is available than for, e.g., HSE06, and many trends are conserved also with PBE. 
+The ground-state (and $0$~K) parameters that can be extracted from this type of data set include the total energy (translates into stability), the band gap, the elctronegativity, the electron-phonon coupling and magnetic properties. 
 
 
 \subsection*{Material Informatics} %Øyvind (Oliver)    
 %Data mining, screening 
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{figures/ht-workflow.jpg}
+    \caption{[PLACEHOLDER for workflow] Morten: can you please add the other schematic figure we discussed as placeholder? Sebastian makes our own versions of these schematic figures (I can make some VESTA files with materials). }
+    \label{fig:ht-workflow}
+\end{figure}
 
 \subsection*{Machine Learning} % Morten 
 
