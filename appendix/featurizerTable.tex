@@ -1,0 +1,88 @@
+\begin{center}
+\begin{longtable}{M{3.5cm} M{6.5cm} M{2.0cm}}
+\caption{This work's chosen 39 featurizers from matminer. Descriptions are either found from Ref. \cite{Ward2018} or from the project's Github page. For entries lacking references, we refer to Ref.~\cite{Ward2018}.}
+\label{table:featurizers} 
+\hline 
+Features & Description & Reference \\ 
+\hline 
+  \textbf{Composition features} & & \\ 
+  AtomicOrbitals & Highest occupied molecular orbital (HOMO) & \cite{Kotochigova1997}  \\   
+   & and lowest unoccupied molecular orbital (LUMO) &  \\   
+  AtomicPacking-Efficiency & Packing efficiency & \cite{Laws2015}  \\   
+  BandCenter & Estimate absolute position of band center  & \cite{Butler1978} \\   
+   & using geometric mean of electronegativity &  \\  
+  ElementFraction & Fraction of each element in a composition &    \\   
+  ElementProperty & Statistics of various element properties & \cite{Ong2013,Ward2016, Deml2016}  \\   
+  IonProperty & Maximum and average ionic character & \cite{Ward2016} \\   
+  Miedema & Formation enthalpies of intermetallic compounds, solid solutions, & \cite{Weeber1987} \\   
+   & and amorphous phases using semi-empirical Miedema model &  \\   
+  Stoichiometry & $L^p$ norm-based stoichiometric attributes & \cite{Ward2016} \\   
+  TMetalFraction & Fraction of magnetic transition metals & \cite{Deml2016}  \\   
+  ValenceOrbital & Valence orbital attributes such as & \cite{Ward2016}  \\   
+   &  the mean number of electrons in each shell &   \\   
+  YangSolid-Solution & Mixing thermochemistry and size mismatch terms & \cite{Yang2012} \\
+    \hline 
+  \textbf{Oxide composition features} &  &  \\
+  Electronegativity-Diff & Statistics on electronegativity difference & \cite{Deml2016} \\   
+   &  between anions and cations & \\ 
+  OxidationStates & Statistics of oxidation states & \cite{Deml2016}  \\   
+\hline 
+  \textbf{Structure features} & & \\   
+  DensityFeatures & Calculate density, volume per atom and packing fraction & - \\   
+  GlobalSymmetry-Features & Determines spacegroup number, crystal system  & - \\   
+   & (1-7) and inversion symmetry & \\ 
+  RadialDistribution-Function & Calculates the radial distribution  & - \\   
+   & function of a crystal system & \\ 
+  CoulombMatrix & Generate the Coulomb matrix for nuclear interactions  & \cite{Rupp2012}  \\    
+  %CoulombMatrix & Generate the Coulomb matrix, which is a representation of the nuclear coulombic interaction of the input structure. & \cite{Rupp2012}  \\      
+  PartialRadial-Distribution-Function & Compute the partial radial distribution  & \cite{Schuett2014}  \\   
+   & function of a crystal structure & \\ 
+  SineCoulomb-Matrix & Computes a variant of the coulomb matrix & \cite{Faber2015}  \\   
+   & developed for periodic crystals & \\ 
+  EwaldEnergy & Computes the energy from Coulombic interactions  & \cite{Ewald1921}  \\   
+   & based on charge states of each site & \\ 
+  BondFractions & Compute the fraction of each bond in a  & \cite{Hansen2015}  \\   
+   & structure, based on nearest neighbors & \\ 
+  Structural Heterogeneity & Calculates the variance in bond lengths and  & \cite{Ward2017}  \\   
+   & atomic volumes in a structure & \\ 
+  MaximumPacking-Efficiency & Calculates the maximum packing efficiency of a structure & \cite{Ward2017} \\   
+  Chemical-Ordering & Computes how much the ordering of species  & \cite{Ward2017}  \\   
+   & differs from random in a structure & \\ 
+  XRDPowder-Pattern & 1D array representing normalized powder diffraction & \cite{Ong2013} \\ 
+   &of a structure as calculated by pymatgen  & \\ 
+    \hline 
+  \textbf{Site features} & & \\
+  AGNI-Fingerprints & Calculates the product integral of RDF & \cite{Botu2014}  \\    
+   & and Gaussian window function  & \\ 
+  AverageBond- Agle & Determines the average bond angle of a specific  & \cite{Jong2016}  \\
+   & site with its nearest neighbors  & \\ 
+  AverageBond-Length & Determines the average bond length between one specific site & \cite{Jong2016}  \\ 
+   & and all its nearest neighbors  & \\ 
+  BondOrientational-Parameter & Calculates the averages of spherical  & \cite{Seko2017, Steinhardt1983}  \\ 
+   & harmonics of local neighbors & \\ 
+  ChemEnvSite-Fingerprint & Calculates the resemblance of given sites to ideal & \cite{Waroquiers2017, Zimmermann2017}  \\   
+   & environment using pymatgens ChemEnv package  & \\ 
+  Coordination-Number & The number of first nearest neighbors of a site & \cite{Zimmermann2017}  \\
+  CrystalNN-Fingerprint & A local order parameter fingerprint for periodic crystals & -  \\   
+  GaussianSymm-Func & Calculates the gaussian radial and angular symmetry functions  & \cite{Behler2011,Khorshidi2016}  \\   
+   & originally suggested for fitting machine learning potentials &  \\ 
+  GeneralizedRadial-Distribution-Function & Computes the general radial distribution function for a site & \cite{Seko2017}  \\   
+  LocalProperty-Difference & Computes the difference in elemental properties  & \cite{Ward2017, Jong2016} \\   
+   & between a site and its neighboring sites & \\ 
+  OPSite-Fingerprint & Computes the local structure order parameters & \cite{Zimmermann2017} \\   
+   & from a site's neighbor environment  & \\ 
+  Voronoi-Fingerprint & Calculates the Voronoi tessellation-based  & \cite{Peng2011,Wang2019} \\
+   & features around a target site & \\ 
+\hline     
+  \textbf{Density of state features} & & \\
+  DOSFeaturizer & Computes top contributors to the density of  & \cite{Dylla2020} \\ 
+  & states at the VBM and CBM  & \\ 
+  %DOSFeaturizer & Computes top contributors to the density of states at the valence and conduction band edges. Thus includes chemical species, orbital character, and orbital location information. & \cite{Dylla2020} \\
+  \hline  
+  \textbf{Band structure features} & & \\
+  BandFeaturizer & Converts a complex electronic band  & - \\ 
+   &structure into discrete quantities  & \\ 
+%BandFeaturizer & Converts a complex electronic band structure into quantities such as band gap and the norm of k point coordinates at which the conduction band minimum and valence band maximum occur. & - \\
+\hline 
+\end{longtable}
+\end{center}
