@@ -112,7 +112,7 @@
 
 \title{Predicting Solid State Qubit Candidates}
 
-\author{Oliver Lerstøl Hebnes}
+\author{Oliver Lerst{\o}l Hebnes}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
 \affiliation{Sopra Steria, N-0185 Oslo, Norway}
 
@@ -124,7 +124,7 @@
 \affiliation{Menon Economics, N-0369 Oslo, Norway}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
 
-\author{Øyvind Sigmundson Schøyen}
+\author{{\O}yvind Sigmundson Sch{\o}yen}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
 
 \author{Morten Hjorth-Jensen}
@@ -189,7 +189,7 @@ For example, the best performing quantum computer prototypes available today rel
 
 Quantum technologies based on semiconductors rely on either defects or quantum dots where the latter kind can be of the self-assembled or fabricated type. 
 Semiconductor defects can act as single-photon emitters or spin centers and are compatible with the three main QT categories of computing, communication and sensing.  
-These characteristics are most often found for the case of defects that introduce deep energy levels into the semiconductor band gap. So-called deep level defects can trap carriers in localized states that are essentially isolated from the surroundings, making them highly suitable for QT due to, e.g., reliabl single-photon emission and long spin coherence times. 
+These characteristics are most often found for the case of defects that introduce deep energy levels into the semiconductor band gap. So-called deep level defects can trap carriers in localized states that are essentially isolated from the surroundings, making them highly suitable for QT due to, e.g., reliable single-photon emission and long spin coherence times. 
 The most well-known QT defect is the negatively charged nitrogen-vacancy (NV) center in diamond \cite{Doherty_2013}, but silicon carbide (SiC) and the various quantum emitters therein are poised to out-compete diamond in certain areas due to the favorable emission wavelength region in the near infrared and telecom coupled with more mature material processing and fabrication  \cite{Bathen2021}. 
 However, defect based QT is still in the early stages, and the issues left to address include identification of suitable host materials and candidate defects, and scalable and reproducible quantum device fabrication. Another important issue is that the understanding of the requirements for a material to enable quantum compatible properties to manifest remains lacking,  
 %The plethora of possible emitters and spin centers formed by semiconductor defects or nanostructures come with different characteristics that are compatible with specific applications.  
@@ -699,17 +699,17 @@ Screening and workflow and approaches.
 
 Machine learning  represents the science of giving computers the ability to learn without being explicitly programmed. The idea is that there exist generic algorithms which can be used to find patterns in a broad class of data sets without having to write code specifically for each problem. The algorithm builds its own logic based on the data. 
 
+The approaches to ML are many, but are often split into two main categories, supervised and unsupervised. In supervised learning we know the answer to a problem, and let the computer deduce the logic behind it. On the other hand, unsupervised learning is a method for finding patterns and relationship in data sets without any prior knowledge of the system. Many researchers also operate with a third category, namely reinforcement learning. This is a paradigm of learning inspired by behavioral psychology, where learning is achieved by trial-and-error, solely from rewards and punishment. In this work our focus is on supervised learning only with labeled data. Our main focus is on classification problems.
 
-
-
-\begin{itemize}
-    \item Logistic regression
-    \item Decision trees
-    \item Random forests
-    \item Gradient boosting
-\end{itemize}
-
-
+In this work we have applied four well-known and tested machine learning methods for classification problems, these are (see for example \cite{Hastie2009,Mehta2019} for discussions and applications):
+\begin{enumerate}
+    \item Logistic regression,
+    \item Decision trees,
+    \item Random forests,
+    \item Gradient boosting.
+\end{enumerate}
+Logistic regression \cite{Hastie2009} is a simple and frequently used method for binary and multi-category classification problems.  In addition to logistic regression, we have also applied and tested the predictions made by decision trees and ensemble methods like random forests and gradient boosting, the latter through the application of the computationally efficient  XGBoost library \cite{xgboost2016}. Gradient boosting and random forests use decision trees as weak learners and improve their predictability, through either collections of randomized decision trees (a subset of the features in the data sets are selected randomly en building a decision tree for classification)  in random forests or by using a decision tree as a weak learner and improve upon this model by iterative process that involves the estimation of the gradients of the cost/loss function \cite{Hastie2009}. Pure decision trees can easily lead to overfitting of the data under
+ study, leading to a model that exhibits a high variance. Ensemble methods like random forests and gradient boosting on the other hand tend to soften the overfitting problem, resulting in both a small bias and a reduced variance of the model employed, see for example Ref.~\cite{Mehta2019} for an in-depth discussion of the bias-variance trade-off in machine learning applied to physics problems. Gradient boosting implemented through the  XGBoost library, is used widely by data scientists to achieve state-of-the-art results on many machine learning challenges.
 
 \section*{Data availability} 
 %We can put something else, standard text 
