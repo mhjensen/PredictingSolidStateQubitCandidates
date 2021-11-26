@@ -136,7 +136,7 @@
 
 \begin{abstract}
 
-Semiconductor materials provide a compelling platform for quantum technology, and a vast amount of materials and their properties can be found in high-throughput databases. However, filtering among these materials in order to find novel candidates for quantum technology is a challenge. Therefore, we provide a framework for the automatic discovery of promising solid-state material hosts using machine learning methods.
+Semiconductor materials provide a compelling platform for quantum technology, and a vast amount of materials and their properties can be found in high-throughput databases. However, sifting through tens of thousands of these materials in order to find novel candidates for quantum technology is a challenge. Therefore, we provide a framework for the automatic discovery of promising solid-state material hosts using machine learning methods.
 
 %Main message 1: develop methodology for data mining and machine learning for materials properties 
 We have developed data extraction tools for numerous material science databases, and constructed over $4800$ physics-informed features for a dataset consisting of more than $25000$ materials. Furthermore, we
@@ -167,10 +167,10 @@ and $10$ tertiary compounds.
 %I think we can make a supplementary material if we see that we need it, it is quite common for the journal 
 
 \section*{Introduction}%Oliver and Morten and Marianne (semiconductor portion)
-The second quantum revolution is heralding the development of new solutions and devices based on quantum technology \cite{Acin2018}. Among the promising prototypes that are already available we find in vivo sensing of magnetic fields in cells [], secure communication over large distances by separation of entangled photons [], and finally the demonstration of quantum computing []. 
+The second quantum revolution is heralding the development of new solutions and devices based on quantum technology \cite{Acin2018}. Among the promising prototypes that are already available we find in vivo sensing of magnetic fields in cells [REF!], secure communication over large distances by separation of entangled photons [REF!], and finally the demonstration of quantum computing [REF!]. 
 Quantum computers are in high demand to meet the increasing need for computing power to solve complex many-body problems that are beyond the scope of classical machines.   
 Simultaneously, the concepts of entanglement and teleportation may enable advanced quantum communication protocols such as the quantum internet. 
-Recent advances have highlighted the potential of quantum computer architectures to outperform classical systems as a 53-qubit quantum computer based on superconducting electronics solved a computational problem that was beyond the capabilities of a 200'000 core supercomputer \cite{Arute_2019}, spurring further investigations into competitive quantum technology platforms.  And IBM announced recently its 127 qubit quantum processor.
+Recent advances have highlighted the potential of quantum computer architectures to outperform classical systems as a 53-qubit quantum computer based on superconducting electronics solved a computational problem that was beyond the capabilities of a 200'000 core supercomputer \cite{Arute_2019}, spurring further investigations into competitive quantum technology platforms. Most recently, IBM announced its 127 qubit quantum processor~\cite{IBM2021}.
 
 %Figure 1 introduction schematic 
 \begin{figure}[t]
@@ -189,7 +189,7 @@ For example, the best performing quantum computer prototypes available today rel
 
 Quantum technologies based on semiconductors rely on either defects or quantum dots where the latter kind can be of the self-assembled or fabricated type. 
 Semiconductor defects can act as single-photon emitters or spin centers and are compatible with the three main QT categories of computing, communication and sensing.  
-These characteristics are most often found for the case of defects that introduce deep energy levels into the semiconductor band gap. So-called deep level defects can trap carriers in localized states that are essentially isolated from the surroundings, making them highly suitable for QT due to, e.g., reliable single-photon emission and long spin coherence times. 
+These characteristics are most often found for the case of defects that introduce deep energy levels into the semiconductor band gap. So-called deep level defects can trap carriers in localized states that are essentially isolated from the surroundings, making them highly suitable for QT due to, e.g., reliabl single-photon emission and long spin coherence times. 
 The most well-known QT defect is the negatively charged nitrogen-vacancy (NV) center in diamond \cite{Doherty_2013}, but silicon carbide (SiC) and the various quantum emitters therein are poised to out-compete diamond in certain areas due to the favorable emission wavelength region in the near infrared and telecom coupled with more mature material processing and fabrication  \cite{Bathen2021}. 
 However, defect based QT is still in the early stages, and the issues left to address include identification of suitable host materials and candidate defects, and scalable and reproducible quantum device fabrication. Another important issue is that the understanding of the requirements for a material to enable quantum compatible properties to manifest remains lacking,  
 %The plethora of possible emitters and spin centers formed by semiconductor defects or nanostructures come with different characteristics that are compatible with specific applications.  
@@ -412,10 +412,10 @@ the Ferrenti approach.
 
 \subsubsection*{The insightful approach}
 The third approach differs substantially from the first two approaches in terms 
-of labeling, as we apply knowledge from the field (see, e.g., Refs.~\cite{Atatuere2018,Zhang2020,Son2020,Toth2019,Bathen2021} for an overview)   
+of labeling, as we apply knowledge from the field (see for instance Refs.~\cite{Atatuere2018,Zhang2020,Son2020,Toth2019,Bathen2021} for an overview)   
 to pick our promising material host candidates. We therefore name this scheme 
 \emph{the insightful approach}. 
-Due to the concern of having a too-small dataset, we will include
+Due to the concern of having an insufficient dataset, we will include
 materials that are promising and have shown suitable properties to 
 accommodate deep defects that potentially can exhibit quantum effects. 
 Materials where properties like single-photon emission and spin manipulation are attributed to quantum dot self-assembled formation or lithographic structuring will also be included in this context.  
@@ -454,7 +454,6 @@ In the insightful approach, we include materials that are known to be quantum co
 
 After the first stage of picking candidates we are left with a list of 202 matching formulas which include 12 entries that have a band gap of less than $0.4$~eV. These structures are unstable in terms of energy above hull calculations, and will decompose into other materials in the list with a band gap that is substantially above $0.5$~eV. We include all of these structures except for C (mp-568410) having a PBE-computed band gap of $0.12$~eV - a metal according to AFLOW-ML and therefore labeled as an unsuitable candidate. 
  
-MORE ON MANUAL SCREENING....
 %% OH: Dirty details about suitable materials:
 Entries matching the formula C, SiC, BN, MoS$_2$, WSe$_2$ and WS$_2$ were manually screened to see if the entries have a matching structure to the respective candidates discussed earlier. %OH: Is discussed earlier in thesis but maybe neccessary to mention here? 
 For C, we admit three-dimensional diamond-like structures as explicitly stated in the column tags at Materials Project. Additionally, we find many two-dimensional structures of carbon with a large band gap ($>1.5$ eV) in the data. We add these as suitable candidates. Complex structures (eg. C$_{28}$, C$_{48}$, C$_{60}$) were moved to the test set. For SiC, we admitted all entries, which involved $2$H, $3$C, $4$H, $6$H and $15$R. Concerning BN, MoS$_2$, WSe$_2$ and  WS$_2$, we only admit two-dimensional structures. For non-matching structures not mentioned so far, we move them to the test set to see if they will be predicted suitable or not by the models in a later step.
