@@ -1,31 +1,36 @@
 \begin{figure}[t]
-  \centering
-  \begin{forest}
-    for tree={l sep=1em, s sep=1em, anchor=center, inner sep=0.3em, fill=red!50, circle}
-    [$23623$ compounds, node box, alias=bagging, above=1em
-    [Logistic regression,node box,alias=a1
-      [$11243$]
-      [$12380$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
-      ]
-    ]
-    [Decision tree,node box,alias=a1
-      [$12308$]
-      [$11315$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
-      ]
-    ]
-    [Random forest,node box,alias=a1
-      [$9345$]
-      [$14278$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
-      ]
-    ]
-    [Gradient boost,node box,alias=a1
-      [$11835$]
-      [$11788$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
-      ]
-    ]
-    ]
-  \end{forest}
+    \centering
+    (a)
+    \\
+    \begin{forest}
+        for tree={l sep=1em, s sep=1em, anchor=center, inner sep=0.3em, fill=red!50, circle}
+        [$23623$ compounds, node box, alias=bagging, above=1em
+        [Logistic regression,node box,alias=a1
+          [$11243$]
+          [$12380$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
+          ]
+        ]
+        [Decision tree,node box,alias=a1
+          [$12308$]
+          [$11315$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
+          ]
+        ]
+        [Random forest,node box,alias=a1
+          [$9345$]
+          [$14278$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
+          ]
+        ]
+        [Gradient boost,node box,alias=a1
+          [$11835$]
+          [$11788$,fill=green!50,edge label={node[above=1ex,green arrow]{}}
+          ]
+        ]
+        ]
+    \end{forest}
 %\vspace*{-95mm}
+    \\
+    (b)
+    \\
 \begin{forest}
     for tree={l sep=1em, s sep=1em, anchor=center, inner sep=0.3em, fill=red!50, circle}
     [$22550$ compounds, node box, alias=bagging, above=1em
@@ -52,6 +57,9 @@
     ]
   \end{forest}
 %\vspace*{20mm}
+    \\
+    (c)
+    \\
  \begin{forest}
     for tree={l sep=1em, s sep=1em, anchor=center, inner sep=0.3em, fill=red!50, circle}
     [$24544$ compounds, node box, alias=bagging, above=1em
