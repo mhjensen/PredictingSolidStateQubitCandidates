@@ -330,7 +330,7 @@ After the first stage of picking candidates we are left with a list of $202$ mat
 %% OH: Dirty details about suitable materials:
 Entries matching the formulas C, SiC, BN, MoS$_2$, WSe$_2$ and WS$_2$ were manually screened to see if the entries have a matching structure to the respective candidates discussed earlier and summarized in Table~\ref{tab:qt-materials}. 
 %OH: Is discussed earlier in thesis but maybe neccessary to mention here? 
-For C, we admit three-dimensional diamond-like structures as explicitly stated in the column tags from Materials Project. Additionally, we find many two-dimensional structures of carbon with a large band gap ($>1.5$ eV) in the data. We add these as suitable candidates. Complex structures (eg. C$_{28}$, C$_{48}$, C$_{60}$) were moved to the test set. For SiC, we admitted all entries, which included the $2$H, $3$C, $4$H, $6$H and $15$R polytypes. Concerning BN, MoS$_2$, WSe$_2$ and  WS$_2$, we only admit two-dimensional structures. For non-matching structures not mentioned so far, we move them to the test set to see if they will be predicted as suitable or not by the ML models in a later step.
+For carbon, we admit three-dimensional diamond-like structures as explicitly stated in the column tags from the Materials Project. Additionally, we find many two-dimensional structures of carbon with a large band gap ($>1.5$ eV) in the data. We add these as suitable candidates. Complex structures (eg. C$_{28}$, C$_{48}$, C$_{60}$) were moved to the test set. For SiC, we admitted all entries, which included the $2$H, $3$C, $4$H, $6$H and $15$R polytypes. Concerning BN, MoS$_2$, WSe$_2$ and  WS$_2$, we only admit two-dimensional structures. For non-matching structures not mentioned so far, we move them to the test set to see if they will be predicted as suitable or not by machine learning methods  in a later step.
 
 The materials AlP, GaP, AlAs, ZnTe and CdS were manually screened for tetrahedrally coordinated structures, and have been included since \citeauthor{Weber2010} \cite{Weber2010}  identified them as potentially promising candidates due to suitable material properties. 
 %acceptable properties defined in requirements (H1-H4) in \autoref{ssec:qubit-material-host-requirements}. 
@@ -425,14 +425,14 @@ Another potential source of uncertainty which should be mentioned is the use of 
 
 \subsection*{Predicting Suitable Material Hosts for Quantum Technology}
 
-Taking the four machine learning algorithms outlined above and applying them to the data sets optimized using each of the three approaches yields 12 sets of results for predicting  materials as suitable material hosts for QT. In this section, we present representative ML results based on each of the three data mining approaches. 
+Taking the four machine learning algorithms outlined above and applying them to the data sets optimized using each of the three approaches yields twelve sets of results for predicting  materials as suitable material hosts for QT. In this section, we present representative ML results based on each of the three data mining approaches. 
 
 \subsubsection*{The Ferrenti Approach}
 %Should we include materials in training set? Or keep it, but move into data mining discussion?
 We first consider the machine learning classification of the test set based on the Ferrenti approach. 
-Notably we find that carbon in diamond-like structure is classified as a suitable candidate from the training set in the Ferrenti approach. 
+Notably we find that carbon in a diamond-like structure is classified as a suitable candidate from the training set in the Ferrenti approach. 
 This is in agreement with the suitable candidates that were defined manually for the insightful approach. 
-Interestingly, from the training set of the Ferrenti approach, we also find that carbon in two-dimensional graphite-like structures are labeled as suitable. 
+Interestingly, from the training set of the Ferrenti approach, we also find that carbon in two-dimensional graphite-like structures is labeled as suitable. 
 %Out of the known suitable candidates defined for the insightful approach, we find carbon in diamond-like structures, but we also find two-dimensional carbon in graphite-like structures labeled as suitable. 
 All structures of silicon are also labeled as suitable together with one entry of silicon carbide. 
 Among other potentially suitable candidates we find ZnS, ZnSe, ZnO and ZnTe present. 
@@ -443,11 +443,11 @@ Among other potentially suitable candidates we find ZnS, ZnSe, ZnO and ZnTe pres
 
 \input{figures/tikz-plots/prediction-fig.tex}
 
-The number of candidates predicted by each of the four machine learning algorithms 'Logistic regression', 'Decision tree', 'Random forest' and 'Gradient boost' is labeled in Figure~\ref{fig:predictions}(a) for the Ferrenti approach. 
-From the training set of $23623$ materials, the four models consistently predict at least $11.000$ materials as promising candidates. All of the models agree on $6804$ suitable candidates, however, many of the materials are predicted with the probability similar to a coin-flip. 
+The number of candidates predicted by each of the four machine learning methods 'Logistic regression', 'Decision trees', 'Random forests' and 'Gradient boosting' is labeled in Figure~\ref{fig:predictions}(a) for the Ferrenti approach. 
+From the training set of $23623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates. All four methods agree on $6804$ suitable candidates, however, many of the materials are predicted with the probability similar to a coin flip. 
 If we were to raise the minimum bar of a prediction to
-$0.7$ instead of $0.5$, the models would only agree on around $3000$ suitable candidates. 
-Of the known suitable materials that were present in the training set, we find that all four models admit almost all materials with a chemical formula matching the known candidates. This can allow materials with unfortunate structures to be labeled as suitable candidates by all models. Consequently, the models do not recognize the strict band gap restriction, which makes it challenging to facilitate deep defects. Ideally, we would expect that the models would have probabilities lower than $0.5$ for all materials with band gaps lower than $0.5$~eV, which would be expected behavior based on the training set, but this is not the case. We find that many entries with band gaps lower than $0.5$~eV are predicted as both suitable and unsuitable candidates by all models. 
+$0.7$ instead of $0.5$, the above ML approaches would only agree on around $3000$ suitable candidates. 
+Of the known suitable materials that were present in the training set, we find that all four methods admit almost all materials with a chemical formula matching the known candidates. This can allow materials with unfortunate structures to be labeled as suitable candidates by all of our ML methods. Consequently, the ML methods do not recognize the strict band gap restriction, which makes it challenging to facilitate deep defects. Ideally, we would expect that the ML methods would have probabilities lower than $0.5$ for all materials with band gaps lower than $0.5$~eV, which would be expected behavior based on the training set, but this is not the case. We find that many entries with band gaps lower than $0.5$~eV are predicted as both suitable and unsuitable candidates by all ML methods studied here. 
 
 \subsubsection*{The augmented Ferrenti Approach}
 
@@ -455,16 +455,16 @@ Of the known suitable materials that were present in the training set, we find t
 %MB I think it's fine here also 
 Next, we turn to the more liberal augmented Ferrenti approach. In the training set, we find a single entry for each of SiC, Si, GaN, ZnS, GaP, AlAs, AlP, carbon in both diamond- and graphite-like structures, and AlN in three different structures. The training set includes a larger variety of known suitable candidates compared to the Ferrenti approach due to admitting more elements in the initial restriction. However, since we also included a larger band gap restriction of $1.5$~eV, we find a more sparse representation of each known chemical formula present in the training set.
 
-The four models predict at least $13.000$ materials as suitable candidates out of $22.550$ materials in the test set, where they all agree on a set of $9227$ predicted suitable candidates. Comparing to the training set reveals that all of the unlabeled known suitable candidates are, in fact, predicted as suitable candidates. Unfortunately, the models also yield predictions that do not match with what one would expect from physical considerations. 
-All four machine learning models confidently predict NaCl as a suitable candidate, which we believe is unlikely due to the strong electrostatic interactions between Na and Cl. 
+The four ML methods predict at least $13.000$ materials as suitable candidates out of $22.550$ materials in the test set, where they all agree on a set of $9227$ predicted suitable candidates. Comparing to the training set reveals that all of the unlabeled known suitable candidates are, in fact, predicted as suitable candidates. Unfortunately, the ML methods also yield predictions that do not match with what one would expect from physical considerations. 
+All four ML methods confidently predict NaCl as a suitable candidate, which we believe is unlikely due to the strong electrostatic interactions between Na and Cl. 
 At least, single-photon emitters with sharp and bright zero-phonon lines are uncommon in materials with a strong ionic character. 
-Furthermore, despite enforcing a larger band gap restriction of $1.5$~eV for the training set, we find that all models are predicting suitable candidates that exhibit band gaps substantially lower than $0.5$~eV.
-Clearly, the models are not taking this important property into account when classifying the materials. 
+Furthermore, despite enforcing a larger band gap restriction of $1.5$~eV for the training set, we find that all our implemented ML methods  predict suitable candidates that exhibit band gaps substantially lower than $0.5$~eV.
+Clearly, the methods are not taking this important property into account when classifying the materials. 
  
 \subsubsection*{The insightful approach}
-The ML models that were trained on the data set defined from the insightful approach to data mining predict substantially fewer candidates as compared to the two other approaches. 
+The ML methods that were trained on the data set defined from the insightful approach to data mining predict substantially fewer candidates as compared to the two other approaches. 
 %Trained on the training set defined as the insightful approach, the models are able to predict radically fewer suitable candidates compared to the two latter approaches. 
-A total of $842$, $1197$, $543$ and $596$ materials are classified as suitable candidates by logistic regression, decision tree, random forest and gradient boost, respectively. All the four ML models agree on a total of $214$ suitable candidates. However, $51$ of these have a band gap of $0.5$~eV or smaller as reported in Materials Project from PBE-level DFT calculations.  
+A total of $842$, $1197$, $543$ and $596$ materials are classified as suitable candidates by logistic regression, decision trees, random forests and gradient boosting, respectively. All the four ML methods agree on a total of $214$ suitable candidates. However, $51$ of these have a band gap of $0.5$~eV or smaller as reported in Materials Project from PBE-level DFT calculations.  
 
 %Cut down the amount of information given on perhaps not so suitable candidates, while rather emphasis the good predicted suitable candidates?
 
@@ -501,7 +501,7 @@ to compete with
 Cd- or Pb- based QDs for, e.g., display and lighting applications \cite{Zhang2020a, Won2019}.
 
 It is worth to mention that all models agree on several oxides being potential candidates when the probability cut-off is set low enough (but still above $50 \ \%$). However, we find that almost all the oxide compounds fall between the decision boundary defining suitable and unsuitable candidates, and none are present in the list defining the $66$ suitable candidates in the Supplementary Material. Due to the labeling of ZnO as a suitable candidate, we believe that the boundary was shifted sufficiently to admit several oxides as suitable candidates.
-Removing ZnO from the training set for the insightful approach might result in fewer or even no oxide compounts being predicted above the suitability limit. 
+Removing ZnO from the training set for the insightful approach might result in fewer or even no oxide compounds being predicted above the suitability limit. 
 
 The work of \citeauthor{Ferrenti2020} \cite{Ferrenti2020} suggests a list of $541$ viable hosts after the data mining procedure.  
 Of these, we find only a single material present in our list of $66$ candidates (see the Supplementary Material at \cite{supplementary}). This material is the nontoxic compound MgSe (mp-$10760$) which crystallizes in the rock-salt structure. Its band gap is $1.98$~eV in the MP database with the experimental value being $5.6$~eV  \cite{SaumGeorge1959}. MgSe is notable for its available spin-zero isotopes in accordance with the criteria set by the of Ref.~\cite{Ferrenti2020}. We believe that these criteria favor defects acting as spin centers with qubit potential and MgSe is thus identified as a promising host material in this respect.  
@@ -512,22 +512,22 @@ Of these, we find only a single material present in our list of $66$ candidates 
 \subsubsection*{Comparison of the approaches}
 
 Out of the three approaches, we find that the augmented Ferrenti approach is the least restricted approach and admits the most entries. The Ferrenti approach also admits a large number of entries, but is otherwise not very different from the augmented version. 
-Importantly, by applying the four ML models to the data extracted using the two approaches, we are unable to reproduce the criteria the approaches are based on, such as band gap restriction or polar space group. Of course, the list of materials proposed by the Ferrenti and augmented Ferrenti approach is extensive, whereas the insightful approach predicts fewer suitable candidates where manually verification is achievable.  
+Importantly, by applying the four ML methods to the data extracted using the two approaches, we are unable to reproduce the criteria the approaches are based on, such as band gap restriction or polar space group. Of course, the list of materials proposed by the Ferrenti and augmented Ferrenti approach is extensive, whereas the insightful approach predicts fewer suitable candidates where manually verification is achievable.  
 Manual verification through a literature survey will often not be available, however, and perfecting automatic data mining and analysis is therefore an important goal of material informatics \cite{rickman2019}. 
 
-It is important to note that the insightfull approach also proposed candidates with band gap energies lower than $0.5$~eV, but less compared to that of the other two approaches. Thus, all three approaches predicted suitable candidates with band gaps lower than the lowest in the training sets. 
+It is important to note that the insightful approach also proposed candidates with band gap energies lower than $0.5$~eV, but less compared to that of the other two approaches. Thus, all three approaches predicted suitable candidates with band gaps lower than the lowest in the training sets. 
 %We believe there are three reasons for this.  
 It is known that the GGA functional Materials Project applies is known to underestimate the band gap of many semiconductors. 
 %underestimating the band gap severely, and therefore there is a chance that the models consider the band gap as noise and not useful information. 
-It is therefore possible that the band gap is not considered an important parameter by the ML models. 
+It is therefore possible that the band gap is not considered an important parameter by the ML methods. 
 %Understanding the motivation behind the classification of the models will be an important step towards understanding ... 
 Indeed, we did not find that the band gap was prominent in the principal components, although the band gap could be correlated with other more important features. 
-Thus, one can argue that the models find other patterns that represent a better distinction between suitable and unsuitable candidates in the training sets, resulting in the band gap being redundant.
+Thus, one can argue that the ML methods find other patterns that represent a better distinction between suitable and unsuitable candidates in the training sets, resulting in the band gap being redundant.
 
-We find that $119$ of the $214$ candidates predicted as suitable by the insightful approach (when the probability cut-off is set to [X]) were also selected by all models in the augmented Ferrenti approach. 
+We find that $119$ of the $214$ candidates predicted as suitable by the insightful approach (when the probability cut-off is set to [X]) were also selected by all ML methods in the augmented Ferrenti approach. 
 %Of the $214$ suitable candidates predicted by all models in the insightful approach, we find $119$ of them also predicted as suitable by all models in the augmented Ferrenti approach. 
-Similarly, $78$ of the $214$ are also predicted as suitable by all models in the Ferrenti approach. All approaches and their corresponding models agree on a $47$ potential candidates, where eight are elementary (unary), $29$ binary, and $10$ tertiary.
-\textbf{The list of the $47$ materials agreed on by all models and all three approaches as suitable candidates with a probability $> X \ \%$ can be found in the Supplementary Material at \cite{supplementary}.} 
+Similarly, $78$ of the $214$ are also predicted as suitable by all models in the Ferrenti approach. All approaches and their corresponding methods agree on a $47$ potential candidates, where eight are elementary (unary), $29$ binary, and $10$ tertiary.
+\textbf{The list of the $47$ materials agreed on by all ML methods and all three approaches as suitable candidates with a probability $> X \ \%$ can be found in the Supplementary Material at \cite{supplementary}.} 
 
 
 \section*{Discussion} 
@@ -538,7 +538,7 @@ Similarly, $78$ of the $214$ are also predicted as suitable by all models in the
 %SHORT SUMMARY FIRST HERE. 
 
 Motivated by our findings, we believe that further computational, experimental, or theoretical verification after a prediction of a possible promising material remains an important step in this work. This step is part of the workflow for novel materials discovery, which is visualized in Fig.~\ref{fig:ht-workflow}.  
-Nevertheless, we have provided an exploratory analysis for the discovery of novel materials to be used in QT. Considering the number of materials predicted as suitable candidates by our models and approaches, we hope it encourages further studies and identification of possible new material hosts. 
+Nevertheless, we have provided an exploratory analysis for the discovery of novel materials to be used in QT. Considering the number of materials predicted as suitable candidates by our machine learning methods and approaches, we hope it encourages further studies and identification of possible new material hosts. 
 
 We find that including toxic materials etc in the training set is vital for reliable predictions. They can then later be excluded when planning experiments, but the practical considerations should be saved for last and not included in the initial criteria.  
 
@@ -558,7 +558,7 @@ The AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} repository is an au
 %with projector-augmented wave (PAW) potentials 
 to relax twice and optimize the ICSD-structure. 
 
-AFLOW-ML \cite{Isayev2017} is an API that uses machine learning to predict thermo-mechanical and electronic properties based on the chemical composition and atomic structure alone, which they denote as \textit{fragment descriptors}. Initially, the API decides whether a given material is a metal or an insulator, where the latter is confirmed with an additional regression model to predict the band gap width. The accuracy is validated by a five-fold cross-validation process for each model, where they report a $93 \ \%$ prediction success of their initial binary classification model. 
+AFLOW-ML \cite{Isayev2017} is an API that uses machine learning to predict thermo-mechanical and electronic properties based on the chemical composition and atomic structure alone, which they denote as \textit{fragment descriptors}. Initially, the API decides whether a given material is a metal or an insulator, where the latter is confirmed with an additional regression method to predict the band gap width. The accuracy is validated by a five-fold cross-validation process for each ML method, where they report a $93 \ \%$ prediction success of their initial binary classification method. 
 
 Matminer \cite{Ward2018} is an open-source toolkit for material analysis written in Python. Matminer provides modules to extract information from a wide variety of databases. Additionally, they provide the tools to construct possibly thousands of features from calculations based on a material's composition, structure and electronic properties from DFT calculations, and have frameworks for visualization and automatic machine learning.
 
@@ -578,17 +578,17 @@ In this work we have applied four well-known and tested machine learning methods
     \item Random forests,
     \item Gradient boosting.
 \end{enumerate}
-Logistic regression \cite{Hastie2009} is a simple and frequently used method for binary and multi-category classification problems.  In addition to logistic regression, we have also applied and tested the predictions made by decision trees and ensemble methods like random forests and gradient boosting, the latter through the application of the computationally efficient  XGBoost library \cite{xgboost2016}. Gradient boosting and random forests use decision trees as weak learners and improve their predictability. For random forests this is implemented through a collection of randomized decision trees where a  subset of the features in the data sets are selected randomly when building a decision tree. Boosting methods like gradient boosting use decision trees as  weak learners and improve upon these by an iterative process that involves the estimation of the gradients of the cost/loss function \cite{Hastie2009}. Pure decision trees can easily lead to overfitting of the data under study, leading to a model that exhibits a high variance. Ensemble methods like random forests and gradient boosting on the other hand tend to soften the overfitting problem, resulting in both a small bias and a reduced variance of the model employed, see for example Refs.~\cite{Hastie2009,Mehta2019} for an in-depth discussion of the bias-variance trade-off in machine learning. Gradient boosting implemented through the  XGBoost library \cite{xgboost2016}, is widely used by data scientists to achieve state-of-the-art results on many machine learning challenges.
+Logistic regression \cite{Hastie2009} is a simple and frequently used method for binary and multi-category classification problems.  In addition to logistic regression, we have also applied and tested the predictions made by decision trees and ensemble methods like random forests and gradient boosting, the latter through the application of the computationally efficient  XGBoost library \cite{xgboost2016}. Gradient boosting and random forests use decision trees as weak learners and improve their predictability. For random forests this is implemented through a collection of randomized decision trees where a  subset of the features in the data sets are selected randomly when building a decision tree. Boosting methods like gradient boosting use decision trees as  weak learners and improve upon these by an iterative process that involves the estimation of the gradients of the cost/loss function \cite{Hastie2009}. Pure decision trees can easily lead to overfitting of the data under study, leading to a machine learning method that exhibits a high variance. Ensemble methods like random forests and gradient boosting on the other hand tend to soften the overfitting problem, resulting in both a small bias and a reduced variance of the employed method, see for example Refs.~\cite{Hastie2009,Mehta2019} for an in-depth discussion of the bias-variance trade-off in machine learning. Gradient boosting implemented through the  XGBoost library \cite{xgboost2016}, is widely used by data scientists to achieve state-of-the-art results on many machine learning challenges.
 
 \section*{Data availability} 
 %We can put something else, standard text 
 %The data that support the plots within this paper and other findings of this study are available from the corresponding authors upon reasonable request. [Marianne: I assume you want to add the Github link here?] 
 
-The data sets that support the findings of this study are available from the corresponding author, and the data sets used to generate the ML models are available online at [Github link]. 
+The data sets that support the findings of this study are available from the corresponding author, and the data sets used in our  machine learning studies are available online at [Github link]. 
 
 \section*{Code availability} 
 %The codes developed in this study are available from the authors upon reasonable request. [Marianne: I assume you want to add the Github link here?] 
-The codes employed to develop the ML models are available online at https://github.com/ohebbi/predicting-solid-state-qubit-material-hosts (DOI: 10.5281/zenodo.4633959 - Update with new release later). %This DOI refers to an release of a Github Repository.  
+The codes employed to develop the machine learning results are available online at https://github.com/ohebbi/predicting-solid-state-qubit-material-hosts (DOI: 10.5281/zenodo.4633959 - Update with new release later). %This DOI refers to an release of a Github Repository.  
 
 \bibliography{apssamp}% Produces the bibliography via BibTeX.
 
@@ -597,7 +597,7 @@ The codes employed to develop the ML models are available online at https://gith
 The work of LV and MEB was supported by the Research Council of Norway and the University of Oslo through the frontier research project FUNDAMeNT (no. 251131, FriPro ToppForsk-program). 
 %Some of the computations were performed on resources provided by UNINETT Sigma2 - the National Infrastructure for High Performance Computing and Data Storage in Norway.  
 The work of MEB was supported by an ETH Zurich Postdoctoral Fellowship. 
-The work of MHJ is partially supported by the U.S. Department of Energy,
+The work of MHJ was supported by the U.S. Department of Energy,
 Office of Science, office of Nuclear Physics under grant
 No. DE-SC0021152 and U.S. National Science Foundation Grants
 No. PHY-1404159 and PHY-2013047. 
