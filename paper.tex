@@ -168,7 +168,7 @@ Recent advances have highlighted the potential of quantum computer architectures
 %Figure 1 introduction schematic 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/ht-workflow-new.png}
+    \includegraphics[width=0.9\textwidth]{figures/ht-workflow-new-2.png}
     \caption{Schematic of an example workflow in material informatics: results from theory, experiment and computation are fed into material databases. A cycle involving material screening, machine learning and predictions leads to knowledge gain and ultimately applications in fields such as clean energy and quantum technology. 
     }
     \label{fig:ht-workflow}
@@ -201,14 +201,27 @@ Matminer \cite{Ward2018} was then used for material analysis to featurize the ex
 
 \subsection*{Information Flow} 
 
-The information stream in this work can be regarded as many modular parts connected in logical pieces. The initial step for gathering material data and building features is visualized by the the flowchart in Figure~\ref{fig:flowchart-makedata}. 
+The information stream in this work can be regarded as many modular parts connected in logical pieces. The initial step for gathering material data and building features is visualized by the the flowchart in Figure~\ref{fig:flowchart}. 
 Initially, we start by extracting all entries in
 the Materials Project (MP) that matches a specific query. 
 The MP database contains ground state properties of different materials that are calculated using density functional theory (DFT) as implemented in the Vienna Ab Initio Package (VASP) \cite{Kresse1996} and using the The Perdew-Burke-Ernzerhof \cite{Perdew1996} (PBE) functional to calculate the electronic structure of the materials. 
 
-\input{figures/tikz-plots/flow-chart-data-extraction.tex}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/flow_chart.png}
+    \caption{
+        The data flow of the main project, starting from an initial MP-query, and ending with a featurized dataset
+        with entries from several other databases. To limit the memory and computational usage, the data is
+        partitioned into smaller subsets where the respective pymatgen objects are obtained through a query to be used in
+        the following featurization steps. This process is repeated iteratively until all the data has been featurized.
+        Abbreviations used are Materials Project (MP), density of states (DOS) and electronic band structure (band).
+    }
+    \label{fig:flowchart}
+\end{figure}
 
-\input{figures/tikz-plots/flow-chart-featurization.tex}
+% \input{figures/tikz-plots/flow-chart-data-extraction.tex}
+
+% \input{figures/tikz-plots/flow-chart-featurization.tex}
 
 Thereafter, we apply Matminer’s \cite{Ward2018}
 featurization tools to make thousands of features of the data. The conditions for this initial query are that the materials must derive from experimental data and have a band gap wider than $0.1$~eV to exclude metallic compounds. In a parallel step, entries that are deemed
@@ -218,7 +231,7 @@ are extracted from the databases OQMD \cite{Saal2013,Kirklin2015}, JARVIS-DFT \c
 Before applying any machine learning algorithm, the data was transformed into a numerical representation that reflects the relationship between the input and output data. This transformation is known as generating descriptors
 or features, however, we will in this work adapt the name featurization.
 The open-source library of Matminer provides many tools to featurize existing features extracted from the Materials Project.
-A schematic describing the  featurization process in Matminer is shown in Figure~\ref{fig:flowchart-featurization} 
+A schematic describing the  featurization process in Matminer is shown as a step in Figure~\ref{fig:flowchart} 
 and focus on a material's composition, structure, atomic sites, density of states and band structure. 
 %\textbf{[Describe it and say something about which features we choose.]}  
 The 39 features selected in this work are summarized in the Supplementary Material at \cite{supplementary}. The selection of features was kept rather wide as we do not precisely know which features best describe a suitable  host material. 
@@ -364,7 +377,7 @@ Identification of the features that promote quantum compatible characteristics c
         \centering
           \input{figures/parallel-coordinates-plots/03-insightful-approach-v2.pgf}
     \end{subfigure}
-    \vspace*{-95mm}
+    %\vspace*{10mm}
     \caption{Parallel coordinate plots for the different approaches. To limit the data cluttering, we have randomly collected up to $250$ entries for each class and made the lines transparent. For the intuitive approach, we have used all the $187$ suitable candidates. The axes show total magnetization (mag) taken from the Materials Project (MP) database along with the space group (SG), ionic character (ionic char), covalent range (cov range) as calculated from elemental properties, number of elements (num elements) and energy gap (Eg) extracted from MP.} 
     \label{fig:parallel-coordinates-approaches}
 \end{figure}
@@ -384,7 +397,7 @@ Thus, devising a sound framework for the data mining process is paramount to obt
     \centering
     \begin{subfigure}{0.3\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/01-ferrenti-approach.pdf}
+        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/01-ferrenti-approach-v2.pdf}
     \end{subfigure}%
     \begin{subfigure}{0.3\textwidth}
         \centering
@@ -392,9 +405,9 @@ Thus, devising a sound framework for the data mining process is paramount to obt
     \end{subfigure}
     \begin{subfigure}{0.3\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/03-insightful-approach.pdf}
+        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/03-insightful-approach-v2.pdf}
     \end{subfigure}
-    \vspace*{-95mm}
+    %\vspace*{-95mm}
     \caption{Two-dimensional scatter plots for the three different approaches. We have identified the two eigenvectors corresponding to the two largest eigenvalues of the covariance-matrix, that is, the two most important principal components (PC1 and PC2) of the initial data from the Materials Project query. Then, we have transformed the three training sets resulting from the three approaches and visualized them as scatter plots. Green squares display suitable candidates and red triangles represent unsuitable candidates.}
     \label{fig:2dscatterplotpca}
 \end{figure}
