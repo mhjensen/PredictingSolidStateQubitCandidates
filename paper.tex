@@ -150,7 +150,7 @@ The three approaches define distinct training sets for the supervised machine le
 %We find a lack of consistent results for the Ferrenti approach and the augmented Ferrenti approach due to an overly broad formulation of the training set, whereas the restrictions set in the intuitive approach proved suitable. All models for the intuitive approach agreed on $214$ predicted candidates, with examples such as ZnGeP$_2$, MgSe, CdS, BP, BC2N, BP, Ge, GeC, InP, and InAs. All three approaches and all ML models agreed on a subset of $47$ eligible candidates of $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 We find a lack of consistent results for the Ferrenti approach and the augmented Ferrenti approach due to an overly broad formulation of the training set. The restrictions set in the intuitive approach, on the other hand, which relies exclusively on findings from the literature, proved more suitable.  
 All four machine learning (ML) methods applied to the data set derived using the intuitive approach agreed on a set of $214$ predicted candidate materials to a probability of $>50 \ \%$. 
-All three approaches and all four ML methods agreed on a subset of $47$ eligible candidates (to a probability of $>XX \ \%$) of $8$ elemental, $29$ binary, and $10$ tertiary compounds.
+All three approaches and all four ML methods agreed on a subset of $47$ eligible candidates (to a probability of $>50 \ \%$) of $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 
 \end{abstract}
 
@@ -259,7 +259,7 @@ They suggest a data mining process consisting of four stages by systematically e
     \begin{itemize}
         \item exclude Th, U, Cd and Hg because they are radioactive and/or toxic in most stable forms,
         \item exclude any rare-earth metals (because of the difficulty of obtaining pure materials free of isotopes with nuclear spin) and noble gases (due to the lack of stable solid phases),
-        \item exclude transition metal elements with unpaired electrons like Ru, Os, Fe or Ni because of their paramagnetism.
+        \item exclude transition metal elements with unpaired electrons like Fe and Ni because of their paramagnetism. Ru and Os are also removed because they only exist in the data as complex cluster structures. 
     \end{itemize}
     \item Include only materials with a band gap larger than $0.5$~eV calculated using DFT and the PBE functional. The value of $0.5$~eV was chosen to match that typically predicted for silicon by PBE-level DFT calculations. 
     \item Ensure that energy above hull is less than $0.2$~eV per atom.
@@ -268,8 +268,7 @@ They suggest a data mining process consisting of four stages by systematically e
 Transition metal elements are eliminated in this approach if they have unpaired electrons because the presence of permanent electric dipole moments may have a detrimental impact on the optical coherence of defect emission. In this context, also the symmetry of the crystalline host may be important. Therefore, only phases which take on non polar space groups are considered in this approach. 
 The energy above hull requirement is included to ensure that the selected compounds are thermodynamically stable. 
 
-We then label \textbf{unsuitable} candidates according to the reverse requirements of the above; as materials in the ICSD database that crystallize in polar space groups, are calculated 
-to be magnetic and have a band gap larger than $0.1$~eV (to exclude metals but include lower-band gap semiconductors) as calculated by DFT using the PBE functional.
+We then label \textbf{unsuitable} candidates according to the reverse requirements of the above; as materials in the ICSD database that crystallize in polar space groups, are calculated to be magnetic and have a band gap larger than $0.1$~eV (to exclude metals but include lower-band gap semiconductors) as calculated by DFT using the PBE functional.
 The resulting complete data set contains materials where $56 \ \%$ are labeled as unsuitable and $44 \ \%$ as suitable for QT applications. 
 
 \subsubsection*{The augmented Ferrenti approach}
@@ -283,7 +282,7 @@ in the \emph{augmented Ferrenti approach}.
 \begin{enumerate}
     \item Include materials that; 
     \begin{itemize}
-        \item contain elements where more than half have a natural abundance of zero spin isotopes, except Al, P, Ga, As, B and N, 
+        \item contain elements where more than half have a natural abundance of zero spin isotopes, including Al, P, Ga, As, B and N, 
         \item crystallize in non-polar space groups,
         \item are present in the ICSD database,
         \item are calculated to be nonmagnetic. 
@@ -292,8 +291,7 @@ in the \emph{augmented Ferrenti approach}.
     \item Ensure that the energy above hull is less than $0.2$~eV per atom. 
 \end{enumerate}
 
-For \textbf{unsuitable} candidates, we implement the same strategy as for the non-augmented Ferrenti approach. The result is a somewhat unbalanced data set, with up to $75 \ \%$ of the 
-materials found in the suitable group. However, the data set is $78 \ \%$ larger than for the Ferrenti approach.
+For \textbf{unsuitable} candidates, we implement the same strategy as for the non-augmented Ferrenti approach. The result is a somewhat unbalanced data set, with up to $75 \ \%$ of the materials found in the suitable group. However, the data set is $78 \ \%$ larger than for the Ferrenti approach.
 
 \subsubsection*{The intuitive approach}
 The third approach differs substantially from the first two approaches in terms of labeling, as we apply knowledge from the field (see for instance Refs.~\cite{Atatuere2018,Zhang2020,Son2020,Toth2019,Bathen2021} for an overview) to pick our promising material host candidates. 
@@ -438,7 +436,7 @@ All structures of silicon are also labeled as suitable together with one entry o
 
 The number of candidates predicted by each of the four machine learning methods 'Logistic regression', 'Decision trees', 'Random forests' and 'Gradient boosting' is labeled in Figure~\ref{fig:predictions}(a) for the Ferrenti approach. 
 From the training set of $23.623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates. All four methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with the probability similar to a coin flip. 
-If we were to raise the minimum bar of a prediction to $70 \ \%$ instead of $50 \ \%$, the above ML algorithms would only agree on around $3000$ suitable candidates. 
+If we were to raise the minimum bar of a prediction to $70 \ \%$ instead of $50 \ \%$, the above ML algorithms would only agree on $1784$ suitable candidates. 
 We find that all four ML methods admit almost all materials with a chemical formula matching the known suitable candidates (see Table~\ref{tab:qt-materials}) that were present in the training set. 
 This can allow materials with unfortunate structures to be labeled as suitable candidates by all of our ML methods. 
 %Be careful here - PBE is known for underestimating band gaps. 
@@ -504,7 +502,39 @@ The work of \citeauthor{Ferrenti2020} \cite{Ferrenti2020} suggests a list of $54
 Among these these, we find only a single material present in our list of $66$ candidates predicted by the four ML models after training on the dataset resulting from the intuitive approach (see the Supplementary Material at \cite{supplementary}). This material is the nontoxic compound MgSe (mp-$10760$) which crystallizes in the rock-salt structure. Its band gap is $2.0$~eV in the MP database with the experimental value being reported as much larger at $5.6$~eV  \cite{SaumGeorge1959}. MgSe is notable for its available spin-zero isotopes in accordance with the criteria set by the of Ref.~\cite{Ferrenti2020}. We believe that these criteria may favor defects acting as spin centers with qubit potential and MgSe is thus identified as a promising host material in this respect.  
 %\oliver{Maybe also see if other compounds that were present in training set are present in their 541 hosts. }
 
+\begin{figure}[h] %!tbp
+    \centering
+    \begin{subfigure}{1\textwidth}
+        \centering
+        %\includegraphics[width=1\textwidth]{figures/histograms/01-02-histogram-.pdf}
+        \input{figures/histograms/summary-01-02-histogram-.tex}
+    \end{subfigure}%
+    
+    \begin{subfigure}{1\textwidth}
+        \centering
+        %\includegraphics[width=1\textwidth]{figures/histograms/03-histogram-.pdf}
+        \input{figures/histograms/summary-03-histogram-.tex}
+    \end{subfigure}
+    \caption{Histograms of predicted materials as a function of band gaps, where all models in an approach agree with at least the probability of $50\%$. The number of predicted materials are $6804$ for the Ferrenti approach, $9227$ for the augmented Ferrenti approach, and $214$ for the intuitive approach.}
+    \label{fig:histogram}
+\end{figure}
+
 \subsubsection*{Comparing the approaches}
+
+\begin{table}[b]
+    \centering 
+    \caption{Overview of the number of predicted suitable candidates as a function of ML model confidence when the four models in an approach agree. A probability of $50 \ \%$ represents the confidence of a coin flip, while $100 \ \%$ is a fully confident prediction.}
+    \begin{tabular}{c|c|c|c}
+      & $50 \ \%$ & $75 \ \%$ & $85 \ \%$ \\
+     \hline
+     Ferrenti approach &  $6804$ & $1784$ & $258$  \\
+     Augmented Ferrenti approach &  $9227$ & $4735$  & $2001$  \\ 
+     Intuitive approach & $214$ & $66$ & $9$ \\
+     \hline
+     All approaches together & $47$ & $6$ & 0 \\
+    \end{tabular}
+    \label{tab:probabilites}
+\end{table} 
 
 Out of the three approaches, we find that the augmented Ferrenti approach is the least restricted approach and admits the most entries. The Ferrenti approach also admits a large number of materials into the training set, but the resulting data is otherwise not very different from the augmented version. 
 Importantly, by applying the four ML methods to the data extracted using the two approaches, we are unable to reproduce the criteria the approaches are based on, such as band gap restriction or polar space group. Of course, the list of materials proposed by the Ferrenti and augmented Ferrenti approach is extensive, whereas the intuitive approach predicts fewer suitable candidates where manually verification is achievable.  
@@ -524,7 +554,7 @@ Among the three approaches to data mining we find that the intuitive one conform
 We find that $119$ of the $214$ candidates predicted as suitable by the intuitive approach (when the probability cut-off is set to $50 \ \%$) were also selected by all ML methods in the augmented Ferrenti approach. 
 Similarly, $78$ of the $214$ are also predicted as suitable by all models in the Ferrenti approach. All approaches and their corresponding methods agree on a total of $47$ potential candidates, where eight are elementary (unary), $29$ binary, and $10$ tertiary.
 \textbf{The list of the $47$ materials agreed on by all ML methods and all three approaches as suitable candidates with a probability $> 50 \ \%$ can be found in the Supplementary Material at \cite{supplementary}.} 
-
+    
 
 \section*{Discussion} 
 We have developed data extraction tools for numerous material science databases, and constructed over $4800$ physics-informed features for a data set consisting of more than $25000$ materials. Furthermore, three approaches to data mining for QT applications were developed; the Ferrenti, augmented Ferrenti and augmented approaches. 
