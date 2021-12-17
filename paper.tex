@@ -45,7 +45,7 @@
 % \usepackage{braket}
 \usepackage{siunitx}
 \usepackage{color}
-\usepackage{caption}
+% \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{tikz,pgfplots}
 \usepackage{makecell}
@@ -53,7 +53,7 @@
 \pgfplotsset{compat=1.17}
 \sisetup{separate-uncertainty}
 \usepackage{hyperref} 
-\usepackage{longtable}
+% \usepackage{longtable}
 
 \usepackage{forest}
 \forestset{
@@ -107,6 +107,7 @@
 \newcommand{\oyvind}[1]{\textcolor{maroon}{#1}}
 \newcommand{\lasse}[1]{\textcolor{red}{#1}}
 
+
 \begin{document}
 
 %\title{Predicting Solid State Qubit Candidates}
@@ -139,11 +140,11 @@
 %Rewrite to avoid plagiarism complaints, original is commented out  
 
 %Semiconductor materials provide a compelling platform for quantum technology, and a vast amount of materials and their properties can be found in high-throughput databases. However, sifting through tens of thousands of these materials in order to find novel candidates for quantum technology is a challenge. Therefore, we provide a framework for the automatic discovery of promising solid-state material hosts using machine learning methods.
-Semiconductor materials provide a compelling platform for quantum technologies (QT), and the properties of a vast amount of materials can be found in databases containing information from both experimental and theoretical explorations. However, scouring these databases to find promising candidate materials for quantum technology applications among tens of thousands of contenders is a major challenge. Therefore, we have developed a framework for the automated discovery of semiconductor host platforms for QT using materials informatics \cite{rickman2019} and machine learning methods.    
+Semiconductor materials provide a compelling platform for quantum technologies (QT), and the properties of a vast amount of materials can be found in databases containing information from both experimental and theoretical explorations. However, scouring these databases to find promising candidate materials for quantum technology applications among tens of thousands of contenders is a major challenge. Therefore, we have developed a framework for the automated discovery of semiconductor host platforms for QT using materials informatics \cite{rickman2019} and machine learning methods.
 
 %We have developed data extraction tools for numerous material science databases, and constructed over $4800$ physics-informed features for a data set consisting of more than $25000$ materials. Furthermore, we have developed and implemented three data mining approaches, termed \textit{the Ferrenti approach}, \textit{the augmented Ferrenti approach} and \textit{the intuitive approach} for defining three distinct training sets for the supervised machine learning algorithms logistic regression, decision tree, random forest and gradient boost to be trained on.
 Data extraction tools have been developed for a number of materials science databases resulting in a data set consisting of over $25.000$ materials. The information from the databases was converted into nearly $5000$ physics-informed features. Furthermore, we have developed and implemented three different approaches for the data mining process: \textit{The Ferrenti approach}, \textit{the augmented Ferrenti approach}, and \textit{the intuitive approach}. 
-%Rename intuitive approach! To what? 
+%Rename insightful approach! To what? 
 %Options include stringent, strict, cherry-picked, informed and intuitive. 
 The three approaches define distinct training sets for the supervised machine learning methods logistic regression, decision trees, random forests and gradient boosting. 
 
@@ -256,7 +257,7 @@ They suggest a data mining process consisting of four stages by systematically e
     \begin{itemize}
         \item contain elements with more than $50 \ \%$ natural abundance of spin zero  isotopes,
         \item crystallize in non-polar space groups,
-        \item are present in the ICSD database (the world's largest database for completely identified inorganic crystal structures), and
+        \item are present in the ICSD database~\cite{Allen1987} (the world's largest database for completely identified inorganic crystal structures), and
         \item are calculated to be nonmagnetic. 
     \end{itemize}
     \item Pragmatically remove toxic, radioactive and otherwise ``difficult'' materials;
@@ -397,7 +398,7 @@ We expect therefore that the two Ferrenti approaches would need supplementary di
 In the case of the intuitive approach, on the other hand, we can already start to see a trend where the upper left part of the figure is dominated by suitable candidates. The unsuitable candidates are similarly restricted to the lower right corner and there appears to be a clear barrier between the two, albeit with some exceptions. This indicates that the intuitive approach may be capable of separating materials based on their underlying properties.  
 Thus, devising a sound framework for the data mining process is paramount to obtain a suitable training set for the machine learning methods. 
 
-\begin{figure}[h] %!tbp
+\begin{figure}%[h] %!tbp
     \centering
     \begin{subfigure}{0.3\textwidth}
         \centering
@@ -512,7 +513,7 @@ The work of \citeauthor{Ferrenti2020} \cite{Ferrenti2020} suggests a list of $54
 Among these these, we find only a single material present in our list of $66$ candidates predicted by the four ML models after training on the dataset resulting from the intuitive approach (see the Supplementary Material at \cite{supplementary}). This material is the nontoxic compound MgSe (mp-$10760$) which crystallizes in the rock-salt structure. Its band gap is $2.0$~eV in the MP database with the experimental value being reported as much larger at $5.6$~eV  \cite{SaumGeorge1959}. MgSe is notable for its available spin-zero isotopes in accordance with the criteria set by the of Ref.~\cite{Ferrenti2020}. We believe that these criteria may favor defects acting as spin centers with qubit potential and MgSe is thus identified as a promising host material in this respect.  
 %\oliver{Maybe also see if other compounds that were present in training set are present in their 541 hosts. }
 
-\begin{figure}[h] %!tbp
+\begin{figure}%[h] %!tbp
     \centering
     \begin{subfigure}{1\textwidth}
         \centering
@@ -619,12 +620,12 @@ In this work we have applied four well-known and tested machine learning methods
 Logistic regression \cite{Hastie2009} is a simple and frequently used method for binary and multi-category classification problems. In addition to logistic regression, we have also applied and tested the predictions made by decision trees and ensemble methods like random forests and gradient boosting, the latter through the application of the computationally efficient  XGBoost library \cite{xgboost2016}. Gradient boosting and random forests use decision trees as weak learners and improve their predictability. For random forests this is implemented through a collection of randomized decision trees where a  subset of the features in the data sets are selected randomly when building a decision tree. Boosting methods like gradient boosting use decision trees as  weak learners and improve upon these by an iterative process that involves the estimation of the gradients of the cost/loss function \cite{Hastie2009}. Pure decision trees can easily lead to overfitting of the data under study, leading to a machine learning method that exhibits a high variance. Ensemble methods like random forests and gradient boosting on the other hand tend to soften the overfitting problem, resulting in both a small bias and a reduced variance of the employed method, see for example Refs.~\cite{Hastie2009,Mehta2019} for an in-depth discussion of the bias-variance trade-off in machine learning. Gradient boosting implemented through the  XGBoost library \cite{xgboost2016} is widely used by data scientists to achieve state-of-the-art results on many machine learning challenges. 
 
 \section*{Data availability} 
-The data sets that support the findings of this study are available online at DOI: 10.5281/zenodo.4633959.  
+The data sets that support the findings of this study are available online at \cite{Ohebbi2021}.
 
 \section*{Code availability} 
 The codes employed to develop the machine learning results are available online at 
 %https://github.com/ohebbi/predicting-solid-state-qubit-material-hosts 
-DOI: 10.5281/zenodo.4633959. 
+\cite{Ohebbi2021}.
 %Update with new release later). 
 
 \bibliography{apssamp}
