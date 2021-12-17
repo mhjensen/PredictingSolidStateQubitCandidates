@@ -139,7 +139,7 @@
 %Rewrite to avoid plagiarism complaints, original is commented out  
 
 %Semiconductor materials provide a compelling platform for quantum technology, and a vast amount of materials and their properties can be found in high-throughput databases. However, sifting through tens of thousands of these materials in order to find novel candidates for quantum technology is a challenge. Therefore, we provide a framework for the automatic discovery of promising solid-state material hosts using machine learning methods.
-Semiconductor materials provide a compelling platform for quantum technologies (QT), and the properties of a vast amount of materials can be found in databases containing information from both experimental and theoretical explorations. However, scouring these databases to find promising candidate materials for quantum technology applications among tens of thousands of contenders is a major challenge. Therefore, we have developed a framework for the automated discovery of semiconductor host platforms for QT using materials informatics and machine learning methods.    
+Semiconductor materials provide a compelling platform for quantum technologies (QT), and the properties of a vast amount of materials can be found in databases containing information from both experimental and theoretical explorations. However, scouring these databases to find promising candidate materials for quantum technology applications among tens of thousands of contenders is a major challenge. Therefore, we have developed a framework for the automated discovery of semiconductor host platforms for QT using materials informatics \cite{rickman2019} and machine learning methods.    
 
 %We have developed data extraction tools for numerous material science databases, and constructed over $4800$ physics-informed features for a data set consisting of more than $25000$ materials. Furthermore, we have developed and implemented three data mining approaches, termed \textit{the Ferrenti approach}, \textit{the augmented Ferrenti approach} and \textit{the intuitive approach} for defining three distinct training sets for the supervised machine learning algorithms logistic regression, decision tree, random forest and gradient boost to be trained on.
 Data extraction tools have been developed for a number of materials science databases resulting in a data set consisting of over $25.000$ materials. The information from the databases was converted into nearly $5000$ physics-informed features. Furthermore, we have developed and implemented three different approaches for the data mining process: \textit{The Ferrenti approach}, \textit{the augmented Ferrenti approach}, and \textit{the intuitive approach}. 
@@ -148,7 +148,7 @@ Data extraction tools have been developed for a number of materials science data
 The three approaches define distinct training sets for the supervised machine learning methods logistic regression, decision trees, random forests and gradient boosting. 
 
 %We find a lack of consistent results for the Ferrenti approach and the augmented Ferrenti approach due to an overly broad formulation of the training set, whereas the restrictions set in the intuitive approach proved suitable. All models for the intuitive approach agreed on $214$ predicted candidates, with examples such as ZnGeP$_2$, MgSe, CdS, BP, BC2N, BP, Ge, GeC, InP, and InAs. All three approaches and all ML models agreed on a subset of $47$ eligible candidates of $8$ elemental, $29$ binary, and $10$ tertiary compounds.
-We find a lack of consistent results for the Ferrenti approach and the augmented Ferrenti approach due to an overly broad formulation of the training set. The restrictions set in the intuitive approach, on the other hand, which relies exclusively on findings from the literature, proved more suitable.  
+We find a lack of consistent results for the Ferrenti approach and the augmented Ferrenti approach due to an overly broad formulation of the training set. The restrictions set in the intuitive approach, which relies exclusively on findings from the literature, proved on the other hand more suitable.  
 All four machine learning (ML) methods applied to the data set derived using the intuitive approach agreed on a set of $214$ predicted candidate materials to a probability of $>50 \ \%$. 
 All three approaches and all four ML methods agreed on a subset of $47$ eligible candidates (to a probability of $>50 \ \%$) of $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 
@@ -169,51 +169,54 @@ Recent advances have highlighted the potential of quantum computer architectures
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/ht-workflow-new-2.png}
-    \caption{Schematic of an example workflow in material informatics: results from theory, experiment and computation are fed into material databases. A cycle involving material screening, machine learning and predictions leads to knowledge gain and ultimately applications in fields such as clean energy and quantum technology. 
+    \caption{Schematic of an example workflow in material informatics: results from theory, experiment and computation are fed into material databases (arrow pointing to the center). A cycle involving material screening, machine learning and predictions leads to knowledge gain and ultimately applications in fields such as clean energy and quantum technology. 
     }
     \label{fig:ht-workflow}
 \end{figure}
 
-Several platforms are available for the development of quantum technologies (QT) but the materials and fabrication technologies are less mature than those for, e.g., classical computers and sensors. 
+Several platforms are available for the development of quantum technologies (QT), but the materials and fabrication technologies are less mature than those for, e.g., classical computers and sensors. 
 An important concern in this context is that of scalability. 
 For example, the best performing quantum computer prototypes available today rely on superconducting electronics or trapped ions. Both technologies require millikelvin temperatures to operate, fabrication is challenging, and the stability of interactions between qubits is an issue. Instead, semiconductors are emerging as a promising alternative platform, offering competitive characteristics combined with the possibility of room temperature operation and mature and scalable material processing and fabrication.  
 
 Quantum technologies based on semiconductors rely on either defects or quantum dots where the latter kind can be of the self-assembled or fabricated type. 
 Semiconductor defects can act as single-photon emitters or spin centers and are compatible with the three main QT categories of computing, communication and sensing.  
 These characteristics are most often found for the case of defects that introduce deep energy levels into the semiconductor band gap. So-called deep level defects can trap charge carriers in localized states that are essentially isolated from the surroundings, making them highly suitable for QT due to, e.g., indistinguishable single-photon emission and long spin coherence times. 
-The most well-known QT defect is the negatively charged nitrogen-vacancy (NV) center in diamond \cite{Doherty_2013}, but silicon carbide (SiC) and the various quantum emitters therein are poised to out-compete diamond in certain areas due to the favorable emission wavelength region in the near infrared coupled with more mature material processing and fabrication \cite{Bathen2021}. 
+The most well-known QT defect is the negatively charged nitrogen-vacancy (NV) center in diamond \cite{Doherty_2013}, but silicon carbide (SiC) and the various quantum emitters therein are poised to outcompete diamond in certain areas due to the favorable emission wavelength region in the near infrared coupled with more mature material processing and fabrication \cite{Bathen2021}. 
 However, defect based QT is still in the early stages, and the issues left to address include identification of suitable host materials and candidate defects, and scalable and reproducible quantum device fabrication. 
-Importantly, we are lacking a complete understanding of the requirements for a material to manifest quantum compatible properties,  
+Furthermore, we lack a complete understanding of the requirements for a material to manifest quantum compatible properties,  
 and the selection of known quantum compatible semiconductor host materials is slim. 
 
 The majority of discoveries of quantum emitters in semiconductors has so far happened by serendipity, and there is an urgent need for 
-a better understanding of how the QT compatible materials properties manifest. 
+a better and more systematic understanding of how the QT compatible materials properties manifest. 
 In this context, a framework for dedicated materials search and analysis is needed. 
-The fourth science paradigm of big data driven science presents a significant improvement over the third paradigm focusing on computational science, for instance via density functional theory calculations of different materials properties. The fourth paradigm instead introduces the potential of targeted search for promising material systems to act as hosts for qubit and single-photon emitter defects.  
-Instead of searching through a host of signals for the one that matches our criteria, we are now able to \textit{predict} which materials and signatures we should target for more detailed studies, following the framework illustrated in Figure~\ref{fig:ht-workflow}. 
-This is made feasible by the availability of databases containing materials properties for a wide range of different systems. In this work, the data in question is provided by bulk density functional theory (DFT) calculations to obtain the ground state properties of different elements and compounds. Combined with machine learning methods we provide a path towards precise classification of qubit candidates. The inclusion of machine learning methods follows recent trends in applications of statistical learning, data science and machine learning for scientific discoveries, see for example Refs.~\cite{deiana2021,Carleo2019}.
 
-In this work we provide a framework for the data mining and automated discovery of promising solid-state semiconductor hosts for quantum emitters and spin centers using targeted database search and machine learning methods combined with knowledge from the field. The methodology developed herein can be modified for other material types and application areas provided that a large enough database with relevant theoretical or experimental data is available. 
-The method that was developed relies on data extraction from the databases Materials Project \cite{Jain2013,Jain2018}, the Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015}, JARVIS-DFT \cite{Choudhary2020}, AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} and AFLOW-ML \cite{Isayev2017}. 
-Matminer \cite{Ward2018} was then used for material analysis to featurize the extracted data. An important feature of our work is the database building and development of the training sets for machine learning methods. We have developed three different approaches to data mining: (i) \emph{the Ferrenti approach} which is similar to that proposed by \citeauthor{Ferrenti2020}  \cite{Ferrenti2020}, (ii) \emph{the augmented Ferrenti approach} and (iii) \emph{the intuitive approach}. We find that the former two methodologies base their data extraction protocols on practical considerations, such as experimental availability in specific forms or the toxicity of the materials, leading to few observable trends in the materials predicted by well-tested machine learning algorithms, such as logistic regression, decision trees, and ensemble methods like random forests and gradient boosting \cite{Mehta2019,Hastie2009}. The third approach, on the other hand, relies on including materials with experimentally proven advantageous characteristics in the training set. This more restricted approach proved more suitable than the other two and yielded $214$ predicted candidates (to a probability of $>50 \ \%$) with examples such as ZnGeP$_2$, MgSe, CdS, BP, BC$_2$N, BP, Ge, GeC, InP, and InAs. 
+The fourth science paradigm of big data driven science presents a significant improvement over the third paradigm focusing on computational science, for instance via density functional theory calculations of different materials properties. Instead, the fourth paradigm  introduces the potential of targeted search for promising material systems to act as hosts for qubit and single-photon emitter defects.  
+Rather than searching through a host of signals for those that match our criteria, we are now able to \textit{predict} which materials and signatures we should target for more detailed studies, following the framework illustrated in Figure~\ref{fig:ht-workflow}. 
+This is made feasible by the availability of databases containing materials properties for a wide range of different systems. In this work, the data in question are provided by bulk density functional theory (DFT) calculations to obtain the ground state properties of different elements and compounds. Combined with machine learning methods we provide a path towards precise classification of qubit candidates. The inclusion of machine learning methods follows recent trends in applications of statistical learning, data science and machine learning for scientific discoveries, see for example Refs.~\cite{deiana2021,Carleo2019}.
+
+In this work we provide a framework for the data mining and automated discovery of promising solid-state semiconductor hosts for quantum emitters and spin centers using targeted database search and machine learning methods combined with knowledge from the field. The methodology developed herein can be modified for other material types and application areas provided that a large enough database with relevant theoretical and/or experimental data are available. 
+
+The approach we have developed relies on data extraction from the databases Materials Project \cite{Jain2013,Jain2018}, the Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015}, JARVIS-DFT \cite{Choudhary2020}, AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} and AFLOW-ML \cite{Isayev2017}. 
+The Python library for data mining Matminer \cite{Ward2018} was then used for material analysis to featurize the extracted data. An important aspect of our work is the database building and pertinent development of the training sets for machine learning methods. We have developed three different approaches to data mining: (i) \emph{the Ferrenti approach} which is similar to that proposed by \citeauthor{Ferrenti2020}  \cite{Ferrenti2020}, (ii) \emph{the augmented Ferrenti approach} and (iii) \emph{the intuitive approach}. We find that the former two methodologies base their data extraction protocols on practical considerations, such as experimental availability in specific forms or the toxicity of the materials, leading to few observable trends in the materials predicted by well-tested machine learning algorithms, such as logistic regression, decision trees, and ensemble methods like random forests and gradient boosting \cite{Mehta2019,Hastie2009}. The third approach, on the other hand, relies on including materials with experimentally proven advantageous characteristics in the training set. These training sets where then analyzed with the above mentioned machine learning methods. This approach proved more suitable than the other two and yielded $214$ predicted candidates (to a probability of $>50 \ \%$) with examples such as ZnGeP$_2$, MgSe, CdS, BP, BC$_2$N, BP, Ge, GeC, InP, and InAs. 
 
 \section*{Results}
 
 \subsection*{Information Flow} 
 
-The information stream in this work can be regarded as many modular parts connected in logical pieces. The initial step for gathering material data and building features is visualized by the the flowchart in Figure~\ref{fig:flowchart}. 
+%MHJ what do we mean with logical pieces?
+The information stream in this work can be regarded as many modular parts connected in logical pieces. The initial step for gathering material data and building features is visualized by the  flowchart in Figure~\ref{fig:flowchart}. 
 Initially, we start by extracting all entries in
-the Materials Project (MP) that matches a specific query. 
-The MP database contains ground state properties of different materials that are calculated using density functional theory (DFT) as implemented in the Vienna Ab Initio Package (VASP) \cite{Kresse1996} and using the The Perdew-Burke-Ernzerhof \cite{Perdew1996} (PBE) functional to calculate the electronic structure of the materials. 
+the Materials Project (MP) that match a specific query. 
+The MP database contains ground state properties of different materials that are calculated using density functional theory (DFT). The DFT simulations are effectively implemented using the Vienna Ab Initio Package (VASP) \cite{Kresse1996} and the  Perdew-Burke-Ernzerhof \cite{Perdew1996} (PBE) functional to calculate the electronic structure of the materials. 
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/flow_chart.png}
     \caption{
         The data flow of the main project, starting from an initial MP-query, and ending with a featurized dataset
-        with entries from several other databases. To limit the memory and computational usage, the data is
-        partitioned into smaller subsets where the respective pymatgen objects are obtained through a query to be used in
-        the following featurization steps. This process is repeated iteratively until all the data has been featurized.
+        with entries from several other databases. To limit the memory and computational usage, the data are
+        partitioned into smaller subsets where the respective Pymatgen objects (Pymatgen is a robust, open-source Python library for materials analysis \cite{pymatgen}) are obtained through a query to be used in
+        the following featurization steps. This process is repeated iteratively until all the data have been featurized.
         Abbreviations used are Materials Project (MP), density of states (DOS) and electronic band structure (band).
     }
     \label{fig:flowchart}
@@ -228,7 +231,7 @@ featurization tools to make thousands of features of the data. The conditions fo
 similar to the entries from the initial query
 are extracted from the databases OQMD \cite{Saal2013,Kirklin2015}, JARVIS-DFT \cite{Choudhary2020}, AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015}, AFLOW-ML \cite{Isayev2017}, and the Citrination platform \cite{OMaraJordan2016MDIA}. The results of these steps are combined into a data set for further analysis. 
 
-Before applying any machine learning algorithm, the data was transformed into a numerical representation that reflects the relationship between the input and output data. This transformation is known as generating descriptors
+Before applying any machine learning algorithm, the data were transformed into a numerical representation that reflects the relationship between the input and output data. This transformation is known as generating descriptors
 or features, however, we will in this work adapt the name featurization.
 The open-source library of Matminer provides many tools to featurize existing features extracted from the Materials Project.
 A schematic describing the  featurization process in Matminer is shown as a step in Figure~\ref{fig:flowchart} 
@@ -245,14 +248,15 @@ is that the physical mechanisms promoting favorable defect properties are not fu
 We follow three separate procedures to define a training set consisting of materials that are labeled as both suitable and unsuitable candidates for QT. 
 
 \subsubsection*{The Ferrenti approach}
-The first approach to defining a training set is based on the criteria from the paper by \citeauthor{Ferrenti2020} \cite{Ferrenti2020}.
-They suggest a data mining process consisting of four stages by systematically evaluating the suitability of host materials from the Materials Project. In this framework, we label \textbf{suitable} candidates by the following steps. 
+The first approach to defining a training set is based on the criteria proposed by \citeauthor{Ferrenti2020} \cite{Ferrenti2020}.
+They suggest a data mining process consisting of four stages by systematically evaluating the suitability of host materials from the Materials Project. In this framework, we label \textbf{suitable} candidates by the following steps:
+%MHJ how do we cite the  ICSD data? No ref as of now
 \begin{enumerate}
     \item Include materials that;
     \begin{itemize}
         \item contain elements with more than $50 \ \%$ natural abundance of spin zero  isotopes,
         \item crystallize in non-polar space groups,
-        \item are present in the ICSD database, and
+        \item are present in the ICSD database (the world's largest database for completely identified inorganic crystal structures), and
         \item are calculated to be nonmagnetic. 
     \end{itemize}
     \item Pragmatically remove toxic, radioactive and otherwise ``difficult'' materials;
@@ -268,17 +272,18 @@ They suggest a data mining process consisting of four stages by systematically e
 Transition metal elements are eliminated in this approach if they have unpaired electrons because the presence of permanent electric dipole moments may have a detrimental impact on the optical coherence of defect emission. In this context, also the symmetry of the crystalline host may be important. Therefore, only phases which take on non polar space groups are considered in this approach. 
 The energy above hull requirement is included to ensure that the selected compounds are thermodynamically stable. 
 
-We then label \textbf{unsuitable} candidates according to the reverse requirements of the above; as materials in the ICSD database that crystallize in polar space groups, are calculated to be magnetic and have a band gap larger than $0.1$~eV (to exclude metals but include lower-band gap semiconductors) as calculated by DFT using the PBE functional.
+We then label \textbf{unsuitable} candidates according to the reverse requirements of the above; as materials in the ICSD database %MHJ need ref here
+that crystallize in polar space groups, are calculated to be magnetic and have a band gap larger than $0.1$~eV (to exclude metals but include lower-band gap semiconductors) as calculated by DFT using the PBE functional, as discussed above.
 The resulting complete data set contains materials where $56 \ \%$ are labeled as unsuitable and $44 \ \%$ as suitable for QT applications. 
 
 \subsubsection*{The augmented Ferrenti approach}
 In the second approach, we adjust the first approach in order to improve the data set. This approach is therefore named \emph{the augmented Ferrenti approach}.
 
 In the first approach we included criteria that were not physically motivated, but instead based on a purely practical perspective, like excluding toxic and radioactive elements. Such criteria are not necessarily related to what makes a material suitable for quantum technology - eventually it is up to the experimentalist to decide the practicality of the material to be employed. 
-Consequently, in the augmented Ferrenti approach, we remove stage two from the approach above. Moreover, we include a few additional elements that have shown promising properties but were initially excluded due to the lack of spin zero isotopes. 
+Consequently, in the augmented Ferrenti approach, we remove stage two from the approach above. Moreover, we include a few additional elements that have shown promising properties but were initially excluded due to the lack of total spin zero isotopes. 
 
 The following steps constitute the process of choosing \textbf{suitable} candidates 
-in the \emph{augmented Ferrenti approach}. 
+in the \emph{augmented Ferrenti approach}:
 \begin{enumerate}
     \item Include materials that; 
     \begin{itemize}
@@ -331,16 +336,17 @@ The properties being studied arise from mechanisms related to, e.g., point defec
 Quantum emission signatures have been assigned to specific defects in both diamond and SiC, but for most other materials, secure identification of the responsible defects still remains. 
 In the intuitive approach, we include materials that are known to be quantum compatible as outlined in Table~\ref{tab:qt-materials} in the training set. Additionally, we also include materials matching the formulas ZnSe, AlP, GaP, AlAs, ZnTe, CdS and SiGe as these materials have been predicted to behave as suitable quantum hosts based on favorable properties such as a wide band gap and low spin-orbit coupling \cite{Weber2010,Hardy2019}.  
 
-After the first stage of picking candidates we are left with a list of $202$ matching formulas which includes $12$ entries that have a band gap of less than $0.4$~eV. These $12$ entries are calculated to be thermodynamically unstable in terms of the energy above hull, and will decompose into other materials in the list --- incidentally, the resulting structures all have calculated band gaps that are substantially above $0.5$~eV. We include all of the $202$ structures except for C (mp-568410) having a PBE-computed band gap of $0.12$~eV - a metal according to AFLOW-ML and therefore labeled as an unsuitable candidate. 
+After the first stage of picking candidates we are left with a list of $202$ matching formulas which includes $12$ entries that have a band gap of less than $0.4$~eV. These $12$ entries are calculated to be thermodynamically 
+unstable in terms of the energy above hull, and will decompose into other materials in the list --- incidentally, the resulting structures all have calculated band gaps that are substantially above $0.5$~eV. We include all of the $202$ structures except for C (mp-568410) having a PBE-computed band gap of $0.12$~eV - a metal according to AFLOW-ML and therefore labeled as an unsuitable candidate. 
  
 %% OH: Dirty details about suitable materials:
 Entries matching the formulas C, SiC, BN, MoS$_2$, WSe$_2$ and WS$_2$ were manually screened to see if the entries have a matching structure to the respective candidates discussed earlier and summarized in Table~\ref{tab:qt-materials}. 
 %OH: Is discussed earlier in thesis but maybe neccessary to mention here? 
-For carbon, we admit three-dimensional diamond-like structures as explicitly stated in the column tags from the Materials Project. Additionally, we find many two-dimensional structures of carbon with a large band gap ($>1.5$ eV) in the data. We add these as suitable candidates. Complex structures (eg. C$_{28}$, C$_{48}$, C$_{60}$) were moved to the test set. For SiC, we admitted all entries, which included the $2$H, $3$C, $4$H, $6$H and $15$R polytypes. Concerning BN, MoS$_2$, WSe$_2$ and  WS$_2$, we only admit two-dimensional structures. For non-matching structures not mentioned so far, we move them to the test set to see if they will be predicted as suitable or not by machine learning methods in a later step.
+For carbon, we admit three-dimensional diamond-like structures as explicitly stated in the column tags from the Materials Project. Additionally, we find many two-dimensional structures of carbon with a large band gap ($>1.5$ eV) in the data. We add these as suitable candidates. Complex structures (eg. C$_{28}$, C$_{48}$, C$_{60}$) were moved to the test set in our machine learning studies, see discussion below. For SiC, we admitted all entries, which included the $2$H, $3$C, $4$H, $6$H and $15$R polytypes. Concerning BN, MoS$_2$, WSe$_2$ and  WS$_2$, we only admit two-dimensional structures. For non-matching structures not mentioned so far, we move them to the test set to see if they will be predicted as suitable or not by machine learning methods in a later step.
 
-The materials AlP, GaP, AlAs, ZnTe and CdS were manually screened for tetrahedrally coordinated structures, and have been included since \citeauthor{Weber2010} \cite{Weber2010}  identified them as potentially promising candidates due to suitable material properties. 
+The materials AlP, GaP, AlAs, ZnTe and CdS were manually screened for tetrahedral coordinated structures, and have been included since \citeauthor{Weber2010} \cite{Weber2010}  identified them as potentially promising candidates due to suitable material properties. 
 %acceptable properties defined in requirements (H1-H4) in \autoref{ssec:qubit-material-host-requirements}. 
-We note that only tetrahedrally coordinated structures of the given formulas were present after applying the band gap restriction of $0.5$~eV.
+We note that only tetrahedral coordinated structures of the given formulas were present after applying the band gap restriction of $0.5$~eV.
 
 The suitable candidates in the intuitive approach contain only compounds that are either elementary (unary) or binary. We do not want to discriminate based on the number of elements in a compound, therefore we remove the feature that describes the number of elements in a compound. After the three stages, a total of $187$ entries were labeled as suitable candidates.
 See the Supplementary Material at \cite{supplementary} for a table containing the manually screened materials that were labeled as suitable candidates in the training set for the intuitive approach. 
@@ -348,7 +354,7 @@ See the Supplementary Material at \cite{supplementary} for a table containing th
 Since the data set constituting suitable candidates in the third approach contains few entries, we add $400$ candidates that are labeled as \emph{unsuitable}. These are picked at random from the pool of unsuitable candidates from the two previous approaches, in addition to those that were marked as unsuitable through the manual screening process. 
 
 \subsubsection*{Comparing the approaches}
-The three different approached to data mining place a particular emphasis on each of their particular goals. The Ferrenti approach depends on choosing only elements with spin zero isotopes together with practical filters, while the augmented Ferrenti approach allows a larger variety of elements and removes the practical reasons for excluding candidate materials. Thus, the first approach targets a more narrow prediction space than the second approach does. However, perhaps the most restricted approach is the intuitive one. Since the variety of known suitable materials is substantially more restricted than for the two other approaches, we would expect the intuitive approach to provide an even narrower prediction space. Here, one should keep in mind that ... 
+The three different approached to data mining place a particular emphasis on each of their particular goals. The Ferrenti approach depends on choosing only elements with spin zero isotopes together with practical filters, while the augmented Ferrenti approach allows a larger variety of elements and removes the practical reasons for excluding candidate materials. Thus, the first approach targets a more narrow prediction space than the second approach does. However, perhaps the most restricted approach is the intuitive one. Since the variety of known suitable materials is substantially more restricted than for the two other approaches, we would expect the intuitive approach to provide an even narrower prediction space. %Here, one should keep in mind that ... 
 
 We provide a visualization of each approach's training data as a parallel coordinate plot for a few selected features in Figure~\ref{fig:parallel-coordinates-approaches}. Parallel coordinate schemes \cite{Inselberga1990, Inselberg1985} represent a multi-dimensional data tuple as one polyline crossing a parallel axis. The selected features are found on the x-axis, while the y-axis shows the value of the data present. Thus, parallel coordinate plots can turn many-dimensional data into a compact two-dimensional representation. Due to possible data cluttering, the figure visualizes a random sample of each class (suitable or unsuitable) with an upper limit of $250$ per class with transparent lines. The green and red polylines represent suitable and unsuitable candidates, respectively. 
 
@@ -380,13 +386,13 @@ Identification of the features that promote quantum compatible characteristics c
     \label{fig:parallel-coordinates-approaches}
 \end{figure}
 
-To visualize the complexity of the training sets, we have found the two largest eigenvalues of the covariance matrix of the initial data from the Materials Project, and transformed the training sets according to the corresponding two eigenvectors. The resulting scatter plots are found in Figure~\ref{fig:2dscatterplotpca}. 
+To visualize the complexity of the training sets, we have found the two largest eigenvalues of the covariance matrix \cite{Hastie2009} of the initial data from the Materials Project, and transformed the training sets according to the corresponding two eigenvectors. The resulting scatter plots are found in Figure~\ref{fig:2dscatterplotpca}. 
 Green squares display suitable candidates and red triangles represent unsuitable candidates. 
 Due to the complexity of reducing the large amount of features down to only two, both suitable and unsuitable candidates for the Ferrenti and the augmented Ferrenti approaches are largely overlapping. 
-The logic behind categorizing materials in the two classes (suitable and unsuitable) appears to not translate into a distinct separation, at least not in the representation of Fig.~\ref{fig:2dscatterplotpca}. 
+The logic behind categorizing materials in  two classes (suitable and unsuitable) appears to not translate into a distinct separation, at least not in the representation of Fig.~\ref{fig:2dscatterplotpca}. 
 Hence, using these approaches for predicting QT material hosts could prove challenging for any model that would try to glean a clear-cut boundary between materials that are and are not suitable for QT. 
 %Nonetheless, we note that the unsuitable candidates appear to be restricted to a certain parameter space while the suitable candidates extend much further.  
-Therefore, we can expect that the two Ferrenti approaches would need supplementary dimensions for further distinguishing between the materials in the two categories (suitable and unsuitable), or that it could prove challenging to find a generalized model based on the available data sets.  
+We expect therefore that the two Ferrenti approaches would need supplementary dimensions for further distinguishing between the materials in the two categories (suitable and unsuitable), or that it could prove challenging to find a generalized model based on the available data sets.  
 
 In the case of the intuitive approach, on the other hand, we can already start to see a trend where the upper left part of the figure is dominated by suitable candidates. The unsuitable candidates are similarly restricted to the lower right corner and there appears to be a clear barrier between the two, albeit with some exceptions. This indicates that the intuitive approach may be capable of separating materials based on their underlying properties.  
 Thus, devising a sound framework for the data mining process is paramount to obtain a suitable training set for the machine learning methods. 
@@ -536,8 +542,8 @@ Among these these, we find only a single material present in our list of $66$ ca
     \label{tab:probabilites}
 \end{table} 
 
-Out of the three approaches, we find that the augmented Ferrenti approach is the least restricted approach and admits the most entries. The Ferrenti approach also admits a large number of materials into the training set, but the resulting data is otherwise not very different from the augmented version. 
-Importantly, by applying the four ML methods to the data extracted using the two approaches, we are unable to reproduce the criteria the approaches are based on, such as band gap restriction or polar space group. Of course, the list of materials proposed by the Ferrenti and augmented Ferrenti approach is extensive, whereas the intuitive approach predicts fewer suitable candidates where manually verification is achievable.  
+Out of the three approaches, we find that the augmented Ferrenti approach is the least restricted approach and admits the most entries. The Ferrenti approach also admits a large number of materials into the training set, but the resulting data are otherwise not very different from the augmented version. 
+Importantly, by applying the four machine learning methods to the data extracted using the two approaches, we are unable to reproduce the criteria the approaches are based on, such as band gap restriction or polar space group. Of course, the list of materials proposed by the Ferrenti and augmented Ferrenti approach is extensive, whereas the intuitive approach predicts fewer suitable candidates where manually verification is achievable.  
 Manual verification through a literature survey will often not be possible, however, and perfecting automatic data mining and analysis is therefore an important goal of material informatics \cite{rickman2019}. 
 
 It is important to note that the intuitive approach also proposed candidates with band gap energies lower than $0.5$~eV, but to a lesser extent as compared to the other two approaches. Thus, all three approaches predicted suitable candidates with band gaps lower than the lowest in the training sets. 
@@ -563,7 +569,7 @@ Three distinct training sets were defined for four different machine learning al
 We find that the formulation of the training sets for the Ferrenti and augmented Ferrenti approaches was overly broad with a lack of clear distinction between the materials labeled suitable and unsuitable for QT in the two training sets. The stringent restrictions set for the intuitive approach on the other hand proved more suitable basing on the much clearer distinction between suitable and unsuitable candidates. 
 
 Notably, our results show that including impractical materials (e.g., toxic, radioactive and without spin-zero isotopes) in the training set is vital for defining a suitable training set. 
-\textbf{This manifests in the ML predictions as ...} 
+% MHJ paragraph not concluded \textbf{This manifests in the ML predictions as ...} 
 Such materials can be eliminated based on practical considerations at a later stage but should be included initially in order to provide the ML methods with ideal conditions to divine physics based trends. 
 
 In short, the findings presented herein firmly establish that material informatics via data mining to machine learning predictions is a both viable and important route to new discoveries in important fields. Herein, we focus on predicting new candidate materials to host single-photon emitters and spin centers for quantum technology applications, but the framework we have developed is suitable for other fields as well. 
@@ -578,16 +584,19 @@ The Materials Project \cite{Jain2013, Jain2018} is an open-source project based 
 
 The Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015} contains thermodynamic and structural properties of more than $600.000$  materials. The calculations are performed with the VASP software whereas the electron exchange and correlation are described with the PBE functional. The $+U$ extension is included for several calculations considering specific elements \cite{Stevanovic2012}. 
 
-JARVIS-DFT \cite{Choudhary2020} is an open database based on the VASP software and consists of roughly $40.000$ 3D materials using the vdW-DF-OptB88 (OPT) functional \cite{Thonhauser2007, Klimes2011}. Structures included in the database are originally taken from the Materials Project, and then re-optimized using the OPT functional. Finally, the combination of the OPT and modified Becke-Johnson (mBJ) functionals is used to obtain a representative band gap for each structure \cite{Choudhary2018a}. 
+JARVIS-DFT \cite{Choudhary2020} is an open database based on the VASP software and consists of roughly $40.000$ three-dimensional materials using the vdW-DF-OptB88 (OPT) functional \cite{Thonhauser2007, Klimes2011}. Structures included in the database are originally taken from the Materials
+%mhj: ref to materials project is missing
+Project, and then re-optimized using the OPT functional. Finally, the combination of the OPT and modified Becke-Johnson (mBJ) functionals is used to obtain a representative band gap for each structure \cite{Choudhary2018a}. 
 
 The AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} repository is an automatic software framework for the calculations of a wide range of inorganic material properties. They utilize the PBE functional within VASP
 %with projector-augmented wave (PAW) potentials 
 to relax twice and optimize the ICSD-structure. 
 
-AFLOW-ML \cite{Isayev2017} is an API that uses machine learning to predict thermo-mechanical and electronic properties based on the chemical composition and atomic structure alone, which are denoted as \textit{fragment descriptors}. Initially, the API decides whether a given material is a metal or an insulator, where the latter is confirmed with an additional regression method to predict the band gap width. The accuracy is validated by a five-fold cross-validation process for each ML method, where they report a $93 \ \%$ prediction success of their initial binary classification method. 
+AFLOW-ML \cite{Isayev2017} is an application programming interface (API) that uses machine learning to predict thermo-mechanical and electronic properties based on the chemical composition and atomic structure alone, which are denoted as \textit{fragment descriptors}. Initially, the API decides whether a given material is a metal or an insulator, where the latter is confirmed with an additional regression method to predict the band gap width. The accuracy is validated by a five-fold cross-validation process for each ML method, where they report a $93 \ \%$ prediction success of their initial binary classification method. 
 
 \subsection*{Material Informatics}  
 Matminer \cite{Ward2018} is an open source toolkit for material analysis written in Python. Matminer provides modules to extract information from a wide variety of databases. Additionally, they provide the tools to construct possibly thousands of features from calculations based on a material's composition, structure and electronic properties from DFT calculations, and have frameworks for visualization and automatic machine learning. 
+Pymatgen is a robust, open-source Python library for materials analysis \cite{pymatgen}.
 The features selected for featurization herein are summarized in the Supplementary Material at \cite{supplementary}. 
 
 \subsection*{Machine Learning} 
