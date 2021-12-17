@@ -427,6 +427,10 @@ Furthermore, we have utilized data obtained from high-throughput density functio
 
 Another potential source of uncertainty that should be mentioned is the use of the PBE functional for computing the information in the databases employed herein. Despite being immensely successful in describing a number of material properties, PBE is widely known for underestimating the band gap of semiconductors \cite{Freysoldt2014}. Therefore, not all properties predicted using the PBE functional are reliable, and the band gaps in particular cannot be trusted in absolute terms. Nonetheless, the functional is in wide use due to the combination of reasonable accuracy and high computational throughput, and is usually considered to be reliable for large-scale trends in semiconductor properties. 
 
+In summary, using various
+data extraction tools for a number of materials science databases, we have obtained databases consisting of over 25.000 materials. The information from the databases has then been converted into nearly 5000 physics-informed features.
+After these steps with fine-tuning and selection of entries  for our data sets we are now ready to apply machine learning methods in order to classify materials as potential candidates for quantum technologies.
+
 \subsection*{Predicting Suitable Material Hosts for Quantum Technology}
 Four well-tested machine learning algorithms were employed in this work: logistic regression, decision trees, and ensemble methods like random forests and gradient boosting \cite{Mehta2019,Hastie2009}. 
 These four machine learning methods were applied to the data sets that were optimized using each of the three approaches (Ferrenti, augmented Ferrenti and intuitive) outlined above. This yielded twelve sets of materials that were predicted as suitable material hosts for QT applications. In this section, we present representative results after applying machine learning methods to the datasets resulting from each of the three data mining approaches. 
