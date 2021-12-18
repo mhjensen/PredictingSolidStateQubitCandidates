@@ -48,6 +48,8 @@
 % \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{tikz,pgfplots}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
 \usepackage{makecell}
 \captionsetup[table]{skip=10pt}
 \pgfplotsset{compat=1.17}
@@ -518,15 +520,26 @@ Among these these, we find only a single material present in our list of $66$ ca
     \begin{subfigure}{1\textwidth}
         \centering
         %\includegraphics[width=1\textwidth]{figures/histograms/01-02-histogram-.pdf}
-        \input{figures/histograms/summary-01-02-histogram-.tex}
+        \input{figures/histograms/summary-01-02-03-histogram-bg.tex}
+        \subcaption[]{}
     \end{subfigure}%
+
     
     \begin{subfigure}{1\textwidth}
         \centering
         %\includegraphics[width=1\textwidth]{figures/histograms/03-histogram-.pdf}
-        \input{figures/histograms/summary-03-histogram-.tex}
+        \input{figures/histograms/summary-01-02-03-histogram-cov.tex}
+        \subcaption[]{}
     \end{subfigure}
-    \caption{Histograms of predicted materials as a function of band gaps, where all models in an approach agree with at least the probability of $50\%$. The number of predicted materials are $6804$ for the Ferrenti approach, $9227$ for the augmented Ferrenti approach, and $214$ for the intuitive approach.}
+
+    \begin{subfigure}{1\textwidth}
+        \centering
+        %\includegraphics[width=1\textwidth]{figures/histograms/03-histogram-.pdf}
+        \input{figures/histograms/summary-01-02-03-histogram-ionic.tex}
+        \subcaption[]{}
+    \end{subfigure}
+    
+    \caption{Histograms of predicted suitable materials as a function of (a) PBE-calculated band gap from Materials Project, (b) covalent range (Cov range) and (c) maximum ionic character (Ionic char). The number of predicted materials are $6804$ for the Ferrenti approach, $9227$ for the augmented Ferrenti approach, and $214$ for the intuitive approach.}
     \label{fig:histogram}
 \end{figure}
 
