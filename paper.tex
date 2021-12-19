@@ -237,10 +237,11 @@ are extracted from the databases OQMD \cite{Saal2013,Kirklin2015}, JARVIS-DFT \c
 Before applying any machine learning algorithm, the data were transformed into a numerical representation that reflects the relationship between the input and output data. This transformation is known as generating descriptors
 or features, however, we will in this work adapt the name featurization.
 The open-source library of Matminer provides many tools to featurize existing features extracted from the Materials Project.
-A schematic describing the  featurization process in Matminer is shown as a step in Figure~\ref{fig:flowchart} 
+
+%\textbf{[Describe it and say something about which features we choose.]}
+To apply Matminer's featurization tools, we extend an existing implementation by \citeauthor{Breuck2021} \cite{Breuck2021}, which were used to generate a supervised mcahine learning framework called the MODnet. Their implementation provides featurization for a material's composition, structure and atomic sites. However, Matminer also provides featurization tools for a material's density of states (DOS) and band structure, therefore, we extend their implementation to facilitate such featurizations. A schematic figure visualizing the featurization process in Matminer is shown in Figure~\ref{fig:flowchart} 
 and focus on a material's composition, structure, atomic sites, density of states and band structure. 
-%\textbf{[Describe it and say something about which features we choose.]}  
-The 39 features selected in this work are summarized in the Supplementary Material at \cite{supplementary}. The selection of features was kept rather wide as we do not precisely know which features best describe a suitable  host material. 
+The 39 features selected in this work are summarized in the Supplementary Material at \cite{supplementary}. The selection of features was kept rather wide as we do not precisely know which features best describe a solid state material platform for quantum technology. 
 
 \subsection*{Data Mining}
 
@@ -598,7 +599,7 @@ Another, perhaps even more important, is to use the features and trends identifi
 \section*{Methods}
 
 \subsection*{Databases} 
-The Materials Project \cite{Jain2013, Jain2018} is an open-source project based on the Vienna Ab Initio Package (VASP) \cite{Kresse1996}. The Perdew-Burke-Ernzerhof \cite{Perdew1996} (PBE) functional is used to calculate band structures, while for transition metals, a $+U$ correction is applied to correct for correlation effects \cite{Wang2006}. The project is known as the initiator of materials genomics and offers a variety of calculated properties for over one hundred thousand inorganic crystalline materials, with frequent updates and extensions. 
+The Materials Project \cite{Jain2013, Jain2018} is an open-source project based on the Vienna Ab Initio Package (VASP) \cite{Kresse1996}. The Perdew-Burke-Ernzerhof \cite{Perdew1996} (PBE) functional is used to calculate band structures, while for transition metals, a $+U$ correction is applied to correct for correlation effects \cite{Wang2006}. The project is known as the initiator of materials genomics and offers a variety of calculated properties for over one hundred thousand inorganic crystalline materials, with frequent updates and extensions. Data extracted from Materials Project was done 
 
 The Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015} contains thermodynamic and structural properties of more than $600.000$  materials. The calculations are performed with the VASP software whereas the electron exchange and correlation are described with the PBE functional. The $+U$ extension is included for several calculations considering specific elements \cite{Stevanovic2012}. 
 
