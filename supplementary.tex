@@ -73,19 +73,19 @@ Predicting Solid State Material Platforms for Quantum Technologies}
 \affiliation{Advanced Power Semiconductor Laboratory, ETH Zürich, 8092  Zürich,  Switzerland}
 \affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
 
+\author{{\O}yvind Sigmundson Sch{\o}yen}
+\affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+
 \author{Sebastian G. Winther-Larsen}
 \affiliation{Menon Economics, N-0369 Oslo, Norway}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
 
-\author{{\O}yvind Sigmundson Sch{\o}yen}
-\affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+\author{Lasse Vines}
+\affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
 
 \author{Morten Hjorth-Jensen}
 \affiliation{Department of Physics and Astronomy and Facility for Rare Ion Beams, Michigan State University, East Lansing, MI 48824, USA}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
-
-\author{Lasse Vines}
-\affiliation{Department of Physics and Center for Materials Science and Nanotechnology, University of Oslo, N-0316 Oslo, Norway}
 
 \pacs{02.70.Ss, 31.15.A-, 31.15.bw, 71.15.-m, 73.21.La}
 
@@ -109,13 +109,14 @@ Table~\ref{table:featurizers} contains an overview of this work's chosen 39 feat
 \subsection*{Optimization of machine learning models}
 
 \section*{Supplementary results}
-Table~\ref{tab:03-probability-candidates}  displays the 66 predicted candidates that all four machine learning models, using the data set derived in the intuitive approach, agreed on with more than $75 \ \%$ probability.  All band gaps are taken from the Materials Project database as calculated using DFT and the PBE functional. Note that materials can appear several times  on  the  list due  to  different  structures of the same composition. The  list  contains $5$ elementary (unary), $46$  binary and  $15$ ternary compounds. 
+Table~\ref{tab:03-probability-candidates} displays the 66 predicted candidates that all four machine learning models, using the data set derived in the intuitive approach, agreed on with a cut-off set to $0.75$. All band gaps are taken from the Materials Project database as calculated using DFT and the PBE functional. Note that materials can appear several times  on  the  list due  to  different  structures of the same composition. The  list  contains $5$ elementary (unary), $46$  binary and  $15$ ternary compounds. 
 
 \input{appendix/tablesof66materials.tex}
 
+Table~\ref{tab:04-probability-candidates} displays the $47$ predicted candidates that all four machine learning models and all three approaches agreed upon. The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
+
 \input{appendix/tablesof47materials.tex}
 
-Still missing. 
 
 \bibliography{apssamp}% Produces the bibliography via BibTeX.
 
