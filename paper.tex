@@ -227,7 +227,8 @@ The conditions for this initial query are that the materials must derive from
 %experimental data 
 the ICSD database 
 and have a band gap wider than $0.1$~eV to exclude metallic compounds. 
-The Inorganic Crystal Structure Database (ICSD) is the world's largest database for completely identified inorganic crystal structures \cite{Allen1987,Levin2020}.  
+The Inorganic Crystal Structure Database (ICSD) is the world's largest database for completely identified inorganic crystal structures \cite{Allen1987,Zagorac2019}.%
+%OH: corrected icsd citation to german one (different from nist)
 In a parallel step, entries that are deemed
 similar to the entries from the initial query
 are extracted from the databases OQMD \cite{Saal2013,Kirklin2015}, JARVIS-DFT \cite{Choudhary2020}, AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015}, AFLOW-ML \cite{Isayev2017}, and the Citrination platform \cite{OMaraJordan2016MDIA}. The results of these steps are combined into a data set for further analysis. 
@@ -258,7 +259,7 @@ They suggest a data mining process consisting of four stages by systematically e
     \begin{itemize}
         \item contain elements with more than $50 \ \%$ natural abundance of spin zero isotopes,
         \item crystallize in non-polar space groups,
-        \item are present in the ICSD database~\cite{Allen1987} (the world's largest database for completely identified inorganic crystal structures), and
+        \item are present in the ICSD database~\cite{Allen1987,Zagorac2019} (the world's largest database for completely identified inorganic crystal structures), and
         \item are calculated to be nonmagnetic. 
     \end{itemize}
     \item Pragmatically remove toxic, radioactive and otherwise ``difficult'' materials;
@@ -274,9 +275,14 @@ They suggest a data mining process consisting of four stages by systematically e
 Transition metal elements are eliminated in this approach if they have unpaired electrons because the presence of permanent electric dipole moments may have a detrimental impact on the optical coherence of defect emission. In this context, also the symmetry of the crystalline host may be important. Therefore, only phases which take on non polar space groups are considered in this approach. 
 The energy above hull requirement is included to ensure that the selected compounds are thermodynamically stable. 
 
-We then label \textbf{unsuitable} candidates according to the reverse requirements of the above; as materials in the ICSD database %MHJ need ref here
+We then label \textbf{unsuitable} candidates according to the reverse requirements of the above; as materials in the ICSD database \cite{Allen1987,Zagorac2019} %MHJ need ref here
 that crystallize in polar space groups, are calculated to be magnetic and have a band gap larger than $0.1$~eV (to exclude metals but include lower-band gap semiconductors) as calculated by DFT using the PBE functional, as discussed above.
-The resulting complete data set contains materials where $56 \ \%$ are labeled as unsuitable and $44 \ \%$ as suitable for QT applications. 
+The resulting complete data set contains $1581$ materials where %$56 \ \%$ 
+$35 \ \%$
+are labeled as unsuitable and 
+%$44 \ \%$
+$65 \ \%$
+as suitable for QT applications. 
 
 \subsubsection*{The augmented Ferrenti approach}
 In the second approach, we adjust the first approach in order to improve the data set. This approach is therefore named \emph{the augmented Ferrenti approach}.
@@ -577,6 +583,7 @@ The list of the $47$ materials agreed on by all ML methods and all three approac
 \textbf{I am missing a discussion, here or below, on the different ML methods and their different results. Which of the four algorithms is best or makes the most sense? Please compare either here, or for each of the approaches in the Predictions subsections. Data can go in Supplemental.}  
     
 Among the three approaches to data mining, we find that the materials predicted based on the training set defined in the intuitive approach conform to expectation most closely. Figure~\ref{fig:histogram} displays the number of predicted candidate materials as a function of (a) band gap, (b) covalent range and (c) ionic character. We observe ... 
+% 
 
 \section*{Discussion} 
 We have developed data extraction tools for numerous material science databases, and constructed over $4800$ physics-informed features for a data set consisting of more than $25.000$ materials. Furthermore, three approaches to data mining for QT applications were developed; (i) the Ferrenti approach,  (ii) the augmented Ferrenti approach, and (iii) the intuitive approach.  
@@ -594,20 +601,20 @@ Two main routes can be followed to exploit the results. One aspect is the pursui
 
 \section*{Methods}
 
-\subsection*{Databases} 
-The Materials Project \cite{Jain2013, Jain2018} is an open-source project based on the Vienna Ab Initio Package (VASP) \cite{Kresse1996}. The Perdew-Burke-Ernzerhof \cite{Perdew1996} (PBE) functional is used to calculate band structures, while for transition metals, a $+U$ correction is applied to correct for correlation effects \cite{Wang2006}. The project is known as the initiator of materials genomics and offers a variety of calculated properties for over one hundred thousand inorganic crystalline materials, with frequent updates and extensions. Data extraction from Materials Project was performed ... 
+\subsection*{Databases}
+The Materials Project \cite{Jain2013, Jain2018} is an open-source project based on the Vienna Ab Initio Package (VASP) \cite{Kresse1996}. The Perdew-Burke-Ernzerhof \cite{Perdew1996} (PBE) functional is used to calculate band structures, while for transition metals, a $+U$ correction is applied to correct for correlation effects \cite{Wang2006}. The project is known as the initiator of materials genomics and offers a variety of calculated properties for over one hundred thousand inorganic crystalline materials, with frequent updates and extensions. Data extraction from Materials Project was performed in december of $2020$ for the Ferrenti and Augmented Ferrenti approach, while in march $2021$ for the intuitive approach. Therefore, the two former approaches includes $77$ more materials due to deprecated entries in the Materials Project database.
 
-The Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015} contains thermodynamic and structural properties of more than $600.000$  materials. The calculations are performed with the VASP software whereas the electron exchange and correlation are described with the PBE functional. The $+U$ extension is included for several calculations considering specific elements \cite{Stevanovic2012}. 
+The Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015} contains thermodynamic and structural properties of more than $600.000$  materials. The calculations are performed with the VASP software whereas the electron exchange and correlation are described with the PBE functional. The $+U$ extension is included for several calculations considering specific elements \cite{Stevanovic2012}. Data extraction from OQMD was done in february of $2021$. 
 
 JARVIS-DFT \cite{Choudhary2020} is an open database based on the VASP software and consists of roughly $40.000$ three-dimensional materials using the vdW-DF-OptB88 (OPT) functional \cite{Thonhauser2007, Klimes2011}. Structures included in the database are originally taken from the Materials
 %mhj: ref to materials project is missing
-Project, and then re-optimized using the OPT functional. Finally, the combination of the OPT and modified Becke-Johnson (mBJ) functionals is used to obtain a representative band gap for each structure \cite{Choudhary2018a}. 
+Project, and then re-optimized using the OPT functional. Finally, the combination of the OPT and modified Becke-Johnson (mBJ) functionals is used to obtain a representative band gap for each structure \cite{Choudhary2018a}. Data extraction from JARVIS-DFT was done in january of $2021$, were we utilized the version made available 30.04.2021 at \url{figshare.com}.
 
 The AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} repository is an automatic software framework for the calculations of a wide range of inorganic material properties. They utilize the PBE functional within VASP
 %with projector-augmented wave (PAW) potentials 
-to relax twice and optimize the ICSD-structure. 
+to relax twice and optimize the ICSD-structure. Data-extraction was done in the period of january-february of $2021$.
 
-AFLOW-ML \cite{Isayev2017} is an application programming interface (API) that uses machine learning to predict thermo-mechanical and electronic properties based on the chemical composition and atomic structure alone, which are denoted as \textit{fragment descriptors}. Initially, the API decides whether a given material is a metal or an insulator, where the latter is confirmed with an additional regression method to predict the band gap width. The accuracy is validated by a five-fold cross-validation process for each ML method, where they report a $93 \ \%$ prediction success of their initial binary classification method. 
+AFLOW-ML \cite{Isayev2017} is an application programming interface (API) that uses machine learning to predict thermo-mechanical and electronic properties based on the chemical composition and atomic structure alone, which are denoted as \textit{fragment descriptors}. Initially, the API decides whether a given material is a metal or an insulator, where the latter is confirmed with an additional regression method to predict the band gap width. The accuracy is validated by a five-fold cross-validation process for each ML method, where they report a $93 \ \%$ prediction success of their initial binary classification method. This work utilized the Property Labeled Material Fragments (PLMF) openly available at their website \url{aflowlib.org}. We extract the crystallographic information file (CIF) of the crystals from Materials Project, and then use this as input to AFLOW-ML, which then returns an anticipated band gap. The process was done during january of $2021$. 
 
 \subsection*{Material Informatics}  
 Matminer \cite{Ward2018} is an open source toolkit for material analysis written in Python. Matminer provides modules to extract information from a wide variety of databases. Additionally, they provide the tools to construct possibly thousands of features from calculations based on a material's composition, structure and electronic properties from DFT calculations, and have frameworks for visualization and automatic machine learning. 

@@ -41,15 +41,25 @@
 \usepackage{bm}% bold math
 \usepackage{physics}
 \usepackage{lipsum}
-\usepackage{subfig}
+%\usepackage{subfig}
 % \usepackage{braket}
 \usepackage{siunitx}
 \usepackage{color}
 \usepackage{longtable}
+\usepackage{subfigure}
+\usepackage{tikz,pgfplots}
+\usepgfplotslibrary{groupplots,dateplot}
+\usetikzlibrary{patterns,shapes.arrows}
 \sisetup{separate-uncertainty}
 %\newcommand\abs[1]{\left|#1\right|}
 %\newcommand\bra[1]{\left| #1 \right \rangle}
 %\newcommand\ket[1]{\left \langle #1 \right |}
+\pgfplotsset{%samples=101,
+axis lines = left,
+every axis plot/.append style={line width=2pt},
+}
+
+\pgfplotsset{compat=1.17}
 
 \newcommand{\oliver}[1]{\textcolor{violet}{#1}} 
 \newcommand{\morten}[1]{\textcolor{green}{#1}}
@@ -107,6 +117,33 @@ Table~\ref{table:featurizers} contains an overview of this work's chosen 39 feat
 \input{appendix/featurizerTable.tex}
 
 \subsection*{Optimization of machine learning models}
+\begin{figure}[ht!]
+  \begin{subfigure}[b]{0.5\textwidth}
+    \input{figures/optimizing-parameters/01-ferrenti-approach-176-LOG}
+    \caption{}
+    \label{fig:q1-LOG}
+  \end{subfigure}%
+    \hfill
+  \begin{subfigure}[b]{0.5\textwidth}
+    \input{figures/optimizing-parameters/01-ferrenti-approach-176-DT}
+    \caption{}
+    \label{fig:q1-DT}
+  \end{subfigure}
+  
+  \begin{subfigure}[b]{0.5\textwidth}
+    \input{figures/optimizing-parameters/01-ferrenti-approach-176-RF.tex}
+    \caption{}
+    \label{fig:q1-RF}
+  \end{subfigure}%
+   \hfill
+  \begin{subfigure}[b]{0.5\textwidth}
+    \input{figures/optimizing-parameters/01-ferrenti-approach-176-GB.tex}
+    \caption{}
+    \label{fig:q1-GB}
+  \end{subfigure}
+  \caption{{Four figures displaying hyperparameter search for the Ferrenti approach. The best estimator is visualized for all hyperparameters as a function of principal components during a grid search with a $5\times5$ stratified cross-validation, and the dotted lines mark the optimal hyperparameter-combination. Train stands for normal training accuracy, while test is the balanced accuracy on the test set. Precision, recall, and F1 scores are based on the test set. The number of principal components that explain the $95\%$ accumulated variance is $144$, while the optimal model is found using the F1-score.}}
+  \label{fig:01-pca}
+\end{figure}
 
 \section*{Supplementary results}
 Table~\ref{tab:03-probability-candidates} displays the 66 predicted candidates that all four machine learning models, using the data set derived in the intuitive approach, agreed on with a cut-off set to $0.75$. All band gaps are taken from the Materials Project database as calculated using DFT and the PBE functional. Note that materials can appear several times  on  the  list due  to  different  structures of the same composition. The  list  contains $5$ elementary (unary), $46$  binary and  $15$ ternary compounds. 
