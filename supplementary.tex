@@ -36,30 +36,70 @@
 %floatfix,
 ]{revtex4-2}
 
-\usepackage{graphicx}% Include figure files
-\usepackage{dcolumn}% Align table columns on decimal point
-\usepackage{bm}% bold math
-\usepackage{physics}
-\usepackage{lipsum}
-%\usepackage{subfig}
-% \usepackage{braket}
-\usepackage{siunitx}
-\usepackage{color}
-\usepackage{longtable}
-\usepackage{subfigure}
-\usepackage{tikz,pgfplots}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[top=4cm,bottom=4cm,left=2.8cm,right=3.75cm,asymmetric,twoside]{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\usepackage{tikzorbital}
+\usepackage{array} % center tables + 2 next lines
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage{multirow} % confusion matrix
+\newcommand\MyBox[2]{
+  \fbox{\lower0.75cm
+    \vbox to 2.0cm{\vfil
+      \hbox to 2.0cm{\hfil\parbox{1.4cm}{#1\\#2}\hfil}
+      \vfil}%
+  }%
+}
+\usepackage{grffile}
+\usepackage{epigraph} % quote
+\usepackage{wrapfig} %wrapping text to fig
+\usepackage{tikz} %draw figures
+
+\usepackage{subcaption} %subcaption
+\usepackage[font=small,labelfont=bf,width=0.9\textwidth]{caption}
+\captionsetup[table]{skip=10pt}
+\usepackage[T1]{fontenc}
+\usepackage[sc, osf]{mathpazo}
+\usepackage[euler-digits]{eulervm}
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{commath}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
 \usepgfplotslibrary{groupplots,dateplot}
-\usetikzlibrary{patterns,shapes.arrows}
-\sisetup{separate-uncertainty}
-%\newcommand\abs[1]{\left|#1\right|}
-%\newcommand\bra[1]{\left| #1 \right \rangle}
-%\newcommand\ket[1]{\left \langle #1 \right |}
+\usetikzlibrary{patterns,shapes.arrows, arrows.meta,bending, shapes,calc,fadings,decorations.pathreplacing,positioning,arrows.meta}
+\pgfplotsset{compat=newest}
+
+\usepackage{sansmath}
+\tikzset{>=stealth,
+OptimumStyle/.style={align=center,anchor=east,rotate=90,font=\scriptsize}
+}
 \pgfplotsset{%samples=101,
 axis lines = left,
 every axis plot/.append style={line width=2pt},
 }
-
-\pgfplotsset{compat=1.17}
+% Include font for the identity operator
+\usepackage{dsfont}
+\usepackage[binary-units=true]{siunitx}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{physics}
+\usepackage{lipsum}
+\usepackage{siunitx}
+\usepackage{color}
+\sisetup{separate-uncertainty}
+\pgfplotsset{%samples=101,
+axis lines = left,
+every axis plot/.append style={line width=2pt},
+}
 
 \newcommand{\oliver}[1]{\textcolor{violet}{#1}} 
 \newcommand{\morten}[1]{\textcolor{green}{#1}}
@@ -112,12 +152,54 @@ Supplementary references.
 
 \section*{Supplementary methods}
 \subsection*{Featurization}
-Table~\ref{table:featurizers} contains an overview of this work's chosen 39 features from matminer. The features were selected based on ... 
+Table~\ref{table:featurizers} contains an overview of this work's chosen 39 features from matminer. The features were selected based on
+the work of 
+
 
 \input{appendix/featurizerTable.tex}
 
 \subsection*{Optimization of machine learning models}
+
+In the evaluation of the approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations. Four different evaluation metrics are applied to each of the four algorithms for each approach. 
+
+For random forest, gradient boost, and decision tree, we found that by adjusting most of the available parameters responded to severe overfitting. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$ was the maximum number of depth for the trees grown, which we adjusted between $1$ and $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmical adjusted values from $10^{-3}$ to $10^{5}$, and use either $200$ or $400$ iterations to reach convergence. 
+
+When searching for the optimal number of principal components, we iterated over every odd number of principal components from $1$ to the upper restricted number which defines an accumulated variance of $95\%$ from the principal component analysis. Due to a large number of principal components, we end up fitting $25$ folds for each of the $1232$ parameter combinations, totalling up to $30800$ individual models, just for logisitic regression for one approach.
+
+%Ferrenti 
+We visualize the grid search for the optimal number of principal components for the Ferrenti approach in figure \ref{fig:01-pca}, where we present the mean accuracy on the training set, and the balanced accuracy, precision, recall, and F$1$-score on the test set as a function of principal components used in the models. For each principal component, the optimal combination of hyperparameters based on the F$1$-score is visualized. 
+
+In table \ref{tab:01-pc}, we find the precise measurements for each evaluation metrics for the optimal number of principal components, which is visualized as dotted lines in \ref{fig:01-pca}. The relevant hyperparameters for logistic regression were the maximum iterations, which was set at $400$, and the regularization term, which was found optimal at $0.46$. For random forest and decision trees, we find the maximum depth of $7$, while being $4$ for gradient boost. We find the best performing model is logistic regression, but is dependent on a large amount of principal components. 
+
+%Augmented ferrenti (to be continued)
+%Intuitive (to be continued)
+
+\begin{table}[!ht]
+\centering
+\caption{A table of the optimal number of principal components and the respective scores (standard deviation) for the Ferrenti approach, as visualized in the dash-dotted line in figure \ref{fig:01-pca}.}
+\label{tab:01-pc}
+\noindent\makebox[\textwidth]{
+\begin{tabular}{M{1.0cm} M{1.0cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
+  \hline
+  \hline
+   Model & PC & Mean test &  Mean precision & Mean recall & mean F1\\
+  \hline
+  LOG & $171$ & $0.98(0.012)$ & $0.98(0.011)$ & $0.99(0.007)$ & $0.99(0.007)$ \\
+  DT & $37$   & $0.77(0.034)$ & $0.84(0.034)$ & $0.85(0.044)$ & $0.84(0.022)$ \\
+  RF & $53$   & $0.87(0.027)$ & $0.88(0.022)$ & $0.98(0.010)$ & $0.93(0.014)$ \\
+  GB & $107$  & $0.92(0.016)$ & $0.92(0.015)$ & $0.98(0.010)$ & $0.95(0.009)$ \\
+  \hline
+\end{tabular}
+}
+\end{table}
+
+
 \begin{figure}[ht!]
+\begin{subfigure}[b]{1.0\textwidth}
+    \centering
+    \input{figures/optimizing-parameters/label.tex}
+  \end{subfigure}
+  \par\bigskip
   \begin{subfigure}[b]{0.5\textwidth}
     \input{figures/optimizing-parameters/01-ferrenti-approach-176-LOG}
     \caption{}
@@ -144,6 +226,8 @@ Table~\ref{table:featurizers} contains an overview of this work's chosen 39 feat
   \caption{{Four figures displaying hyperparameter search for the Ferrenti approach. The best estimator is visualized for all hyperparameters as a function of principal components during a grid search with a $5\times5$ stratified cross-validation, and the dotted lines mark the optimal hyperparameter-combination. Train stands for normal training accuracy, while test is the balanced accuracy on the test set. Precision, recall, and F1 scores are based on the test set. The number of principal components that explain the $95\%$ accumulated variance is $144$, while the optimal model is found using the F1-score.}}
   \label{fig:01-pca}
 \end{figure}
+
+\clearpage
 
 \section*{Supplementary results}
 Table~\ref{tab:03-probability-candidates} displays the 66 predicted candidates that all four machine learning models, using the data set derived in the intuitive approach, agreed on with a cut-off set to $0.75$. All band gaps are taken from the Materials Project database as calculated using DFT and the PBE functional. Note that materials can appear several times  on  the  list due  to  different  structures of the same composition. The  list  contains $5$ elementary (unary), $46$  binary and  $15$ ternary compounds. 
