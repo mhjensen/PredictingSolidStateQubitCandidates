@@ -157,6 +157,7 @@ Predicting Solid State Material Platforms for Quantum Technologies}
 
 
 \author{Oliver Lerst{\o}l Hebnes}
+\affiliation{Your new job} 
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
 
 \author{Marianne Etzelm\"uller Bathen}
@@ -182,27 +183,30 @@ Predicting Solid State Material Platforms for Quantum Technologies}
 \maketitle
 
 
-Contents: \\ 
-Supplementary methods --- additional information on the featurization process and optimization of the machine learning models. \\ 
-Supplementary results --- statistics and tables over the materials that were predicted by the machine learning models based on the training sets derived using the three different data mining approaches. \\ 
-Supplementary references. 
-
+\noindent \textbf{Contents:} 
+\begin{itemize}
+    \item \textit{Supplementary methods.} \\   Additional information on the featurization process and optimization of the machine learning models. 
+    \item \textit{Supplementary results.} \\  Statistics and tables over the materials that were predicted by the machine learning models based on the training sets derived using the three different data mining approaches. 
+    \item \textit{Supplementary references.}  
+\end{itemize}
 
 \newpage 
 
 \section*{Supplementary methods}
 \subsection*{Featurization}
-Table~\ref{table:featurizers} contains an overview of this work's chosen 39 features from matminer. The features were selected based on
-the work of 
+To apply Matminer's featurization tools, we extend an existing implementation by \citeauthor{Breuck2021} \cite{Breuck2021}. 
+Table~\ref{table:featurizers} contains an overview of this work's chosen 39 featurizers from Matminer. The featurization process results in $4876$ descriptors. 
+
+The motivation behind the choice of featurizers is that we do not precisely know which features describe a suitable potential host. Therefore, we strive to collect an achievable quantity of descriptors with the hope of getting wiser in terms of prediction potential materials for quantum technologies. 
 
 
 \input{appendix/featurizerTable.tex}
 
 \subsection*{Optimization of machine learning models}
 
-In the evaluation of the machine learning models for the three different approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations. Four different evaluation metrics are applied to each of the four algorithms for each approach. 
+In the evaluation of the machine learning models for the three different approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations. Due to imbalanced training data, we apply four different evaluation metrics to each of the four algorithms for each approach. 
 
-For random forests, gradient boosting, and decision trees, we found that by adjusting most of the available parameters, X responded to severe overfitting. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$ was the maximum number of depth for the trees grown, which we adjusted between $1$ and $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic adjusted values from $10^{-3}$ to $10^{5}$, and use either $200$ or $400$ iterations to reach convergence. 
+The implementation of the machine learning models was done through the open library of Scikit-learn. By adjusting the majority of the hyperparameters in Sciki-learn, we experienced severe overfitting for random forest, gradient boosting, and decision trees. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$ was the maximum number of depth for the trees grown, which we adjusted between $1$ and $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic adjusted values from $10^{-3}$ to $10^{5}$, and use either $200$ or $400$ iterations to reach convergence. 
 
 When searching for the optimal number of principal components, we iterated over every odd number of principal components from $1$ to the upper restricted number which defines an accumulated variance of $95 \ \%$ from the principal component analysis. Due to a large number of principal components, we end up fitting $25$ folds for each of the $1232$ parameter combinations, totaling up to $30.800$ individual models, just for one arbitrary machine learning algorithm like logistic regression. 
 
@@ -243,7 +247,7 @@ The grid search for the optimal number of principal components for the Ferrenti 
   \label{fig:01-pca}
 \end{figure}
 
-\begin{table}[b]
+\begin{table}[t]
 \centering
 \caption{Optimal number of principal components and the respective scores (standard deviation) for each of the four ML models logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the Ferrenti approach, as visualized by the dash-dotted line in Figure~\ref{fig:01-pca}.}
 \label{tab:01-pc}
@@ -305,9 +309,9 @@ In Figure~\ref{fig:01-fi}, we visualize how the models interpret the principal c
 For logistic regression, we have visualized the mean fitted coefficients and the standard variation in the top panel of Fig.~\ref{fig:01-fi}. Large positive or negative coefficients can be considered increasingly important, where positive (negative) coefficients will contribute to making positive (negative) predictions. In the three next panels, namely for the models decision trees, random forests, and gradient boosting, we visualize the mean impurity-based feature importance, along with the standard deviation. Importantly, we observe that the single most important feature for all models is the fifth principal component. Interestingly, by selecting the highest values in this eigenvector, we find that the corresponding features originate from the DFT band gap of the elemental solids among the elements in the 
 compound 
 % composition 
-as calculated by OQMD.
+as calculated by Materials Agnostic Platform for Informatics and Exploration (MagPie). 
 
-After the first ten principal components, we observe that the models adapt the other principal components with varying degrees. The coefficients for the case of logistic regression experience large fluctuations, but the three remaining models find the first and second principal components important in addition to the fifth. In order of importance, we observe that the second component's largest values correspond to the electronegativity, ionic property, and covalence radius among the elements in the composition. The aggregations are either calculated as minimum, mean, standard deviation, or maximum. While the first principal component encompasses the largest explained variance, it does not provide any specific information on which features it represents.
+After the first ten principal components, we observe that the models adapt the other principal components with varying degrees. The coefficients for the case of logistic regression experience large fluctuations, but the three remaining models find the first and second principal components important in addition to the fifth. In order of importance, we observe that the second component's largest values correspond to the electronegativity, ionic property, and covalence radius among the elements in the composition. The data originiates from elemental calculatinos from MagPie and are aggregated as either minimum, mean, standard deviation, or maximum. While the first principal component encompasses the largest explained variance, it does not provide any specific information on which features it represents.
 
 %While the first principal component has by far the largest explained variance, it does not provide any specific information of which features it represents. Some of the features represent the period in the periodic table, structural packing efficiency, and atomic weights of the components. However, we are unable to confirm the prominent features due to no significant .
 
@@ -388,7 +392,7 @@ The interpretation of feature importance for the augmented Ferrenti approach is 
 
 \subsubsection*{Intuitive approach}
 
-Lastly, we turn to the intuitive approach, which resulted in $404$ unsuitable and $202$ suitable candidates in the training set, which was again somewhat imbalanced. However, in contrast to the two training sets discussaed above, the majority of the entries was in this case labeled as unsuitable candidates. 
+Lastly, we turn to the intuitive approach, which resulted in $404$ unsuitable and $202$ suitable candidates in the training set, which was again somewhat imbalanced. However, in contrast to the two training sets discussed above, the majority of the entries was in this case labeled as unsuitable candidates. 
 
 The grid search for the optimal number of principal components is visualized in Figure~\ref{fig:03-pca}. Interestingly, we find that all models experience high scores for just a few principal components, where $1$ principal component earns at least $0.93$ scores for all evaluation metrics. %This information was also revealed for an earlier two-dimensional visualization of a scatter plot showing the two most important principal components in figure \ref{fig:2dscatterplotpca}, and consequently can make the models find the optimal decision boundary more easily.
 
@@ -487,7 +491,9 @@ Lastly, gradient boosting performs optimally at $13$ principal components with a
 
 The intuitive approach differs in many aspects from the Ferrenti and augmented Ferrenti approaches. Firstly, we find that the number of principal components necessary to obtain $95 \ \%$ variance is reduced to $103$ components, which is $41$ and $56$ less than the Ferrenti and augmented Ferrenti approach, respectively. Thus, the variance of the training set is found to be described with fewer principal components, indicating a simpler model.   
 
-Secondly, we find that the first principal component is by far the most important feature for all models, as visualized in Figure~\ref{fig:03-fi}. This is part of the reason why we experience a large accuracy for only a single feature, as seen in Figure~\ref{fig:03-pca}. The first principal component's corresponding features are challenging to explain due to small variations of values. However, it differs when it comes to which top features the first principal component describes, which includes bond orientational parameters, coordination numbers, and the radial distribution function of a compound's crystal system.
+Secondly, we find that the first principal component is by far the most important feature for all models, as visualized in Figure~\ref{fig:03-fi}. This is part of the reason why we experience a large accuracy for only a single feature, as seen in Figure~\ref{fig:03-pca}. The first principal component's corresponding features are challenging to explain due to small variations of values, but we see it including 
+%However, it differs when it comes to which top features the first principal component describes, which includes 
+bond orientational parameters, coordination numbers, and the radial distribution function of a compound's crystal system.
 
 Thirdly, the intuitive approach differs in how much explained variation is retained by the first component, which is $21 \ \%$, while it is $14 \ \%$ for the Ferrenti approach and $11 \ \%$ for the augmented Ferrenti approach. We find the difference striking considering that the approaches share the same ultimate goal, but where the training sets apparently exhibit large and significant variations. 
 
@@ -520,7 +526,30 @@ The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 
 \input{appendix/tablesof47materials.tex}
 
+\subsection*{Feature analysis}
+%Or important features for QT 
+Figure~\ref{fig:histograms_supp} displays the number of predicted suitable materials for all approaches (all ML models in an approach agree to a $0.75$ confidence level) as a function of the (a) covalent radius of the elements in the composition, (b) maximum packing efficiency, and standard deviation of the radial distribution function (RDF) with center at (c) $2.0$ and (d) $3.0$. The corresponding figure in the main text shows the standard deviation of the RDF with Gaussian center at $1.0$. Several observations can be made based on the histograms. Panels (e) chemical environment site fingerprint, (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the band gap referenced to the normalized mean of the entire data set.  
 
+Firstly, we find that the ... 
+
+
+%histograms 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/ElementProperty_MagpieData range CovalentRadius_count_075.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/MaximumPackingEfficiency_max packing efficiency_count_075.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/GeneralizedRDF_std_dev Gaussian center=2.0 width=1.0_count_075.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/GeneralizedRDF_std_dev Gaussian center=3.0 width=1.0_count_075.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/ChemEnvSiteFingerprint_GaussianSymmFuncstd_dev G2_20.0_count_075.pdf}
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/CrystalNNFingerprint_mean tetrahedral CN_4_count_075.pdf} 
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/OPSiteFingerprint_mean tetrahedral CN_4_count_075.pdf} 
+    \includegraphics[width=0.4\textwidth]{figures/histograms/new/MP_Eg_count_075.pdf} 
+    \caption{Histograms of predicted suitable materials as a function of the (a) covalent radius, (b) maximum packing efficiency, and standard deviation of the radial distribution function with center at (c) $2.0$ and (d) $3.0$. Panels (e) chemical environment site fingerprint, (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the band gap referenced to the normalized mean of the entire data set. The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. The Ferrenti and extended Ferrenti approaches refer to the left y-axis and the empirical approach to the right. All panels were taken for a $0.75$ cut-off. }
+    \label{fig:histograms_supp}
+\end{figure} 
+
+\newpage 
+ 
 \bibliography{apssamp}% Produces the bibliography via BibTeX.
 
 \end{document}
