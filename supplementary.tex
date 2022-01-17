@@ -231,7 +231,6 @@ The grid search for the optimal number of principal components for the Ferrenti 
     \caption{}
     \label{fig:q1-DT}
   \end{subfigure}
-  
   \begin{subfigure}[b]{0.5\textwidth}
     \input{figures/optimizing-parameters/01-ferrenti-approach-176-RF.tex}
     \caption{}
@@ -243,7 +242,7 @@ The grid search for the optimal number of principal components for the Ferrenti 
     \caption{}
     \label{fig:q1-GB}
   \end{subfigure}
-  \caption{{Four figures displaying hyperparameter search for the Ferrenti approach. The best estimator is visualized for all hyperparameters as a function of principal components during a grid search with a $5\times5$ stratified cross-validation, and the dotted lines mark the optimal hyperparameter-combination. Train stands for normal training accuracy, while test is the balanced accuracy on the test set. Precision, recall, and F$1$ scores are based on the test set. The number of principal components that explain the $95 \ \%$ accumulated variance is $144$, while the optimal model is found using the F$1$-score.}}
+  \caption{Four figures displaying hyperparameter search for the Ferrenti approach. The best estimator is visualized for all hyperparameters as a function of principal components during a grid search with a $5\times5$ stratified cross-validation, and the dotted lines mark the optimal hyperparameter-combination. Train stands for normal training accuracy, while test is the balanced accuracy on the test set. Precision, recall, and F$1$ scores are based on the test set. The number of principal components that explain the $95 \ \%$ accumulated variance is $144$, while the optimal model is found using the F$1$-score.}
   \label{fig:01-pca}
 \end{figure}
 
@@ -458,31 +457,26 @@ The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all 
     \input{figures/feature-importance/03-insightful-approachLOG-final-2.tex}
     \label{fig:03-fi-a}
   \end{subfigure}%
-
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \input{figures/feature-importance/03-insightful-approachDT-final-2.tex}
     \label{fig:03-fi-b}
   \end{subfigure}%
-
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \input{figures/feature-importance/03-insightful-approachRF-final-2.tex}
     \label{fig:03-fi-c}
   \end{subfigure}%
-
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \input{figures/feature-importance/03-insightful-approachGB-final-2.tex}
     \label{fig:03-fi-d}
   \end{subfigure}%
-
   \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \input{figures/feature-importance/03-insightful-approachPC-final-2.tex}
     \label{fig:03-fi-e}
   \end{subfigure}%
-
   \caption{Five figures visualizing different parameters for the $15$ most principal components ranked in descending order by the explained variance for the intuitive approach. The panels show the logistic regression coefficients, decision trees feature importance, random forests feature importance, gradient boosting feature importance, and explained variance that is retained by including each of the eigenvectors. }
   \label{fig:03-fi}
 \end{figure}
