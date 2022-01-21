@@ -1,0 +1,31 @@
+% This file was created by tikzplotlib v0.9.8.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.866666666666667,0.8,0.466666666666667}
+\definecolor{color1}{rgb}{0.533333333333333,0.8,0.933333333333333}
+\definecolor{color3}{rgb}{0.8,0.4,0.466666666666667}
+\begin{axis}[%
+ hide axis,
+ xmin=10,
+ xmax=11,
+ ymin=0,
+ ymax=0.4,
+ legend columns=,
+ legend style={
+   fill opacity=1,
+   draw opacity=1,
+   text opacity=1,
+   align=center,
+   anchor=north,
+   draw=white!80!black
+ },
+ ]
+ \addlegendimage{semithick, color1}
+ \addlegendentry{Ferrenti approach};
+ \addlegendimage{semithick, color0}
+ \addlegendentry{Extended Ferrenti approach};
+ \addlegendimage{semithick, color3}
+ \addlegendentry{Empirical approach};
+ \end{axis}
+
+\end{tikzpicture}

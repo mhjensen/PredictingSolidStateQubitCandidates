@@ -29,7 +29,8 @@
  amsmath,amssymb,
  aps,
 %pra,
-%prb,
+ prb,
+ twocolumn,
 %rmp,
 %prstab,
 %prstper,
@@ -56,17 +57,7 @@
 \sisetup{separate-uncertainty}
 \usepackage{hyperref} 
 % \usepackage{longtable}
-\usetikzlibrary{patterns,shapes.arrows, arrows.meta,bending, shapes,calc,fadings,decorations.pathreplacing,positioning,arrows.meta}
-\pgfplotsset{compat=newest}
 
-\usepackage{sansmath}
-\tikzset{>=stealth,
-OptimumStyle/.style={align=center,anchor=east,rotate=90,font=\scriptsize}
-}
-\pgfplotsset{%samples=101,
-axis lines = left,
-every axis plot/.append style={line width=2pt},
-}
 \usepackage{forest}
 \forestset{
     .style={
@@ -173,13 +164,13 @@ Quantum computers are in high demand to meet the increasing need for computing p
 Recent advances have highlighted the potential of quantum information processors to outperform classical systems. Indeed, Google's $53$ qubit quantum computer based on superconducting electronics solved a computational problem that was beyond the capabilities of a $200.000$ core supercomputer \cite{Arute_2019}. Most recently, IBM announced its $127$ qubit quantum processor~\cite{IBM2021}. Simultaneously, the concepts of entanglement and teleportation may eventually facilitate advanced quantum communication protocols such as quantum cryptography and the quantum internet, spurring further investigations into technologies based on quantum mechanics.
 
 %Figure 1 introduction schematic 
-\begin{figure}[t]
+\begin{figure*}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/ht-workflow-new-2.png}
     \caption{Schematic of an example workflow in material informatics. Results from theory, experiment and computation are fed into material databases (arrow pointing to the center). A cycle involving material screening, machine learning and predictions leads to knowledge gain and ultimately applications in fields such as clean energy and quantum technology. 
     }
     \label{fig:ht-workflow}
-\end{figure}
+\end{figure*}
 
 Several platforms are available for the development of quantum technologies, but the materials and fabrication technologies are less mature than those for, e.g., classical computers and sensors. 
 An important concern in this context is that of scalability. 
@@ -224,7 +215,7 @@ Initially, we start by extracting all entries in the Materials Project (MP) data
 The MP database contains ground state properties of different materials that are computed using density functional theory (DFT). The DFT calculations in the database were performed using the Vienna ab initio simulation package (VASP) \cite{Kresse1996} and the Perdew-Burke-Ernzerhof (PBE) \cite{Perdew1996} exchange-correlation functional to calculate the electronic structure of the materials. 
 We note that despite being immensely successful in describing a number of material properties, PBE is widely known for underestimating the band gap of semiconductors \cite{Freysoldt2014}. Therefore, not all properties predicted using the PBE functional are reliable, and the band gaps in particular cannot be trusted in absolute terms. Nonetheless, the functional is in wide use due to the combination of reasonable accuracy and high computational throughput, and is usually considered to be reliable for large-scale trends in semiconductor properties. 
 
-\begin{figure}[t]
+\begin{figure*}[t]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/flow_chart_2.png}
     \caption{The data flow of the main project, starting from an initial MP query, and ending with a featurized data set with entries from several other databases. To limit the memory and computational usage, the data are partitioned into smaller subsets where the respective Pymatgen objects  
@@ -232,7 +223,7 @@ We note that despite being immensely successful in describing a number of materi
     are obtained through a query to be used in the following featurization steps. This process is repeated iteratively until all the data has been featurized. Abbreviations used are Materials Project (MP), density of states (DOS) and electronic band structure (band).
     }
     \label{fig:flowchart}
-\end{figure}
+\end{figure*}
 
 The conditions for the initial MP query are that the materials must derive from 
 %experimental data 
@@ -390,19 +381,19 @@ In the training set of the extended Ferrenti approach, we find a single entry fo
 
 The labeled data for each approach is visualized in Figure~\ref{fig:parallel-coordinates-approaches} as parallel coordinate plots for a few selected features informed by the criteria proposed by \citeauthor{Weber2010} \cite{Weber2010}. Parallel coordinate schemes  \cite{Inselberga1990, Inselberg1985} represent a multi-dimensional data tuple as one polyline crossing a parallel axis. The selected features are found on the x-axis, while the y-axis shows the value of the data. Thus, parallel coordinate plots can turn complex many-dimensional data into a compact  two-dimensional representation. Due to possible data cluttering, the figure visualizes a random sample of each class (suitable or unsuitable) with an upper limit of $250$ per class with transparent lines. The green and red polylines represent suitable and unsuitable candidates, respectively. 
 
-\begin{figure}[t] %!htp
+\begin{figure}%[t] %!htp
     \centering
-    \begin{subfigure}{0.9\textwidth}
+    \begin{subfigure}{0.9\columnwidth}
         \centering
         \input{figures/parallel-coordinates-plots/01-ferrenti-approach-v2.pgf}
     \end{subfigure}
-    \begin{subfigure}{0.9\textwidth}
+    \begin{subfigure}{0.9\columnwidth}
         \centering
-          \input{figures/parallel-coordinates-plots/02-extended-ferrenti-approach-v3.pgf}
+          \input{figures/parallel-coordinates-plots/02-augmented-ferrenti-approach-v2.pgf}
     \end{subfigure}
-    \begin{subfigure}{0.9\textwidth}
+    \begin{subfigure}{0.9\columnwidth}
         \centering
-          \input{figures/parallel-coordinates-plots/03-empirical-approach-v3.pgf}
+          \input{figures/parallel-coordinates-plots/03-insightful-approach-v2.pgf}
     \end{subfigure}
     %\vspace*{10mm}
     \caption{Parallel coordinate plots for the different approaches. To limit the data cluttering, we have randomly collected up to $250$ entries for each class and made the lines transparent. For the empirical approach, we have used all the $187$ suitable candidates. The axes show total magnetization (mag) taken from the Materials Project (MP) database along with the space group (SG), ionic character (ionic char), covalent range (cov range) as calculated from elemental properties, number of elements (num elements) and energy gap (Eg) extracted from MP.} 
@@ -411,18 +402,19 @@ The labeled data for each approach is visualized in Figure~\ref{fig:parallel-coo
 
 \begin{figure}%[h] %!tbp
     \centering
-    \begin{subfigure}{0.35\textwidth}
+    \begin{subfigure}{0.45\columnwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/01-ferrenti-approach.pdf}
+        \includegraphics[width=1\columnwidth]{figures/pca-2d-plots/01-ferrenti-approach-v3.pdf}
     \end{subfigure}%
-    \begin{subfigure}{0.35\textwidth}
+    \begin{subfigure}{0.45\columnwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/02-augmented-ferrenti-approach.pdf}
+        \includegraphics[width=1\columnwidth]{figures/pca-2d-plots/02-augmented-ferrenti-approach-v2.pdf}
     \end{subfigure}
-    \begin{subfigure}{0.4\textwidth}
+    \begin{subfigure}{0.9\columnwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/03-insightful-approach.pdf}
+        \includegraphics[width=1\columnwidth]{figures/pca-2d-plots/03-insightful-approach-v3.pdf}
     \end{subfigure}
+    %\vspace*{-95mm}
     \caption{Two-dimensional scatter plots for the three different approaches. We have identified the two eigenvectors corresponding to the two largest eigenvalues of the covariance-matrix, that is, the two most important principal components of the initial data from the Materials Project query. Then, we have transformed the three training sets resulting from the three approaches and visualized them as scatter plots. Green squares display suitable candidates, along with the black (SiC), blue (diamond) and yellow (Si) symbols in the bottom panel, and red triangles represent unsuitable candidates.}
     \label{fig:2dscatterplotpca}
 \end{figure}
@@ -477,28 +469,13 @@ Further details on the evaluation of the machine learning models and the results
 
 Fig.~\ref{fig:PComponents}(a) displays the principal components as they are sorted in descending order by the explained variance. For the Ferrenti approach (Fig.~\ref{fig:PComponents}a) to reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components must be included. For the extended Ferrenti approach, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$ (not shown). In the case of the empirical approach and in contrast to the Ferrenti based approaches, the decision trees and random forest models exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting for larger principal component values. 
 Gradient boosting, in contrast to the case for the two Ferrenti based approaches, also experiences the best performance for just a few principal components. 
-\begin{figure}[ht]
+
+\begin{figure}[t]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/01-ferrenti-approach-PC-v2.tex}
-        \label{fig:01-fi-e}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/01-ferrenti-approach-GB-v2.tex}
-        \label{fig:01-fi-d}
-    \end{subfigure}%
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/03-empirical-approach-PC-v2.tex}
-        \label{fig:03-fi-e}
-        \subcaption{}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/03-empirical-approach-GB-v2.tex}
-        \label{fig:03-fi-d}
-        \subcaption{}
-    \end{subfigure}
+    \includegraphics[width=0.9\textwidth]{figures/PC_Ferrenti_empirical.png}
+    %\includegraphics[width=0.9\textwidth]{figures/PCcomponents.pdf}
     \caption{Visualizing different parameters for the $25$ most principal components ranked in descending order by (a) the explained variance for the Ferrenti (upper panel) and empirical (lower panel) approach, and (b) the gradient boosting coefficients for the corresponding approaches. 
+    \textit{Placeholder figure.} 
     }
     \label{fig:PComponents}
 \end{figure}
@@ -701,33 +678,6 @@ We highlight these six compounds, along with the nine predicted by the empirical
 
 \section*{Discussion}
 %\subsection*{Important features for QT} 
-
-\begin{figure}[ht]
-    \begin{subfigure}[b]{1\textwidth}
-    \centering
-    \input{figures/histograms/new/legend.tex}
-  \end{subfigure}
-  \par\bigskip
-\begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
-    \subcaption{}
-\end{subfigure}
-\begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
-    \subcaption{}
-\end{subfigure}%
-
-\begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
-    \subcaption{}
-\end{subfigure}
-\begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
-    \subcaption{}
-\end{subfigure}
-\caption{In progress
-    }
-\end{figure}
 
 %histograms 
 \begin{figure}[t]
