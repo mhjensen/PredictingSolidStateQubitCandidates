@@ -6,11 +6,12 @@
 \definecolor{color3}{rgb}{0.8,0.4,0.466666666666667}
 \begin{axis}[%
  hide axis,
- xmin=10,
- xmax=11,
+ xmin=0,
+ xmax=1,
  ymin=0,
- ymax=0.4,
- legend columns=,
+ ymax=1,
+ legend columns=2,
+ legend cell align={left},
  legend style={
    fill opacity=1,
    draw opacity=1,
@@ -26,6 +27,8 @@
  \addlegendentry{Extended Ferrenti approach};
  \addlegendimage{semithick, color3}
  \addlegendentry{Empirical approach};
+ \addlegendimage{semithick, black}
+ \addlegendentry{Distribution of dataset};
  \end{axis}
 
 \end{tikzpicture}

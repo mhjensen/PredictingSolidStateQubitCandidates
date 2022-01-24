@@ -126,7 +126,6 @@ every axis plot/.append style={line width=2pt},
 \title{Predicting Solid State Material Platforms for Quantum Technologies}
 
 \author{Oliver Lerst{\o}l Hebnes}
-\affiliation{Your new job} 
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
 
 \author{Marianne Etzelm\"uller Bathen}
@@ -392,19 +391,18 @@ The labeled data for each approach is visualized in Figure~\ref{fig:parallel-coo
 
 \begin{figure}[t] %!htp
     \centering
-    \begin{subfigure}{0.9\textwidth}
+    \begin{subfigure}{1\textwidth}
         \centering
-        \input{figures/parallel-coordinates-plots/01-ferrenti-approach-v2.pgf}
+        \scalebox{0.85}{\input{figures/parallel-coordinates-plots/01-ferrenti-approach-v2.pgf}}
     \end{subfigure}
-    \begin{subfigure}{0.9\textwidth}
+    \begin{subfigure}{1\textwidth}
         \centering
-          \input{figures/parallel-coordinates-plots/02-extended-ferrenti-approach-v3.pgf}
+          \scalebox{0.85}{\input{figures/parallel-coordinates-plots/02-extended-ferrenti-approach-v3.pgf}}
     \end{subfigure}
-    \begin{subfigure}{0.9\textwidth}
+    \begin{subfigure}{1\textwidth}
         \centering
-          \input{figures/parallel-coordinates-plots/03-empirical-approach-v3.pgf}
+          \scalebox{0.85}{\input{figures/parallel-coordinates-plots/03-empirical-approach-v3.pgf}}
     \end{subfigure}
-    %\vspace*{10mm}
     \caption{Parallel coordinate plots for the different approaches. To limit the data cluttering, we have randomly collected up to $250$ entries for each class and made the lines transparent. For the empirical approach, we have used all the $187$ suitable candidates. The axes show total magnetization (mag) taken from the Materials Project (MP) database along with the space group (SG), ionic character (ionic char), covalent range (cov range) as calculated from elemental properties, number of elements (num elements) and energy gap (Eg) extracted from MP.} 
     \label{fig:parallel-coordinates-approaches}
 \end{figure}
@@ -438,7 +436,9 @@ Here, we can begin to deduce some trends, if the findings from the empirical app
 
 
 To illustrate the composition of the labeled data we perform a principal component analysis. We identify the two largest eigenvalues of the covariance matrix \cite{Hastie2009} of the complete initial data set from the Materials Project, and transform the three labeled data sets according to the corresponding two eigenvectors. In essence, we reduce the dimensionality of the labeled data in order to visualize them.
-The result of this procedure is displayed in the scatter plots of Figure~\ref{fig:2dscatterplotpca}. Note that some minor differences between the three panels in Fig.~\ref{fig:2dscatterplotpca} may occur due to the process of centering the data. 
+The result of this procedure is displayed in the scatter plots of Figure~\ref{fig:2dscatterplotpca}. Note that some minor differences between the three panels in Fig.~\ref{fig:2dscatterplotpca} may occur due to the process of 
+removing the mean and scaling to unit variance.
+%centering the data. 
 Red triangles represent unsuitable candidates while colored symbols (green, blue, black and yellow) represent suitable candidates. 
 Due to the complexity of reducing the large amount of features down to only two, both suitable and unsuitable candidates for the Ferrenti and the extended Ferrenti approaches are largely overlapping. 
 The logic behind categorizing materials in two classes (suitable and unsuitable) appears to not translate into a distinct separation, at least not in the representation of  Fig.~\ref{fig:2dscatterplotpca} for the Ferrenti and extended Ferrenti approaches.  
@@ -460,22 +460,29 @@ This indicates that the empirical approach may be capable of separating material
 In summary, using various data extraction tools for a number of materials science databases, we have obtained a data set consisting of over $25.000$ materials. The information from this data set has then been converted into nearly $5000$ physics-informed features.  
 After selecting and fine-tuning the entries for our labeled data sets we are now ready to train the ML methods and apply them to the test set in order to classify materials as potential candidates for quantum technology applications. 
 
-\subsection*{Machine learning and principal component analysis}    
+\subsection*{Machine learning and principal component analysis}
 
 Four well-tested machine learning algorithms were employed in this work: logistic regression, decision trees, and ensemble methods like random forests and gradient boosting \cite{Mehta2019,Hastie2009}. 
-These four machine learning methods were applied to the training sets that were optimized using each of the three approaches (Ferrenti, extended Ferrenti and empirical) outlined above. This yielded twelve sets of materials that were predicted as suitable material hosts for QT applications. 
-%
-In order to deduce how the different material features are weighted by the four machine learning models when classifying materials into suitable and unsuitable candidates for QT, we perform a principal component analysis (PCA) for each of the three approaches.   
+These four machine learning methods were applied to the training sets that were optimized using each of the three approaches (Ferrenti, extended Ferrenti and empirical) outlined above. %This yielded twelve sets of materials that were predicted as suitable material hosts for QT applications.  
+
+In order to reduce the dimensionality while preserving most of the variance in the data,
+%In order to deduce how the different material features are weighted by the four machine learning models when classifying materials into suitable and unsuitable candidates for QT,
+we perform a principal component analysis (PCA) for each of the three approaches.
 First, the eigenvalues of the covariance matrices of the three training sets are identified in order of decreasing value,  resulting in three distinct PCA models (as opposed to the case of Fig.~\ref{fig:2dscatterplotpca} where all panels are based on the same model). 
 Next, we apply the machine learning models. 
 % 
-In the evaluation of the machine learning models for the three different approaches we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter  combinations. 
+In the evaluation of the machine learning models for the three different approaches we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations. 
 %
-Figure~\ref{fig:PComponents} visualizes different parameters for the $25$ most principal components ranked in descending order by (a) the explained variance for the Ferrenti (upper panel) and empirical (lower panel) approach, and (b) the gradient boosting coefficients for the corresponding approaches.  
+Figure~\ref{fig:PComponents} visualizes different parameters for the 
+%$25$ 
+most important principal components ranked in descending order by (a) the explained variance for the Ferrenti (upper panel) and empirical (lower panel) approach, and (b) the gradient boosting coefficients for the corresponding approaches.  
 %The extracted principal components after applying the gradient boosting model for the training sets from the Ferrenti and empirical approaches are shown in Figure~\ref{fig:PComponents} in decreasing order of eigenvalue size. 
 Further details on the evaluation of the machine learning models and the results from the principal component analyses for all four machine learning models are shown in the Supplementary Material at \cite{supplementary}. 
 
-Fig.~\ref{fig:PComponents}(a) displays the principal components as they are sorted in descending order by the explained variance. For the Ferrenti approach (Fig.~\ref{fig:PComponents}a) to reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components must be included. For the extended Ferrenti approach, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$ (not shown). In the case of the empirical approach and in contrast to the Ferrenti based approaches, the decision trees and random forest models exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting for larger principal component values. 
+Fig.~\ref{fig:PComponents}(a) displays the principal components as they are sorted in descending order by the explained variance. For the Ferrenti approach (Fig.~\ref{fig:PComponents}a) to reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components must be included. For the extended Ferrenti approach, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$ (not shown). In the case of the empirical approach and in contrast to the Ferrenti based approaches, the decision trees and random forest models exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting 
+%for larger principal component values. 
+when involving more principal components. 
+
 Gradient boosting, in contrast to the case for the two Ferrenti based approaches, also experiences the best performance for just a few principal components. 
 \begin{figure}[ht]
     \centering
@@ -550,7 +557,7 @@ An overview of the number of predicted suitable candidates as a function of mach
 \subsubsection*{The Ferrenti approach}
 
 We first consider the machine learning classification of the test set derived in the Ferrenti approach. 
-From the labeled data set of $23.623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. All four machine learning methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to (e.g.) $0.7$ instead of $0.5$, the above machine learning algorithms would only agree on $1784$ suitable candidates. 
+From the labeled data set of $23.623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. All four machine learning methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to (e.g.) $0.75$ instead of $0.5$, the above machine learning algorithms would only agree on $1784$ suitable candidates. 
 We find that all four machine learning methods admit almost all materials with a chemical formula matching the known suitable candidates (see Table~\ref{tab:qt-materials}) that were present in the labeled data. 
 This can allow materials with unfortunate structures to be labeled as suitable candidates. %by all of our machine learning methods. 
 For example, the machine learning methods do not perpetuate the band gap restriction from the training set definition. 
@@ -702,6 +709,7 @@ We highlight these six compounds, along with the nine predicted by the empirical
 \section*{Discussion}
 %\subsection*{Important features for QT} 
 
+%histograms 
 \begin{figure}[ht]
     \begin{subfigure}[b]{1\textwidth}
     \centering
@@ -713,31 +721,22 @@ We highlight these six compounds, along with the nine predicted by the empirical
     \subcaption{}
 \end{subfigure}
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
+    \input{figures/histograms/new/IonProperty_max ionic char_count_075.tex}
     \subcaption{}
 \end{subfigure}%
 
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
+    \input{figures/histograms/new/GeneralizedRDF_std_dev Gaussian center=1.0 width=1.0_count_075.tex}
     \subcaption{}
 \end{subfigure}
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
+    \input{figures/histograms/new/AverageBondLength_std_dev Average bond length_count_075.tex}
     \subcaption{}
 \end{subfigure}
-\caption{In progress
+\caption{Histograms of predicted suitable materials as a function of the (a) PBE-calculated band gap from Materials Project, (b) maximum ionic character, (c) standard deviation of the radial distribution function (RDF) and (d) standard deviation of the average bond length. The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. The Ferrenti and extended Ferrenti approaches refer to the left y-axis and the empirical approach to the right.
     }
+\label{fig:histogram_new}
 \end{figure}
-
-%histograms 
-\begin{figure}[t]
-    \includegraphics[width=0.45\textwidth]{figures/histograms/new/MP_Eg_count_075.pdf}
-    \includegraphics[width=0.45\textwidth]{figures/histograms/new/IonProperty_max ionic char_count_075.pdf}
-    \includegraphics[width=0.45\textwidth]{figures/histograms/new/GeneralizedRDF_std_dev Gaussian center=1.0 width=1.0_count_075.pdf}
-    \includegraphics[width=0.45\textwidth]{figures/histograms/new/AverageBondLength_std_dev Average bond length_count_075.pdf}
-    \caption{Histograms of predicted suitable materials as a function of the (a) PBE-calculated band gap from Materials Project, (b) maximum ionic character, (c) standard deviation of the radial distribution function and (d) standard deviation of the average bond length. The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. The Ferrenti and extended Ferrenti approaches refer to the left y-axis and the empirical approach to the right.  }
-    \label{fig:histogram_new}
-\end{figure} 
 
 %Turning to why the specific materials were chosen ... 
 Taking a closer look at the reasoning behind the choices made by the different ML methods during the classification process, we find important differences between the three labeling approaches, and can start to discern the driving forces for manifestation of quantum compatible properties in semiconductors. 
