@@ -390,7 +390,7 @@ Considering the materials present in the labeled data sets of the first two appr
 % from the training set. 
 Among other potentially suitable candidates we find ZnS, ZnSe, ZnO and ZnTe present in the training data.  
 %Extended Ferrenti 
-In the training set of the extended Ferrenti approach, we find a single entry for each of SiC, Si, GaN, ZnS, GaP, AlAs and AlP, carbon in both diamond- and graphite-like structures, and AlN in three different configurations. The labeled data set includes a larger variety of materials that are known to be quantum compatible as compared to the Ferrenti approach due to admitting more elements in the initial selection process. However, since we also included a more stringent band gap restriction of $1.5$~eV (to reduce the amount of materials in the training set), we find a more sparse representation of each known chemical formula present in the data, 
+In the training set of the extended Ferrenti approach, we find a single entry for each of SiC, Si, GaN, ZnS, GaP, AlAs and AlP, carbon in both diamond- and graphite-like structures, and AlN in three different configurations. The labeled data set includes a larger variety of materials that are known to be quantum compatible as compared to the Ferrenti approach due to admitting more elements in the initial selection process. However, since we also included a more stringent band gap restriction of $1.5$~eV (to reduce the amount of materials in the training set), we find a more sparse representation of each known chemical formula present in the training set. 
 
 The labeled data for each approach is visualized in Figure~\ref{fig:parallel-coordinates-approaches} as parallel coordinate plots for a few selected features informed by the criteria proposed by \citeauthor{Weber2010} \cite{Weber2010}. Parallel coordinate schemes  \cite{Inselberga1990, Inselberg1985} represent a multi-dimensional data tuple as one polyline crossing a parallel axis. The selected features are found on the x-axis, while the y-axis shows the value of the data. Thus, parallel coordinate plots can turn complex many-dimensional data into a compact  two-dimensional representation. Due to possible data cluttering, the figure visualizes a random sample of each class (suitable or unsuitable) with an upper limit of $250$ per class with transparent lines. The green and red polylines represent suitable and unsuitable candidates, respectively. 
 
@@ -474,21 +474,24 @@ In order to reduce the dimensionality while preserving most of the variance in t
 %In order to deduce how the different material features are weighted by the four machine learning models when classifying materials into suitable and unsuitable candidates for QT,
 we perform a principal component analysis (PCA) for each of the three approaches.
 First, the eigenvalues of the covariance matrices of the three training sets are identified in order of decreasing value,  resulting in three distinct PCA models (as opposed to the case of Fig.~\ref{fig:2dscatterplotpca} where all panels are based on the same model). 
-Next, we apply the machine learning models. 
-% 
-In the evaluation of the machine learning models for the three different approaches we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations. 
-%
-Figure~\ref{fig:PComponents} visualizes different parameters for the 
-%$25$ 
-most important principal components ranked in descending order by (a) the explained variance for the Ferrenti (upper panel) and empirical (lower panel) approach, and (b) the gradient boosting coefficients for the corresponding approaches.  
-%The extracted principal components after applying the gradient boosting model for the training sets from the Ferrenti and empirical approaches are shown in Figure~\ref{fig:PComponents} in decreasing order of eigenvalue size. 
-Further details on the evaluation of the machine learning models and the results from the principal component analyses for all four machine learning models are shown in the Supplementary Material at \cite{supplementary}. 
 
-Fig.~\ref{fig:PComponents}(a) displays the principal components as they are sorted in descending order by the explained variance. For the Ferrenti approach (Fig.~\ref{fig:PComponents}a) to reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components must be included. For the extended Ferrenti approach, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$ (not shown). In the case of the empirical approach and in contrast to the Ferrenti based approaches, the decision trees and random forest models exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting 
+Next, we apply the machine learning models. In the evaluation of the machine learning models for the three different approaches we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations. We note that all four machine learning models have high evaluation metrics for the optimal hyperparameters. Further details on the evaluation of the machine learning models and the results from the principal component analyses for all four machine learning models are shown in the Supplementary Material at \cite{supplementary}. 
+
+%OH: Downsides. Could also be moved to methods?
+We note that there are several potential pitfalls of using the chosen dimensionality reduction and machine learning techniques in this paper. PCA is a trivial algorithm that only accounts for linear correlation between features, where other algorithms, such as Kernel PCA, can facilitate non-linear dimensionality reduction but with higher computational demand. Additionally, by using a trivial PCA, we make an assumption of orthogonality, since the eigenvectors are orthogonal to each other. However, there might exist an non-orthogonal basis which captures the non-orthogonal data in the dataset better. 
+
+%OH: Øyvind og Seb: 
+%Comment on pitfalls of ML metods
+%Comment on pitfalls on data size. 
+
+Figure~\ref{fig:PComponents} visualizes different parameters for the most important principal components ranked in descending order by (a) the explained variance for the Ferrenti (upper panel) and empirical (lower panel) approach, and (b) the gradient boosting coefficients for the corresponding approaches. This differs from Figure \ref{fig:2dscatterplotpca}, where we visualize the two most important eigenvectors for all approaches that originates from the same covariance matrix.
+%Fig.~\ref{fig:PComponents}(a) displays the principal components as they are sorted in descending order by the explained variance. 
+For the Ferrenti approach (Fig.~\ref{fig:PComponents}a) to reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components must be included. For the extended Ferrenti approach, we find that gradient boosting performs optimally at $93$. 
+
+
+In the case of the empirical approach and in contrast to the Ferrenti based approaches, the decision trees and random forest models exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting 
 %for larger principal component values. 
-when involving more principal components. 
-
-Gradient boosting, in contrast to the case for the two Ferrenti based approaches, also experiences the best performance for just a few principal components. 
+when involving more principal components. Gradient boosting, in contrast to the case for the two Ferrenti based approaches, also experiences the best performance for just a few principal components. 
 \begin{figure}[ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -562,7 +565,7 @@ An overview of the number of predicted suitable candidates as a function of mach
 \subsubsection*{The Ferrenti approach}
 
 We first consider the machine learning classification of the test set derived in the Ferrenti approach. 
-From the labeled data set of $23.623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. All four machine learning methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to (e.g.) $0.75$ instead of $0.5$, the above machine learning algorithms would only agree on $1784$ suitable candidates. 
+From the labeled data set of $23.623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. All four machine learning methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to e.g. $0.75$ instead of $0.5$, the above machine learning algorithms would only agree on $1784$ suitable candidates. 
 We find that all four machine learning methods admit almost all materials with a chemical formula matching the known suitable candidates (see Table~\ref{tab:qt-materials}) that were present in the labeled data. 
 This can allow materials with unfortunate structures to be labeled as suitable candidates. %by all of our machine learning methods. 
 For example, the machine learning methods do not perpetuate the band gap restriction from the training set definition. 
@@ -718,7 +721,7 @@ We highlight these six compounds, along with the nine predicted by the empirical
 \begin{figure}[ht]
     \begin{subfigure}[b]{1\textwidth}
     \centering
-    \input{figures/histograms/new/legend.tex}
+    \input{figures/histograms/new/LegendHistPaper.tex}
   \end{subfigure}
   \par\bigskip
 \begin{subfigure}[b]{0.45\textwidth}
@@ -770,7 +773,7 @@ Note that the maxima  in the histograms in Fig.~\ref{fig:histogram_new} seem to 
 Similarly symmetry related features such as the standard deviation of the average bond length (see Figure~\ref{fig:histogram_new}d), site fingerprint of the chemical environment and bond orientation (see the Supplementary Material) are also influential in guiding the machine learning algorithms upon classifying suitable and unsuitable materials for QT in the empirical approach. 
 
 
-Interestingly, none of the nine materials predicted by the empirical approach with $0.85$ confidence, nor of the six materials predicted by all approaches to $0.75$ confidence, are elemental. At most three different elements are present, but the emphasis is clearly on binary compounds. This resonates strongly with the observations from the principal component analysis: an optimal degree of crystalline order likely exists for a material to manifest QT compatible properties, but retaining some variations throughout the crystal in (e.g.) bond length and symmetry.  Indeed, this is 
+Interestingly, none of the nine materials predicted by the empirical approach with $0.85$ confidence, nor of the six materials predicted by all approaches to $0.75$ confidence, are elemental. At most three different elements are present, but the emphasis is clearly on binary compounds. This resonates strongly with the observations from the principal component analysis: an optimal degree of crystalline order likely exists for a material to manifest QT compatible properties, but retaining some variations throughout the crystal in e.g. bond length and symmetry.  Indeed, this is 
 %in contrast 
 contrary to the expectations that guided the formulation of the test, training and validation sets in the Ferrenti and extended Ferrenti approaches. Where most previous works have highlighted features such as band gap, polarity and ionic character as vital for a semiconductor to be a good quantum host, our results instead reveal that local variations in the crystal structure related to symmetry and bond angles, length and orientation should be considered 
 %as well. 
@@ -813,7 +816,7 @@ The Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015} contains
 
 JARVIS-DFT \cite{Choudhary2020} is an open-source database based on the VASP software and consists of roughly $40.000$ three-dimensional materials using the vdW-DF-OptB88 (OPT) functional \cite{Thonhauser2007, Klimes2011}. Structures included in the database are originally taken from the Materials 
 %mhj: ref to materials project is missing
-Project, and then re-optimized using the OPT functional. Finally, the combination of the OPT and modified Becke-Johnson (mBJ) functionals is used to obtain a representative band gap for each structure \cite{Choudhary2018a}. Data extraction from JARVIS-DFT was done in January of $2021$, were we utilized the version made available 30.04.2021 at \url{figshare.com}.
+Project \cite{Jain2013, Jain2018}, and then re-optimized using the OPT functional. Finally, the combination of the OPT and modified Becke-Johnson (mBJ) functionals \cite{Tran2009} is used to obtain a representative band gap for each structure \cite{Choudhary2018a}. Data extraction from JARVIS-DFT was done in January of $2021$, were we utilized the version made available 30.04.2021 at \url{figshare.com}.
 
 The AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} repository is an automatic software framework for the calculations of a wide range of inorganic material properties. They utilize the PBE functional within VASP 
 %with projector-extended wave (PAW) potentials 
@@ -825,7 +828,7 @@ AFLOW-ML \cite{Isayev2017} is an application programming interface (API) that us
 Matminer \cite{Ward2018} is an open source toolkit for material analysis written in Python. Matminer provides modules to extract information from a wide variety of databases. Additionally, they provide the tools to construct possibly thousands of features from calculations based on a material's composition, structure and electronic properties from DFT calculations, and have frameworks for visualization and automatic machine learning. 
 To apply Matminer's featurization tools, we extend an existing implementation by \citeauthor{Breuck2021} \cite{Breuck2021}, which was used to generate a supervised machine learning framework called the MODnet. The implementation by \citeauthor{Breuck2021} provides featurization for a material's composition, structure and atomic sites. However, Matminer also provides featurization tools for a material's density of states (DOS) and band structure. Therefore, we extend their implementation to facilitate such featurizations. The features selected for featurization herein are summarized in the Supplementary Material at \cite{supplementary}. 
 
-Pymatgen, a robust, open-source Python library for materials analysis \cite{pymatgen}, was also employed. 
+Pymatgen, a robust, open-source Python library for materials analysis \cite{pymatgen}, was also employed to extract and generate features for several of the databases mentioned above. 
 
 \subsection*{Machine Learning} 
 
