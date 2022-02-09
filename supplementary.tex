@@ -483,13 +483,14 @@ The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all 
 
 Lastly, gradient boosting performs optimally at $13$ principal components with a mean F$1$-score of $0.96$. The relevant hyperparameters were the regularization term for logistic regression, which was set to $0.021$, and the maximum number of iterations as $400$. The decision trees uses a maximum depth of $6$, where larger values increased the training accuracy but not any other metric. The maximum depth for the random forests model was set to $6$, and gradient boosting was given a value of $4$. 
 
-The empirical approach differs in many aspects from the Ferrenti and extended Ferrenti approaches. Firstly, we find that the number of principal components necessary to obtain $95 \ \%$ variance is reduced to $103$ components, which is $41$ and $56$ less than the Ferrenti and extended Ferrenti approach, respectively. Thus, the variance of the training set is found to be described with fewer principal components, indicating a simpler model.   
+%OH: Commented out the three next paragraphs, since this is mentioned in main text.
+%The empirical approach differs in many aspects from the Ferrenti and extended Ferrenti approaches. Firstly, we find that the number of principal components necessary to obtain $95 \ \%$ variance is reduced to $103$ components, which is $41$ and $56$ less than the Ferrenti and extended Ferrenti approach, respectively. Thus, the variance of the training set is found to be described with fewer principal components, indicating a simpler model.   
 
-Secondly, we find that the first principal component is by far the most important feature for all models, as visualized in Figure~\ref{fig:03-fi}. This is part of the reason why we experience a large accuracy for only a single feature, as seen in Figure~\ref{fig:03-pca}. The first principal component's corresponding features are challenging to explain due to small variations of values, but we see it including 
+%Secondly, we find that the first principal component is by far the most important feature for all models, as visualized in Figure~\ref{fig:03-fi}. This is part of the reason why we experience a large accuracy for only a single feature, as seen in Figure~\ref{fig:03-pca}. The first principal component's corresponding features are challenging to explain due to small variations of values, but we see it including 
 %However, it differs when it comes to which top features the first principal component describes, which includes 
-bond orientational parameters, coordination numbers, and the radial distribution function of a compound's crystal system.
+%bond orientational parameters, coordination numbers, and the radial distribution function of a compound's crystal system.
 
-Thirdly, the empirical approach differs in how much explained variation is retained by the first component, which is $21 \ \%$, while it is $14 \ \%$ for the Ferrenti approach and $11 \ \%$ for the extended Ferrenti approach. We find the difference striking considering that the approaches share the same ultimate goal, but where the training sets apparently exhibit large and significant variations. 
+%Thirdly, the empirical approach differs in how much explained variation is retained by the first component, which is $21 \ \%$, while it is $14 \ \%$ for the Ferrenti approach and $11 \ \%$ for the extended Ferrenti approach. We find the difference striking considering that the approaches share the same ultimate goal, but where the training sets apparently exhibit large and significant variations. 
 
 \input{figures/tikz-plots/prediction-fig.tex}
 
