@@ -150,10 +150,10 @@ every axis plot/.append style={line width=2pt},
 \title{Supplementary Material \\ 
 %Predicting Solid State Qubit Candidates}
 Predicting Solid State Material Platforms for Quantum Technologies}
-
-
 \author{Oliver Lerst{\o}l Hebnes}
+\affiliation{Sopra Steria, Information Technology and Services, N-4020 Stavanger, Norway}
 \affiliation{Department of Physics and Center for Computing in Science Education, University of Oslo, N-0316 Oslo, Norway}
+
 
 \author{Marianne Etzelm\"uller Bathen}
 \affiliation{Advanced Power Semiconductor Laboratory, ETH Zürich, 8092  Zürich,  Switzerland}
@@ -185,29 +185,28 @@ Predicting Solid State Material Platforms for Quantum Technologies}
     \item \textit{Supplementary references.}  
 \end{itemize}
 
-\newpage 
 
 \section*{Supplementary methods}
 \subsection*{Featurization}
 To apply Matminer's featurization tools, we extend an existing implementation by \citeauthor{Breuck2021} \cite{Breuck2021}. 
-Table~\ref{table:featurizers} contains an overview of this work's chosen 39 featurizers from Matminer. The featurization process results in $4876$ descriptors. 
+Table~\ref{table:featurizers} contains an overview of the 39  chosen featurizers from Matminer. The featurization process results in $4876$ descriptors. 
 
-The motivation behind the choice of featurizers is that we do not precisely know which features describe a suitable potential host. Therefore, we strive to collect an achievable quantity of descriptors with the hope of getting wiser in terms of prediction potential materials for quantum technologies. 
+The motivation behind the choice of featurizers is that we do not precisely know which features describe a suitable potential host. Therefore, we strive to collect an achievable quantity of descriptors in order to reliably  predict potential materials for quantum technologies. 
 
 
 \input{appendix/featurizerTable.tex}
 
 \subsection*{Optimization of machine learning models}
 
-In the evaluation of the machine learning models for the three different approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations. Due to imbalanced training data, we apply four different evaluation metrics to each of the four algorithms for each approach. 
+In the evaluation of the machine learning models for the three different approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations, see for example \cite{Hastie2009} for details on the cross-validation procedure. Due to imbalanced training data, we apply four different evaluation metrics to each of the four machine learning algorithms discussed in this work. 
 
-The implementation of the machine learning models was done through the open library of Scikit-learn \cite{Pedregosa2012}. By adjusting the majority of the hyperparameters in Sciki-learn, we experienced severe overfitting for random forest, gradient boosting, and decision trees. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$ was the maximum number of depth for the trees grown, which we adjusted between $1$ and $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic adjusted values from $10^{-3}$ to $10^{5}$, and use either $200$ or $400$ iterations to reach convergence. 
+The implementation of the machine learning models was done through the open library of Scikit-learn \cite{Pedregosa2012}. By adjusting the majority of the hyperparameters in Sciki-learn, we experienced severe overfitting for the random forests, gradient boosting, and decision trees methods. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$  (see \cite{geron2022} for a definition of various metrics) was the maximum number of depth for the trees grown, which we adjusted between $1$ and $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic adjusted values from $10^{-3}$ to $10^{5}$, and use either $200$ or $400$ iterations to reach convergence. 
 
-When searching for the optimal number of principal components, we iterated over every odd number of principal components from $1$ to the upper restricted number which defines an accumulated variance of $95 \ \%$ from the principal component analysis. Due to a large number of principal components, we end up fitting $25$ folds for each of the $1232$ parameter combinations, totaling up to $30.800$ individual models, just for one arbitrary machine learning algorithm like logistic regression. 
+When searching for the optimal number of principal components, we iterated over every odd number of principal components from $1$ to the upper restricted number which defines an accumulated variance of $95 \ \%$ from the principal component analysis. Due to a large number of principal components, we performed a fit of  $25$ folds for each of the $1232$ parameter combinations, totaling up to $30.800$ individual models %, just for one arbitrary machine learning algorithm like logistic regression. 
 
 \subsubsection*{Ferrenti approach}
 %Ferrenti 
-The grid search for the optimal number of principal components for the Ferrenti approach is visualized in Figure~\ref{fig:01-pca}, where we present the mean accuracy on the training set, and the balanced accuracy, precision, recall, and F$1$-score on the test set as a function of principal components used in the models. For each principal component, the optimal combination of hyperparameters based on the F$1$-score is visualized. 
+The grid search for the optimal number of principal components for the Ferrenti approach is visualized in Figure~\ref{fig:01-pca}, where we present the mean accuracy on the training set, and the balanced accuracy, precision, recall, and F$1$-score on the test set as a function of principal components used in the models. For each principal component, we display the optimal combination of hyperparameters based on the F$1$-score.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{1.0\textwidth}
@@ -237,7 +236,7 @@ The grid search for the optimal number of principal components for the Ferrenti 
     \caption{}
     \label{fig:q1-GB}
   \end{subfigure}
-  \caption{Four figures displaying hyperparameter search for the Ferrenti approach. The best estimator is visualized for all hyperparameters as a function of principal components during a grid search with a $5\times5$ stratified cross-validation, and the dotted lines mark the optimal hyperparameter-combination. Train stands for normal training accuracy, while test is the balanced accuracy on the test set. Precision, recall, and F$1$ scores are based on the test set. The number of principal components that explain the $95 \ \%$ accumulated variance is $144$, while the optimal model is found using the F$1$-score.}
+  \caption{Four figures displaying hyperparameter search for the Ferrenti approach. The best estimator is visualized for all hyperparameters as a function of principal components during a grid search with a $5\times5$ stratified cross-validation, and the dotted lines mark the optimal hyperparameter-combination. Train stands for normal training accuracy, while test is the balanced accuracy on the test set. Precision, recall, and F$1$ scores are based on the test set \cite{geron2022}. The number of principal components that explain the $95 \ \%$ accumulated variance is $144$, while the optimal model is found using the F$1$-score.}
   \label{fig:01-pca}
 \end{figure}
 
@@ -260,9 +259,9 @@ The grid search for the optimal number of principal components for the Ferrenti 
 }
 \end{table}
 
-In Table~\ref{tab:01-pc}, we include the precise measurements for each of the evaluation metrics for the optimal number of principal components, which is visualized as dotted lines in Fig.~\ref{fig:01-pca}. The relevant hyperparameters for logistic regression were the maximum iterations, which was set at $400$, and the regularization term, which was found optimal at $0.46$. For random forests and decision trees, we find the maximum depth of $7$, while being $4$ for gradient boosting. We find the best performing model is logistic regression, but this model is dependent on a large number of principal components. 
+In Table~\ref{tab:01-pc}, we include the precise measurements for each of the evaluation metrics for the optimal number of principal components. The optimal number  is visualized as dotted lines in Fig.~\ref{fig:01-pca}. The relevant hyperparameters for logistic regression were the maximum iterations. The number of iterations was set at $400$, and the regularization term was given by an optimal of $0.46$. For random forests and decision trees, we find the maximum depth of $7$. Gradient boosting which uses a weak learner, had a decision tree of depth $4$. We find the best performing model to be logistic regression, but this model depends on a large number of principal components. 
 
-In Figure~\ref{fig:01-fi}, we visualize how the models interpret the principal components that are sorted in descending order by the explained variance, found through a $5\times 5$ stratified cross-validation. To reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components needs to be involved. We have visualized the first $25$ since this captures the most important information, and we note that most of the important features are found within the first five principal components.
+In Figure~\ref{fig:01-fi}, we visualize how the models interpret the principal components that are sorted in descending order by the explained variance, found through a $5\times 5$ stratified cross-validation approach. To reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components were included. We have visualized the first $25$ components since these capture the most important information. We note that most of the important features are found within the first five principal components.
 
 \begin{figure}[ht!]
   \begin{subfigure}[b]{0.5\textwidth}
@@ -305,7 +304,7 @@ compound
 % composition 
 as calculated by Materials Agnostic Platform for Informatics and Exploration (MagPie). 
 
-After the first ten principal components, we observe that the models adapt the other principal components with varying degrees. The coefficients for the case of logistic regression experience large fluctuations, but the three remaining models find the first and second principal components important in addition to the fifth. In order of importance, we observe that the second component's largest values correspond to the electronegativity, ionic property, and covalence radius among the elements in the composition. The data originiates from elemental calculatinos from MagPie and are aggregated as either minimum, mean, standard deviation, or maximum. While the first principal component encompasses the largest explained variance, it does not provide any specific information on which features it represents.
+After the first ten principal components, we observe that the models adapt the other principal components with varying degrees. The coefficients for the case of logistic regression experience large fluctuations, but the three remaining models find the first and second principal components important in addition to the fifth. In order of importance, we observe that the second component's largest values correspond to the electronegativity, ionic property, and covalence radius among the elements in the composition. The data originates from elemental calculations from MagPie and are aggregated as either minimum, mean, standard deviation, or maximum. While the first principal component encompasses the largest explained variance, it does not provide any specific information on which features it represents.
 
 %While the first principal component has by far the largest explained variance, it does not provide any specific information of which features it represents. Some of the features represent the period in the periodic table, structural packing efficiency, and atomic weights of the components. However, we are unable to confirm the prominent features due to no significant .
 
@@ -317,7 +316,7 @@ After the first ten principal components, we observe that the models adapt the o
 
 \subsubsection*{Extended Ferrenti approach}
 
-For the extended Ferrenti approach, the parameter grid search for principal components is visualized in Figure~\ref{fig:02-pca}. All models experience an almost perfect recall score for the first principal component due to the largely imbalanced dataset with $2141$ suitable and $684$ unsuitable candidates, which is a ratio of $75:25 \ \%$. This result comes as a consequence of the models being able to correctly label many suitable candidates compared to the number of unsuitable candidates. 
+For the extended Ferrenti approach, the parameter grid search for principal components is visualized in Figure~\ref{fig:02-pca}. All models experience an almost perfect recall score for the first principal component due to the largely imbalanced dataset with $2141$ suitable and $684$ unsuitable candidates, which results in  a ratio of $75:25 \ \%$. This result comes as a consequence of the models being able to correctly label many suitable candidates compared to the number of unsuitable candidates. 
 On the other hand, we find a small precision for the first component since the model predicts many materials, both actually labeled suitable and unsuitable, as suitable candidates, and the latter case is particularly large. 
 This trend is revealed when looking at the balanced accuracy score. For all figures, it remains the lowest score of the evaluation metrics largely due to the inaccuracy of true negatives for the cross-validations.  
 %Therefore, one can argue that we should use the balanced accuracy score for evaluation and not the F1 score, but the choice is independent of the evaluation metric since the optimal F1 score is also the optimal balanced accuracy score for all figures.
@@ -341,7 +340,7 @@ This trend is revealed when looking at the balanced accuracy score. For all figu
 }
 \end{table}
 
-Overall, the search for optimal hyperparameters in Fig.~\ref{fig:02-pca} for the extended Ferrenti approach bears resemblance to Fig.~\ref{fig:01-pca} for the Ferrenti approach. Logistic regression performs optimally for many principal components, and is the only model that continues to improve with an increasing number of components. The decision trees model exhibits a large fluctuation of scores, where the number of false positives is dominating the balanced accuracy score. Random forests exhibits fewer fluctuations compared to the decision trees as a consequence of the ensemble decision trees, while gradient boosting does not improve after around $100$ principal components.
+Overall, the search for optimal hyperparameters in Fig.~\ref{fig:02-pca} for the extended Ferrenti approach bears resemblance to Fig.~\ref{fig:01-pca} for the Ferrenti approach. Logistic regression performs optimally for many principal components, and is the only model that continues to improve with an increasing number of components. The decision trees model exhibits a large fluctuation of scores, where the number of false positives is dominating the balanced accuracy score. The Random forests method exhibits fewer fluctuations compared to decision trees as a consequence of the ensemble decision trees, while gradient boosting does not improve beyond $100$ principal components.
 
 
 The optimal hyperparameters are summarized in Table~\ref{tab:02-pc}. We find that the logistic regression model with $175$ principal components performs more or less like a perfect classifier with overall high scores. The decision trees and random forests models have similar balanced accuracy scores with $0.69$ and $0.70$, respectively, due to challenges associated with predicting true negative labels for $25$ principal components. Lastly, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$.
