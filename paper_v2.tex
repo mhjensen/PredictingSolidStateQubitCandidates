@@ -194,7 +194,7 @@ However, semiconductor based QT is still in the early stages, and the issues lef
 Furthermore, we lack a complete understanding of the requirements for a semiconductor material to manifest quantum compatible properties,  
 and the selection of known quantum compatible host materials is slim. 
 
-The majority of discoveries of QT compatible characteristics in semiconductors has so far happened by serendipity, and there is an urgent need for a better and more systematic understanding of which material requirements must be met for QT compatible characteristics (e.g. single-photon emission and manipulable spin states) to manifest. In this context, a framework for dedicated materials search and analysis is needed. 
+The majority of discoveries of QT compatible characteristics in semiconductors has so far happened by serendipity, and there is an urgent need for a better and more systematic understanding of which material requirements must be met for QT compatible characteristics (e.g., single-photon emission and manipulable spin states) to manifest. In this context, a framework for dedicated materials search and analysis is needed. 
 
 The fourth science paradigm of big data driven science cover the potential of targeted search for promising material systems in which to expect QT compatible properties, see for example Ref.~\cite{Acin2018}.
 Rather than searching through a host of signals for those that match our criteria, we aim to \textit{predict} which materials and signatures we should target for more detailed studies, following the framework illustrated in Figure~\ref{fig:ht-workflow}. 
@@ -567,7 +567,7 @@ An overview of the number of predicted suitable candidates as a function of a gi
 \subsubsection*{The Ferrenti approach}
 
 We first consider the machine learning classification of the test set derived in the Ferrenti approach. 
-From the labeled dataset of $23.623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. All four ML methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to e.g. $0.75$ instead of $0.5$, the above machine learning algorithms would only agree on $1784$ suitable candidates. 
+From the labeled dataset of $23.623$ materials, the four methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. All four ML methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to e.g., $0.75$ instead of $0.5$, the above machine learning algorithms would only agree on $1784$ suitable candidates. 
 We find that all four ML methods admit almost all materials with a chemical formula matching the known suitable candidates (see Table~\ref{tab:qt-materials}) that were present in the labeled data. 
 This can allow materials with unfortunate structures to be labeled as suitable candidates. %by all of our ML methods. 
 For example, the ML methods do not perpetuate the band gap restriction from the training set definition. 
@@ -761,7 +761,7 @@ The empirical approach exhibits a more scattered data distribution with local ma
 
 The secondmost important principal component in the Ferrenti approach encompasses properties such as the ionic character, covalent radius and maximum packing efficiency (see the Supplementary Material at \cite{supplementary} for the predicted material distributions of the latter two features).  
 %The maximum ionic character is also deemed an important part of PC2. 
-Intriguingly, as shown in Figure~\ref{fig:histogram_new}(b), the predicted candidates distribute over a broad range of ionic characters  for all three approaches - even peaking at a relatively high ionic character of $0.8$. 
+Intriguingly, as shown in Fig.~\ref{fig:histogram_new}(b), the predicted candidates distribute over a broad range of ionic characters  for all three approaches - even peaking at a relatively high ionic character of $0.8$. 
 Moreover, we find that the covalent radii of the materials (see the Supplementary Material) distribute with two peaks in the data in all approaches. 
 %The maxima are slightly shifted towards the right for the empirical approach compared to the two others but otherwise the data distributions are similar. 
 The trend of two data peaks is repeated for the maximum packing efficiency  but is much more prominent for the empirical approach. This indicates that the material density, or in other words the bond length, is an important parameter for QT suitability.  
@@ -777,7 +777,7 @@ Note that the maxima  in the histograms in Fig.~\ref{fig:histogram_new} seem to 
 Similar symmetry related features such as the standard deviation of the average bond length (see Figure~\ref{fig:histogram_new}d), the site fingerprint of the chemical environment and the bond orientation (see the Supplementary Material) are also influential in guiding the machine learning algorithms upon classifying suitable and unsuitable materials for QT in the empirical approach. 
 
 
-Interestingly, none of the nine materials predicted by the empirical approach with $0.85$ confidence, nor any of the six materials predicted by all approaches to $0.75$ confidence, are elemental. At most three different elements are present, but the emphasis is clearly on binary compounds. This resonates strongly with the observations from the principal component analysis: an optimal degree of crystalline order likely exists for a material to manifest QT compatible properties, but retaining some variations throughout the crystal in e.g. bond length and symmetry.  This is  in  
+Interestingly, none of the nine materials predicted by the empirical approach with $0.85$ confidence, nor any of the six materials predicted by all approaches to $0.75$ confidence, are elemental. At most three different elements are present, but the emphasis is clearly on binary compounds. This resonates strongly with the observations from the principal component analysis: an optimal degree of crystalline order likely exists for a material to manifest QT compatible properties, but retaining some variations throughout the crystal in e.g., bond length and symmetry.  This is  in  
 %in contrast 
 contrast to the expectations that guided the formulation of the test, training and validation sets in the Ferrenti and extended Ferrenti approaches. Where most previous works have highlighted features such as band gap, polarity and ionic character as vital for a semiconductor to be a good quantum host, our results show that local variations in the crystal structure related to symmetry and bond angles, length and orientation should be considered as well. 
 
