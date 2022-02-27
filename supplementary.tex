@@ -180,8 +180,8 @@ Predicting Solid State Material Platforms for Quantum Technologies}
 
 \noindent \textbf{Contents:} 
 \begin{itemize}
-    \item \textit{Supplementary methods.} \\   Additional information on the featurization process and optimization of the machine learning models. 
-    \item \textit{Supplementary results.} \\  Statistics and tables over the materials that were predicted by the machine learning models based on the training sets derived using the three different data mining approaches. 
+    \item \textit{Supplementary methods.} \\   Additional information on the featurization process and optimization of the machine learning methods. 
+    \item \textit{Supplementary results.} \\  Statistics and tables over the materials that were predicted by the machine learning methods based on the training sets derived using the three different data mining approaches. 
     \item \textit{Supplementary references.}  
 \end{itemize}
 
@@ -191,22 +191,22 @@ Predicting Solid State Material Platforms for Quantum Technologies}
 To apply Matminer's featurization tools, we extend an existing implementation by \citeauthor{Breuck2021} \cite{Breuck2021}. 
 Table~\ref{table:featurizers} contains an overview of the 39  chosen featurizers from Matminer. The featurization process results in $4876$ descriptors. 
 
-The motivation behind the choice of featurizers is that we do not precisely know which features describe a suitable potential host. Therefore, we strive to collect an achievable quantity of descriptors in order to reliably  predict potential materials for quantum technologies. 
+The motivation behind the choice of featurizers is that we do not precisely know which features describe a suitable potential host. Therefore, we have collected an achievable quantity of descriptors in order to reliably  predict potential materials for quantum technologies. 
 
 
 \input{appendix/featurizerTable.tex}
 
-\subsection*{Optimization of machine learning models}
+\subsection*{Optimization of machine learning methods}
 
-In the evaluation of the machine learning models for the three different approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations, see for example \cite{Hastie2009} for details on the cross-validation procedure. Due to imbalanced training data, we apply four different evaluation metrics to each of the four machine learning algorithms discussed in this work. 
+In the evaluation of the machine learning methods for the three different approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations, see for example \cite{Hastie2009} for details on the cross-validation procedure. Due to imbalanced training data, we apply four different evaluation metrics to each of the four machine learning algorithms discussed in this work. 
 
-The implementation of the machine learning models was done through the open library of Scikit-learn \cite{Pedregosa2012}. By adjusting the majority of the hyperparameters in Sciki-learn, we experienced severe overfitting for the random forests, gradient boosting, and decision trees methods. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$  (see \cite{geron2022} for a definition of various metrics) was the maximum number of depth for the trees grown, which we adjusted between $1$ and $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic adjusted values from $10^{-3}$ to $10^{5}$, and use either $200$ or $400$ iterations to reach convergence. 
+The implementation of the machine learning methods was done through the machine learning library Scikit-learn \cite{Pedregosa2012}. By adjusting the majority of the hyperparameters in Scikit-learn, we experienced severe overfitting for the machine learning methods random forests, gradient boosting, and decision trees. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$  (see \cite{geron2022} for a definition of various metrics) was the maximum number of depth for the trees grown. In our work we adjusted between the depth of the trees to vary from $1$ to $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic adjusted values from $10^{-3}$ to $10^{5}$, and use either $200$ or $400$ iterations to reach convergence. 
 
 When searching for the optimal number of principal components, we iterated over every odd number of principal components from $1$ to the upper restricted number which defines an accumulated variance of $95 \ \%$ from the principal component analysis. Due to a large number of principal components, we performed a fit of  $25$ folds for each of the $1232$ parameter combinations, totaling up to $30.800$ individual models %, just for one arbitrary machine learning algorithm like logistic regression. 
 
 \subsubsection*{Ferrenti approach}
 %Ferrenti 
-The grid search for the optimal number of principal components for the Ferrenti approach is visualized in Figure~\ref{fig:01-pca}, where we present the mean accuracy on the training set, and the balanced accuracy, precision, recall, and F$1$-score on the test set as a function of principal components used in the models. For each principal component, we display the optimal combination of hyperparameters based on the F$1$-score.
+The grid search for the optimal number of principal components for the Ferrenti approach is visualized in Figure~\ref{fig:01-pca}, where we present the mean accuracy on the training set, and the balanced accuracy, precision, recall, and F$1$-score (see for example \cite{geron2022} for a definition of various score metrics) on the test set as a function of principal components. For each principal component, we display the optimal combination of hyperparameters based on the F$1$-score.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{1.0\textwidth}
@@ -242,13 +242,13 @@ The grid search for the optimal number of principal components for the Ferrenti 
 
 \begin{table}[t]
 \centering
-\caption{Optimal number of principal components and the respective scores (standard deviation) for each of the four ML models logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the Ferrenti approach, as visualized by the dash-dotted line in Figure~\ref{fig:01-pca}.}
+\caption{Optimal number of principal components and the respective scores (standard deviation) for each of the four ML methods logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the Ferrenti approach, as visualized by the dash-dotted line in Figure~\ref{fig:01-pca}.}
 \label{tab:01-pc}
 \noindent\makebox[\textwidth]{
 \begin{tabular}{M{1.0cm} M{1.0cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
   \hline
   \hline
-   Model & PC & Mean test &  Mean precision & Mean recall & mean F1\\
+   Method & PC & Mean test &  Mean precision & Mean recall & mean F1\\
   \hline
   LOG & $171$ & $0.98(0.012)$ & $0.98(0.011)$ & $0.99(0.007)$ & $0.99(0.007)$ \\
   DT & $37$   & $0.77(0.034)$ & $0.84(0.034)$ & $0.85(0.044)$ & $0.84(0.022)$ \\
@@ -259,9 +259,9 @@ The grid search for the optimal number of principal components for the Ferrenti 
 }
 \end{table}
 
-In Table~\ref{tab:01-pc}, we include the precise measurements for each of the evaluation metrics for the optimal number of principal components. The optimal number  is visualized as dotted lines in Fig.~\ref{fig:01-pca}. The relevant hyperparameters for logistic regression were the maximum iterations. The number of iterations was set at $400$, and the regularization term was given by an optimal of $0.46$. For random forests and decision trees, we find the maximum depth of $7$. Gradient boosting which uses a weak learner, had a decision tree of depth $4$. We find the best performing model to be logistic regression, but this model depends on a large number of principal components. 
+In Table~\ref{tab:01-pc}, we include the precise measurements for each of the evaluation metrics for the optimal number of principal components. The optimal number  is visualized as dotted lines in Fig.~\ref{fig:01-pca}. The relevant hyperparameters for logistic regression were the maximum iterations. The number of iterations was set at $400$, and the regularization term was given by an optimal of $0.46$. For random forests and decision trees, we find the maximum depth of $7$. Gradient boosting, which normally uses a weak learner, had a decision tree of depth $4$. We find the best performing method to be logistic regression, but this method depends on a large number of principal components. 
 
-In Figure~\ref{fig:01-fi}, we visualize how the models interpret the principal components that are sorted in descending order by the explained variance, found through a $5\times 5$ stratified cross-validation approach. To reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components were included. We have visualized the first $25$ components since these capture the most important information. We note that most of the important features are found within the first five principal components.
+In Figure~\ref{fig:01-fi}, we visualize how the various machine learning methods  interpret the principal components that are sorted in descending order by the explained variance, found through a $5\times 5$ stratified cross-validation approach. To reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components were included. We have visualized the first $25$ components since these capture the most important information. We note that most of the important features are found within the first five principal components.
 
 \begin{figure}[ht!]
   \begin{subfigure}[b]{0.5\textwidth}
@@ -299,12 +299,12 @@ In Figure~\ref{fig:01-fi}, we visualize how the models interpret the principal c
 \end{figure}
 
 
-For logistic regression, we have visualized the mean fitted coefficients and the standard variation in the top panel of Fig.~\ref{fig:01-fi}. Large positive or negative coefficients can be considered increasingly important, where positive (negative) coefficients will contribute to making positive (negative) predictions. In the three next panels, namely for the models decision trees, random forests, and gradient boosting, we visualize the mean impurity-based feature importance, along with the standard deviation. Importantly, we observe that the single most important feature for all models is the fifth principal component. Interestingly, by selecting the highest values in this eigenvector, we find that the corresponding features originate from the DFT band gap of the elemental solids among the elements in the 
+For logistic regression, we have visualized the mean fitted coefficients and the standard variation in the top panel of Fig.~\ref{fig:01-fi}. Large positive or negative coefficients can be considered increasingly important, where positive (negative) coefficients will contribute to making positive (negative) predictions. In the three next panels, namely for the machine learning methods  decision trees, random forests, and gradient boosting, we visualize the mean impurity-based feature importance, along with the standard deviation. Importantly, we observe that the single most important feature for all ML methods is the fifth principal component. Interestingly, by selecting the highest values of this eigenvector, we find that the corresponding features originate from the DFT band gap of the elemental solids among the elements in the 
 compound 
 % composition 
 as calculated by Materials Agnostic Platform for Informatics and Exploration (MagPie). 
 
-After the first ten principal components, we observe that the models adapt the other principal components with varying degrees. The coefficients for the case of logistic regression experience large fluctuations, but the three remaining models find the first and second principal components important in addition to the fifth. In order of importance, we observe that the second component's largest values correspond to the electronegativity, ionic property, and covalence radius among the elements in the composition. The data originates from elemental calculations from MagPie and are aggregated as either minimum, mean, standard deviation, or maximum. While the first principal component encompasses the largest explained variance, it does not provide any specific information on which features it represents.
+After the first ten principal components, we observe that the methods adapt the other principal components with varying degrees. The coefficients for the case of logistic regression experience large fluctuations, but the three remaining models find the first and second principal components important in addition to the fifth. In order of importance, we observe that the second component's largest values correspond to the electronegativity, ionic property, and covalence radius among the elements in the composition. The data originates from elemental calculations from MagPie and are aggregated as either minimum, mean, standard deviation, or maximum. While the first principal component encompasses the largest explained variance, it does not provide any specific information on which features it represents.
 
 %While the first principal component has by far the largest explained variance, it does not provide any specific information of which features it represents. Some of the features represent the period in the periodic table, structural packing efficiency, and atomic weights of the components. However, we are unable to confirm the prominent features due to no significant .
 
@@ -316,20 +316,20 @@ After the first ten principal components, we observe that the models adapt the o
 
 \subsubsection*{Extended Ferrenti approach}
 
-For the extended Ferrenti approach, the parameter grid search for principal components is visualized in Figure~\ref{fig:02-pca}. All models experience an almost perfect recall score for the first principal component due to the largely imbalanced dataset with $2141$ suitable and $684$ unsuitable candidates, which results in  a ratio of $75:25 \ \%$. This result comes as a consequence of the models being able to correctly label many suitable candidates compared to the number of unsuitable candidates. 
-On the other hand, we find a small precision for the first component since the model predicts many materials, both actually labeled suitable and unsuitable, as suitable candidates, and the latter case is particularly large. 
+For the extended Ferrenti approach, the parameter grid search for principal components is visualized in Figure~\ref{fig:02-pca}. All methods experience an almost perfect recall score for the first principal component due to the largely imbalanced dataset with $2141$ suitable and $684$ unsuitable candidates, which results in  a ratio of $75:25 \ \%$. This result comes as a consequence of the ML methods being able to correctly label many suitable candidates compared to the number of unsuitable candidates. 
+On the other hand, we find a small precision for the first component since the ML methods  predict many materials, both actually labeled suitable and unsuitable, as suitable candidates, and the latter case is particularly large. 
 This trend is revealed when looking at the balanced accuracy score. For all figures, it remains the lowest score of the evaluation metrics largely due to the inaccuracy of true negatives for the cross-validations.  
 %Therefore, one can argue that we should use the balanced accuracy score for evaluation and not the F1 score, but the choice is independent of the evaluation metric since the optimal F1 score is also the optimal balanced accuracy score for all figures.
 
 \begin{table}[b]
 \centering
-\caption{Optimal number of principal components and the respective scores (standard deviation) for each of the four ML models logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the extended Ferrenti approach, as visualized by the dash-dotted line in Figure~\ref{fig:02-pca}.}
+\caption{Optimal number of principal components and the respective scores (standard deviation) for each of the four ML methods logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the extended Ferrenti approach, as visualized by the dash-dotted line in Figure~\ref{fig:02-pca}.}
 \label{tab:02-pc}
 \noindent\makebox[\textwidth]{
 \begin{tabular}{M{1.0cm} M{1.0cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
   \hline
   \hline
-   Model & PC & Mean test &  Mean precision & Mean recall & mean F1\\
+   Method & PC & Mean test &  Mean precision & Mean recall & mean F1\\
   \hline
   LOG & $175$ & $0.98(0.008)$ & $0.99(0.004)$ & $0.99(0.004)$ & $0.99(0.003)$ \\
   DT & $25$   & $0.69(0.034)$ & $0.86(0.015)$ & $0.93(0.021)$ & $0.90(0.008)$ \\
@@ -340,10 +340,10 @@ This trend is revealed when looking at the balanced accuracy score. For all figu
 }
 \end{table}
 
-Overall, the search for optimal hyperparameters in Fig.~\ref{fig:02-pca} for the extended Ferrenti approach bears resemblance to Fig.~\ref{fig:01-pca} for the Ferrenti approach. Logistic regression performs optimally for many principal components, and is the only model that continues to improve with an increasing number of components. The decision trees model exhibits a large fluctuation of scores, where the number of false positives is dominating the balanced accuracy score. The Random forests method exhibits fewer fluctuations compared to decision trees as a consequence of the ensemble decision trees, while gradient boosting does not improve beyond $100$ principal components.
+Overall, the search for optimal hyperparameters in Fig.~\ref{fig:02-pca} for the extended Ferrenti approach bears resemblance to Fig.~\ref{fig:01-pca} for the Ferrenti approach. Logistic regression performs optimally for many principal components, and is the only method that continues to improve with an increasing number of components. The decision trees method exhibits a large fluctuation of scores, where the number of false positives is dominating the balanced accuracy score. The Random forests method exhibits fewer fluctuations compared to decision trees as a consequence of the ensemble decision trees, while gradient boosting does not improve beyond $100$ principal components.
 
 
-The optimal hyperparameters are summarized in Table~\ref{tab:02-pc}. We find that the logistic regression model with $175$ principal components performs more or less like a perfect classifier with overall high scores. The decision trees and random forests models have similar balanced accuracy scores with $0.69$ and $0.70$, respectively, due to challenges associated with predicting true negative labels for $25$ principal components. Lastly, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$.
+The optimal hyperparameters are summarized in Table~\ref{tab:02-pc}. We find that logistic regression with $175$ principal components performs more or less like a perfect classifier with overall high scores. The decision trees and random forests methods have similar balanced accuracy scores with $0.69$ and $0.70$, respectively, due to challenges associated with predicting true negative labels for $25$ principal components. Lastly, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$.
 
 \begin{figure}[ht!]
   \begin{subfigure}[b]{1.0\textwidth}
@@ -378,28 +378,30 @@ The optimal hyperparameters are summarized in Table~\ref{tab:02-pc}. We find tha
   \label{fig:02-pca}
 \end{figure}
 
-The relevant hyperparameters for the logistic regression model were the regularization strength and the maximum iterations, which were set to $0.46$ and $400$, respectively. Smaller regularization values resulted in worse scores, while increasing values did not notably alter the results. The decision trees and random forests found an optimal maximum depth of $7$, where smaller values resulted in low precision but high recall. Therefore, the choice was made to facilitate a compromise between precision and recall. For gradient boosting, we find the optimal maximum depth as $4$ due to a decline in overall metrics for increasing depth except for training accuracy, which could potentially result in overfitting.
+The relevant hyperparameters for logistic regression were the regularization strength and the maximum iterations, which were set to $0.46$ and $400$, respectively. Smaller regularization values resulted in worse scores, while increasing values did not notably alter the results. The decision trees and random forests found an optimal maximum depth of $7$, where smaller values resulted in low precision but high recall. Therefore, the choice was made to facilitate a compromise between precision and recall. For gradient boosting, we find the optimal maximum depth as $4$ due to a decline in overall metrics for increasing depth except for training accuracy, which could potentially result in overfitting.
 
 
-The interpretation of feature importance for the extended Ferrenti approach is substantially more difficult than in the Ferrenti approach. We find for logistic regression and decision trees that no feature is different than any other in the cross-validation due to a large variety of accuracy. However, we find that random forests and gradient boosting experience the fifth principal component as important. Similar to the Ferrenti approach, the corresponding features with the highest value for the first principal component originates the DFT band gap of the elemental solids among the elements in the composition.
+The interpretation of feature importance for the extended Ferrenti approach is substantially more difficult than in the Ferrenti approach. We find for logistic regression and decision trees that no feature is different than any other in the cross-validation due to a large variety of accuracy. However, we find that random forests and gradient boosting experience the fifth principal component as important. Similar to the Ferrenti approach, the corresponding features with the highest value for the first principal component originates from the DFT band gap of the elemental solids among the elements in the composition.
 
 \subsubsection*{Empirical approach}
 
-Lastly, we turn to the empirical approach, which resulted in $404$ unsuitable and $202$ suitable candidates in the training set, which was again somewhat imbalanced. However, in contrast to the two training sets discussed above, the majority of the entries was in this case labeled as unsuitable candidates. 
+Lastly, we turn to the empirical approach, which resulted in $404$ unsuitable and $202$ suitable candidates in the training set.
+%, which was again somewhat imbalanced. 
+However, in contrast to the two training sets discussed above, the majority of the entries was in this case labeled as unsuitable candidates. 
 
-The grid search for the optimal number of principal components is visualized in Figure~\ref{fig:03-pca}. Interestingly, we find that all models experience high scores for just a few principal components, where $1$ principal component earns at least $0.93$ scores for all evaluation metrics. %This information was also revealed for an earlier two-dimensional visualization of a scatter plot showing the two most important principal components in figure \ref{fig:2dscatterplotpca}, and consequently can make the models find the optimal decision boundary more easily.
+The grid search for the optimal number of principal components is visualized in Figure~\ref{fig:03-pca}. Interestingly, we find that all ML methods  experience high scores for just a few principal components, where $1$ principal component earns at least $0.93$ scores for all evaluation metrics. %This information was also revealed for an earlier two-dimensional visualization of a scatter plot showing the two most important principal components in figure \ref{fig:2dscatterplotpca}, and consequently can make the models find the optimal decision boundary more easily.
 
-Logistic regression experiences improvement of all scores for an increasing number of principal components, yet only up $5 \ \%$ in scores compared to the one-dimensional representation of one principal component. Thus, one can argue whether the increase in performance is worthwhile, considering a one-dimensional representation with just a few percentage losses of performance. However, with multiple principal components, we find the largest increase in precision, which is a sign that the one-dimensional representation tends to wrongly predict candidates as suitable when they are in fact unsuitable. The decision trees and the random forests models exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting for larger values. Gradient boosting, in contrast to the case for the two Ferrenti based approaches, also experiences the best performance for a few principal components.
+Logistic regression experiences improvement of all scores for an increasing number of principal components, yet only up $5 \ \%$ in scores compared to the one-dimensional representation of one principal component. Thus, one can argue whether the increase in performance is worthwhile, considering a one-dimensional representation with just a few percentage losses of performance. However, with multiple principal components, we find the largest increase in precision, which is a sign that the one-dimensional representation tends to wrongly predict candidates as suitable when they are in fact unsuitable. Decision trees and random forests exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting for larger values. Gradient boosting, in contrast to the case for the two Ferrenti based approaches, also experiences the best performance for a few principal components.
 
 \begin{table}[b]
 \centering
-\caption{ Optimal number of principal components and the respective scores (standard deviation) for each of the four ML models logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the empirical approach, as visualized by the dash-dotted line in Figure~\ref{fig:03-pca}.}
+\caption{ Optimal number of principal components and the respective scores (standard deviation) for each of the four ML methods logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the empirical approach, as visualized by the dash-dotted line in Figure~\ref{fig:03-pca}.}
 \label{tab:03-pca}
 \noindent\makebox[\textwidth]{
 \begin{tabular}{M{1.0cm} M{1.0cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
   \hline
   \hline
-   Model & PC & Mean test & Mean precision & Mean recall  & mean F1\\
+   Method & PC & Mean test & Mean precision & Mean recall  & mean F1\\
   \hline
   LOG & $61$  & $0.99(0.011)$ & $0.97(0.032)$ & $0.99(0.016)$ & $0.98(0.018)$ \\
   DT & $9$    & $0.96(0.019)$ & $0.95(0.040)$ & $0.95(0.033)$ & $0.95(0.026)$ \\
@@ -443,7 +445,7 @@ Logistic regression experiences improvement of all scores for an increasing numb
   \label{fig:03-pca}
 \end{figure}
 
-The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all models exhibit high evaluation metrics. Importantly, we find the difference in the number of principal components as most prominent, where logistic regression finds an optimum at $61$ with the F$1$-score of $0.98$. The decision trees model uses only $9$ principal components to achieve an F$1$ score of $0.95$, while random forests needs $27$ principal components to gain an F$1$ score of $0.97$.
+The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all Ml methods exhibit high evaluation metrics. Importantly, we find the difference in the number of principal components as most prominent, where logistic regression finds an optimum at $61$ with the F$1$-score of $0.98$. Decision trees uses only $9$ principal components to achieve an F$1$ score of $0.95$, while random forests needs $27$ principal components to gain an F$1$ score of $0.97$.
 
 \begin{figure}[ht!]
   \begin{subfigure}[b]{0.5\textwidth}
@@ -480,7 +482,7 @@ The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all 
   \label{fig:03-fi}
 \end{figure}
 
-Lastly, gradient boosting performs optimally at $13$ principal components with a mean F$1$-score of $0.96$. The relevant hyperparameters were the regularization term for logistic regression, which was set to $0.021$, and the maximum number of iterations as $400$. The decision trees uses a maximum depth of $6$, where larger values increased the training accuracy but not any other metric. The maximum depth for the random forests model was set to $6$, and gradient boosting was given a value of $4$. 
+Lastly, gradient boosting performs optimally at $13$ principal components with a mean F$1$-score of $0.96$. The relevant hyperparameters were the regularization term for logistic regression, which was set to $0.021$, and the maximum number of iterations as $400$. The decision trees uses a maximum depth of $6$, where larger values increased the training accuracy but not any other metric. The maximum depth for  random forests  was set to $6$. Fo gradient boosting, which use a weak learner, the depth of the trees was set to  $4$. 
 
 %OH: Commented out the three next paragraphs, since this is mentioned in main text.
 %The empirical approach differs in many aspects from the Ferrenti and extended Ferrenti approaches. Firstly, we find that the number of principal components necessary to obtain $95 \ \%$ variance is reduced to $103$ components, which is $41$ and $56$ less than the Ferrenti and extended Ferrenti approach, respectively. Thus, the variance of the training set is found to be described with fewer principal components, indicating a simpler model.   
@@ -497,24 +499,24 @@ Lastly, gradient boosting performs optimally at $13$ principal components with a
 
 \subsection*{Prediction statistics}
 
-Figure~\ref{fig:predictions} provides a visualization of the number of predicted material candidates from the (a) Ferrenti, (b) extended Ferrenti and (c) empirical approaches. Suitable and unsuitable candidates are marked in green and red, respectively. We observe that the number of predicted suitable candidates is similar for the Ferrenti and extended Ferrenti approaches, albeit higher in the case of the latter, for all four ML models, while the empirical approach results in a substantially narrower selection of contender materials. Note that the confidence cut-off was set to $0.5$. 
+Figure~\ref{fig:predictions} provides a visualization of the number of predicted material candidates from the (a) Ferrenti, (b) extended Ferrenti and (c) empirical approaches. Suitable and unsuitable candidates are marked in green and red, respectively. We observe that the number of predicted suitable candidates is similar for the Ferrenti and extended Ferrenti approaches, albeit higher in the case of the latter, for all four ML methods, while the empirical approach results in a substantially narrower selection of contender materials. Note that the confidence cut-off was set to $0.5$. 
 
-For the Ferrenti approach, logistic regression finds a total of $12.380$ suitable candidates, while decision trees is the most conservative with $11.315$. random forests has the most optimistic estimate with $14.278$, while gradient boosting finds $11.835$ suitable candidates. The four ML models agree on $6804$ suitable candidates, however, many of the materials
+For the Ferrenti approach, logistic regression finds a total of $12.380$ suitable candidates, while decision trees is the most conservative with $11.315$. Random forests has the most optimistic estimate with $14.278$, while gradient boosting finds $11.835$ suitable candidates. The four ML methods agree on $6804$ suitable candidates, however, many of the materials
 are predicted with a confidence similar to that of a coin-flip.
 If we were to raise the minimum bar of a prediction to
-$0.7$, the models would only agree on $3000$ suitable candidates
+$0.7$, the four methods would only agree on $3000$ suitable candidates
 
-The perhaps more liberal extended Ferrenti approach yields the largest number of predicted candidates with $14.993$, $14.407$, $15.351$ and $13.788$ for logistic regression, decision trees, random forests, and gradient boosting, respectively. Due to the less stringent restrictions compared to the Ferrenti approach, we find the large amount of $9227$ entries that the four models agree on.
+The perhaps more liberal extended Ferrenti approach yields the largest number of predicted candidates with $14.993$, $14.407$, $15.351$ and $13.788$ for logistic regression, decision trees, random forests, and gradient boosting, respectively. Due to the less stringent restrictions compared to the Ferrenti approach, we find the large amount of $9227$ entries that the four ML methods  agree on.
 
-The four models predict radically fewer suitable candidates for the empirical approach as compared to the two former approaches, where only $842$, $1197$, $543$, and $596$ materials are predicted suitable by logistic regression, decision trees, random forests, and gradient boosting, respectively. The large majority of the unsuitable candidates are predicted with high probability except for the random forests model due to the ensemble of trees. All models, however, agree on $214$ suitable candidates. 
+The four methods predict radically fewer suitable candidates for the empirical approach as compared to the two former approaches, where only $842$, $1197$, $543$, and $596$ materials are predicted suitable by logistic regression, decision trees, random forests, and gradient boosting, respectively. The large majority of the unsuitable candidates are predicted with high probability except for random forests  due to the ensemble of trees. All methods, however, agree on $214$ suitable candidates. 
 
 \subsection*{Predicted materials}
 
-Table~\ref{tab:03-probability-candidates} displays the $66$ predicted candidate materials that all four machine learning models, using the training set derived in the empirical approach, agreed on with a confidence cut-off set to $0.75$. All band gaps are taken from the Materials Project database as calculated using DFT and the PBE functional. Note that materials can appear several times  on  the  list due  to  different  structures of the same composition. The  list  contains $5$ elementary (unary), $46$  binary and  $15$ ternary compounds. 
+Table~\ref{tab:03-probability-candidates} displays the $66$ predicted candidate materials that all four machine learning methods, using the training set derived in the empirical approach, agreed on with a confidence cut-off set to $0.75$. All band gaps are taken from the Materials Project database as calculated using DFT and the PBE functional. Note that materials can appear several times  on  the  list due  to  different  structures of the same composition. The  list  contains $5$ elementary (unary), $46$  binary and  $15$ ternary compounds. 
 
 \input{appendix/tablesof66materials.tex}
 
-Table~\ref{tab:04-probability-candidates} displays the $47$ predicted candidates that all four machine learning models and all three approaches agreed upon. 
+Table~\ref{tab:04-probability-candidates} displays the $47$ predicted candidates that all four machine learning methods and all three approaches agreed upon. 
 %To 0.5 cutoff 
 The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 
@@ -522,12 +524,12 @@ The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 
 \subsection*{Feature analysis}
 %Or important features for QT 
-Figure~\ref{fig:histograms_supp} displays the number of predicted suitable materials for all approaches (all ML models in an approach agree to a $0.75$ confidence level) as a function of the (a) covalent radius of the elements in the composition, (b) maximum packing efficiency, and standard deviation of the radial distribution function (RDF) with center at (c) $2.0$ and (d) $3.0$. The corresponding figure in the main text shows the standard deviation of the RDF with Gaussian center at $1.0$. Several observations can be made based on the histograms. Panels (e) chemical environment site fingerprint, (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the material band gaps referenced to the normalized mean of the entire data set.  
+Figure~\ref{fig:histograms_supp} displays the number of predicted suitable materials for all approaches (all ML methods in an approach agree to a $0.75$ confidence level) as a function of the (a) covalent radius of the elements in the composition, (b) maximum packing efficiency, and standard deviation of the radial distribution function (RDF) with center at (c) $2.0$ and (d) $3.0$. The corresponding figure in the main text shows the standard deviation of the RDF with Gaussian center at $1.0$. Several observations can be made based on the histograms. Panels (e) chemical environment site fingerprint, (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the material band gaps referenced to the normalized mean of the entire data set.  
 
 Firstly, we find that the covalent radii of the materials (see Fig.~\ref{fig:histograms_supp}a) distribute with two peaks in the data in all approaches. The maxima are slightly shifted towards the right for the empirical approach compared to the two others but otherwise the data distributions are similar. The trend of two data peaks is repeated for the maximum packing efficiency (see Fig.~\ref{fig:histograms_supp}b) but is much more prominent for the empirical approach. This indicates that the material density, or in other words the bond length, is an important parameter for QT suitability.  
 
 %histograms 
-\begin{figure}[!ht]
+\begin{figure}[!ht]\label{fig:histograms_supp}
 \begin{subfigure}[t]{1\textwidth}
     \input{figures/histograms/new/legend.tex}
 \end{subfigure}
