@@ -18,7 +18,7 @@
 %  3)  latex apssamp.tex
 %  4)  latex apssamp.tex
 %
-\documentclass[superscriptaddress,unsortedaddress,
+\documentclass[floatfix, superscriptaddress,unsortedaddress,
 %runinaddress,
 %frontmatterverbose, 
 %preprint,
@@ -96,7 +96,7 @@ every axis plot/.append style={line width=2pt},
 \usepackage{siunitx}
 \usepackage{color}
 \sisetup{separate-uncertainty}
-
+\UseRawInputEncoding
 \usepackage{forest}
 \forestset{
     .style={
@@ -200,9 +200,9 @@ The motivation behind the choice of featurizers is that we do not precisely know
 
 In the evaluation of the machine learning methods for the three different approaches, we apply a $5\times 5$ stratified cross-validation when searching for the optimal hyperparameter combinations, see for example \cite{Hastie2009} for details on the cross-validation procedure. Due to imbalanced training data, we apply four different evaluation metrics to each of the four machine learning algorithms discussed in this work. 
 
-The implementation of the machine learning methods was achieved through the machine learning library Scikit-learn \cite{Pedregosa2012}. Adjusting many of the hyperparameters in Scikit-learn resulted in severe overfitting for the machine learning methods random forests, gradient boosting, and decision trees. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$  (see Ref.~\cite{geron2022} for a definition of various metrics) was the maximum number of depth for the trees grown. In our work we adjusted 
+The implementation of the machine learning methods was achieved through the machine learning library Scikit-learn \cite{Pedregosa2012}. Adjusting many of the hyperparameters in Scikit-learn resulted in severe overfitting for the machine learning methods random forests, gradient boosting, and decision trees. Therefore, most parameters are the default values defined by Scikit-learn. The only parameter that we found that could potentially improve the evaluation metric F$1$  (see Ref.~\cite{geron2022} for a definition of various metrics) was the maximum depth for the trees grown. In our work we adjusted 
 %between 
-the depth of the trees to vary from $1$ to $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic adjusted values from $10^{-3}$ to $10^{5}$, and used either $200$ or $400$ iterations to reach convergence. 
+the depth of the trees to vary from $1$ to $8$. For logistic regression, we chose to adjust the regularization strength with seven logarithmic values ranging from $10^{-3}$ to $10^{5}$, and used either $200$ or $400$ iterations to reach convergence. 
 
 When searching for the optimal number of principal components, we iterated over every odd number of principal components from $1$ to the upper restricted number which defines an accumulated variance of $95 \ \%$ from the principal component analysis. Due to a large number of principal components, we performed a fit of  $25$ folds for each of the $1232$ parameter combinations, totaling up to $30.800$ individual models. 
 %, just for one arbitrary machine learning algorithm like logistic regression. 
@@ -250,10 +250,10 @@ on the test set as a function of the number of principal components. For each pr
 \caption{Optimal number of principal components and the respective scores (standard deviation) for each of the four ML methods logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the Ferrenti approach, as visualized by the dash-dotted line in Fig.~\ref{fig:01-pca}.}
 \label{tab:01-pc}
 \noindent\makebox[\textwidth]{
-\begin{tabular}{M{1.0cm} M{1.0cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
+\begin{tabular}{M{2.0cm} M{1.5cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
   \hline
   \hline
-   Method & PC & Mean test &  Mean precision & Mean recall & mean F1\\
+   Method & PC & Mean test & Mean precision & Mean recall & mean F1\\
   \hline
   LOG & $171$ & $0.98(0.012)$ & $0.98(0.011)$ & $0.99(0.007)$ & $0.99(0.007)$ \\
   DT & $37$   & $0.77(0.034)$ & $0.84(0.034)$ & $0.85(0.044)$ & $0.84(0.022)$ \\
@@ -264,7 +264,7 @@ on the test set as a function of the number of principal components. For each pr
 }
 \end{table}
 
-In Table~\ref{tab:01-pc}, we include the precise measurements for each of the evaluation metrics for the optimal number of principal components. The optimal number  is visualized as dotted lines in Fig.~\ref{fig:01-pca}. The relevant hyperparameters for logistic regression were the maximum iterations. The number of iterations was set at $400$, and the regularization term was given by an optimal of $0.46$. For random forests and decision trees, we find the maximum depth of $7$. Gradient boosting, which normally uses a weak learner, had a decision tree depth of $4$. We find the best performing method to be logistic regression, but this method depends on a large number of principal components. 
+In Table~\ref{tab:01-pc}, we include the precise measurements for each of the evaluation metrics for the optimal number of principal components. The optimal number is visualized as dotted lines in Fig.~\ref{fig:01-pca}. The relevant hyperparameters for logistic regression were the maximum iterations. The number of iterations was set at $400$, and the regularization term was found optimal at $0.46$. For random forests and decision trees, we find the maximum depth to be $7$. Gradient boosting, which normally uses a weak learner, had a decision tree depth of $4$. We find the best performing method to be logistic regression, but this method depends on a large number of principal components. 
 
 In Figure~\ref{fig:01-fi}, we visualize how the various machine learning methods  interpret the principal components that are sorted in descending order by the explained variance, found through a $5\times 5$ stratified cross-validation approach. To reach the $95 \ \%$ accumulated explained variance, a total of $144$ principal components were included. We have visualized the first $25$ components since these capture the most important information. We note that most of the important features are found within the first five principal components.
 
@@ -357,7 +357,7 @@ This trend is revealed when looking at the balanced accuracy score. For all figu
 \caption{Optimal number of principal components and the respective scores (standard deviation) for each of the four ML methods logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the extended Ferrenti approach, as visualized by the dash-dotted line in Fig.~\ref{fig:02-pca}.}
 \label{tab:02-pc}
 \noindent\makebox[\textwidth]{
-\begin{tabular}{M{1.0cm} M{1.0cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
+\begin{tabular}{M{2.0cm} M{1.5cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
   \hline
   \hline
    Method & PC & Mean test &  Mean precision & Mean recall & mean F1\\
@@ -428,7 +428,7 @@ Logistic regression experiences improvement of all scores for an increasing numb
 \caption{ Optimal number of principal components and the respective scores (standard deviation) for each of the four ML methods logistic regression (LOG), decision trees (DT), random forests (RF) and gradient boosting (GB) in the empirical approach, as visualized by the dash-dotted line in Fig.~\ref{fig:03-pca}.}
 \label{tab:03-pca}
 \noindent\makebox[\textwidth]{
-\begin{tabular}{M{1.0cm} M{1.0cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
+\begin{tabular}{M{2.0cm} M{1.5cm} M{2.0cm} M{2.0cm}M{2.0cm}M{2.0cm} }
   \hline
   \hline
    Method & PC & Mean test & Mean precision & Mean recall  & mean F1\\
@@ -522,8 +522,7 @@ The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 \subsection*{Feature analysis}
 
 %histograms 
-\begin{figure}[t]
-\label{fig:histograms_supp}
+\begin{figure}[!t]
 \begin{subfigure}[t]{1\textwidth}
     \input{figures/histograms/new/legend.tex}
 \end{subfigure}
@@ -562,9 +561,11 @@ The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
     \scalebox{0.85}{\input{figures/histograms/supplementary-new/MP_Eg_normalized_databackgrund_075.tex}}
     \subcaption{}
 \end{subfigure}
+
 \caption{Number of predicted suitable materials as a function of the (a) covalent radius, (b) maximum packing efficiency, and standard deviation of the radial distribution function with center at (c) $2.0$ and (d) $3.0$. Panel (e) shows standard deviation of the chemical environment of the gaussian symmetric function. Panels (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the band gap referenced to the normalized mean of the entire data set. 
 %The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. 
 The Ferrenti and extended Ferrenti approaches refer to the left y-axis and the empirical approach to the right. All panels were taken for a $0.75$ cut-off. }
+\label{fig:histograms_supp}
 \end{figure}
 
 Figure~\ref{fig:histograms_supp} displays the number of predicted suitable materials for all approaches (all ML methods in an approach agree to a $0.75$ confidence level) as a function of the (a) covalent radius of the elements in the composition, (b) maximum packing efficiency, and standard deviation of the radial distribution function (RDF) with center at (c) $2.0$ and (d) $3.0$. The corresponding figure in the main text shows the standard deviation of the RDF with Gaussian center at $1.0$. 
@@ -573,7 +574,7 @@ Panels (e) chemical environment site fingerprint, (f) crystal fingerprint and (g
 
 Firstly, we find that the covalent radii of the materials (see Fig.~\ref{fig:histograms_supp}a) distribute with two peaks in the data in all approaches. The maxima are slightly shifted towards the right for the empirical approach compared to the two others but otherwise the data distributions are similar. The trend of two data peaks is repeated for the maximum packing efficiency (see Fig.~\ref{fig:histograms_supp}b) but is much more prominent for the empirical approach. This indicates that the material density, or in other words the bond length, is an important parameter for QT suitability.  
 
-
+\clearpage
  
 \bibliography{apssamp}% Produces the bibliography via BibTeX.
 
