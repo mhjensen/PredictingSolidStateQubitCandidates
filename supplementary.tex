@@ -18,7 +18,7 @@
 %  3)  latex apssamp.tex
 %  4)  latex apssamp.tex
 %
-\documentclass[floatfix, superscriptaddress,unsortedaddress,
+\documentclass[superscriptaddress,unsortedaddress,
 %runinaddress,
 %frontmatterverbose, 
 %preprint,
@@ -59,9 +59,9 @@
 \usepackage{epigraph} % quote
 \usepackage{wrapfig} %wrapping text to fig
 \usepackage{tikz} %draw figures
-
+\usepackage{longtable}
 \usepackage{subcaption} %subcaption
-\usepackage[font=small,labelfont=bf,width=0.9\textwidth]{caption}
+%\usepackage[font=small,labelfont=bf,width=0.9\textwidth]{caption}
 \captionsetup[table]{skip=10pt}
 \usepackage[T1]{fontenc}
 \usepackage[sc, osf]{mathpazo}
@@ -88,7 +88,6 @@ every axis plot/.append style={line width=2pt},
 \usepackage{dsfont}
 \usepackage[binary-units=true]{siunitx}
 \usepackage{makecell}
-\usepackage{longtable}
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
 \usepackage{physics}
@@ -379,7 +378,9 @@ The optimal hyperparameters are summarized in Table~\ref{tab:02-pc}. We find tha
 The relevant hyperparameters for logistic regression were the regularization strength and the maximum iterations, which were set to $0.46$ and $400$, respectively. Smaller regularization values resulted in worse scores, while increasing values did not noticeably affect the results. The decision trees and random forests methods both found an optimal maximum depth of $7$, where smaller values resulted in low precision but high recall.  Therefore, the choice was made to facilitate a compromise between precision and recall. For gradient boosting, we find the optimal maximum depth as $4$ due to a decline in overall metrics for increasing depth except for training accuracy, which could potentially result in overfitting.
 
 
-The interpretation of feature importance for the extended Ferrenti approach is substantially more difficult than in the Ferrenti approach. We find for logistic regression and decision trees that no feature is different than any other in the cross-validation due to a large variety of accuracy. However, we find that random forests and gradient boosting experience the fifth principal component as important. Similar to the Ferrenti approach, the corresponding features with the highest value for the first principal component originates from the DFT band gap of the elemental solids among the elements in the composition.
+The interpretation of feature importance for the extended Ferrenti approach is substantially more difficult than in the Ferrenti approach. We find for logistic regression and decision trees that no feature is different than any other in the cross-validation due to a large variety of accuracy. However, we find that random forests and gradient boosting experience the fifth principal component as important. 
+%Similar to the Ferrenti approach, the corresponding features with the highest value for the first principal component originates from the DFT band gap of the elemental solids among the elements in the composition.
+Similar to the Fererenti approach, the extended Ferrenti finds the DFT band gap of the elemental solids among the elements in the composition important. The feature regarding the band gap originates from the highest value from the first principal component. 
 This means that, if we consider, e.g., the compound SiC, the band gaps of both SiC, Si and C would be considered important by the ML methods. 
 
 \subsubsection*{Empirical approach}
@@ -419,7 +420,10 @@ This means that, if we consider, e.g., the compound SiC, the band gaps of both S
 
 Lastly, we turn to the empirical approach to data labeling, which resulted in $404$ unsuitable and $202$ suitable candidates through the initial selection process. However, in contrast to the two labeled datasets discussed above, the majority of the entries was in this case labeled as unsuitable candidates. 
 
-The grid search for the optimal number of principal components is visualized in Figure~\ref{fig:03-pca} for the empirical approach. Interestingly, we find that all ML methods  experience high scores for just a few principal components, where $1$ principal component earns at least $0.93$ scores for all evaluation metrics. %This information was also revealed for an earlier two-dimensional visualization of a scatter plot showing the two most important principal components in figure \ref{fig:2dscatterplotpca}, and consequently can make the models find the optimal decision boundary more easily.
+The grid search for the optimal number of principal components is visualized in Figure~\ref{fig:03-pca} for the empirical approach. Interestingly, we find that all ML methods  experience high scores for just a few principal components, where 
+%$1$
+the first
+principal component earns at least $0.93$ scores for all evaluation metrics. %This information was also revealed for an earlier two-dimensional visualization of a scatter plot showing the two most important principal components in figure \ref{fig:2dscatterplotpca}, and consequently can make the models find the optimal decision boundary more easily.
 
 Logistic regression experiences improvement of all scores for an increasing number of principal components, yet only up $5 \ \%$ in scores compared to the one-dimensional representation of one principal component. Thus, one can argue whether the increase in performance is worthwhile, considering a one-dimensional representation with just a few percentage losses of performance. However, with multiple principal components, we find the largest increase in precision, which is a sign that the one-dimensional representation tends to wrongly predict candidates as suitable when they are in fact unsuitable. Decision trees and random forests exhibit the best performance for just a few principal components, and experience a considerable degree of overfitting for larger values. Gradient boosting, in contrast to the case for the two Ferrenti approaches, also experiences the best performance for a few principal components.
 
@@ -522,7 +526,7 @@ The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
 \subsection*{Feature analysis}
 
 %histograms 
-\begin{figure}[!t]
+\begin{figure}[ht!]
 \begin{subfigure}[t]{1\textwidth}
     \input{figures/histograms/new/legend.tex}
 \end{subfigure}
@@ -543,7 +547,13 @@ The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
     \scalebox{0.85}{\input{figures/histograms/supplementary-new/GeneralizedRDF_std_dev Gaussian center=3.0 width=1.0_count_075.tex}}
     \subcaption{}
 \end{subfigure}%
+\end{figure}
 
+Figure~\ref{fig:histograms_supp} displays the number of predicted suitable materials for all approaches (all ML methods in an approach agree to a $0.75$ confidence level) as a function of the (a) covalent radius of the elements in the composition, (b) maximum packing efficiency, and standard deviation of the radial distribution function (RDF) with center at (c) $2.0$ and (d) $3.0$. The corresponding figure in the main text shows the standard deviation of the RDF with Gaussian center at $1.0$. 
+%Several observations can be made based on the histograms. 
+Panels (e) chemical environment site fingerprint, (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the material band gaps referenced to the normalized mean of the entire data set.  
+
+\begin{figure}[ht!]\ContinuedFloat
 \begin{subfigure}[b]{0.45\textwidth}
     \scalebox{0.85}{\input{figures/histograms/supplementary-new/ChemEnvSiteFingerprint_GaussianSymmFuncstd_dev G2_20.0_count_075.tex}}
     \subcaption{}
@@ -561,21 +571,15 @@ The list contains $8$ elemental, $29$ binary, and $10$ tertiary compounds.
     \scalebox{0.85}{\input{figures/histograms/supplementary-new/MP_Eg_normalized_databackgrund_075.tex}}
     \subcaption{}
 \end{subfigure}
-
 \caption{Number of predicted suitable materials as a function of the (a) covalent radius, (b) maximum packing efficiency, and standard deviation of the radial distribution function with center at (c) $2.0$ and (d) $3.0$. Panel (e) shows standard deviation of the chemical environment of the gaussian symmetric function. Panels (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the band gap referenced to the normalized mean of the entire data set. 
 %The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. 
 The Ferrenti and extended Ferrenti approaches refer to the left y-axis and the empirical approach to the right. All panels were taken for a $0.75$ cut-off. }
 \label{fig:histograms_supp}
 \end{figure}
 
-Figure~\ref{fig:histograms_supp} displays the number of predicted suitable materials for all approaches (all ML methods in an approach agree to a $0.75$ confidence level) as a function of the (a) covalent radius of the elements in the composition, (b) maximum packing efficiency, and standard deviation of the radial distribution function (RDF) with center at (c) $2.0$ and (d) $3.0$. The corresponding figure in the main text shows the standard deviation of the RDF with Gaussian center at $1.0$. 
-%Several observations can be made based on the histograms. 
-Panels (e) chemical environment site fingerprint, (f) crystal fingerprint and (g) OP site fingerprint are related to bond orientational parameters, while (h) shows the material band gaps referenced to the normalized mean of the entire data set.  
 
 Firstly, we find that the covalent radii of the materials (see Fig.~\ref{fig:histograms_supp}a) distribute with two peaks in the data in all approaches. The maxima are slightly shifted towards the right for the empirical approach compared to the two others but otherwise the data distributions are similar. The trend of two data peaks is repeated for the maximum packing efficiency (see Fig.~\ref{fig:histograms_supp}b) but is much more prominent for the empirical approach. This indicates that the material density, or in other words the bond length, is an important parameter for QT suitability.  
 
-\clearpage
- 
 \bibliography{apssamp}% Produces the bibliography via BibTeX.
 
 \end{document}
