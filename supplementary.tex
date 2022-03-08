@@ -208,9 +208,9 @@ When searching for the optimal number of principal components, we iterated over 
 
 \subsubsection*{Ferrenti approach}
 %Ferrenti 
-The grid search for the optimal number of principal components for the Ferrenti approach is visualized in Fig.~\ref{fig:01-pca}, where we present the mean accuracy on the training set, and the balanced accuracy, precision, recall, and F$1$-score 
+The grid search for the optimal number of principal components for the Ferrenti approach is visualized in Fig.~\ref{fig:01-pca}, where we present the mean accuracy of the four ML models applied to the training set, and the balanced accuracy, precision, recall, and F$1$-score 
 %(see for example \cite{geron2022} for a definition of various score metrics) 
-on the test set as a function of the number of principal components. For each principal component, we display the optimal combination of  hyperparameters based on the F$1$-score \cite{sammut2010,geron2022}.
+for the test set as a function of the number of principal components. For each principal component, we display the optimal combination of  hyperparameters based on the F$1$-score \cite{sammut2010,geron2022}.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{1.0\textwidth}
@@ -303,7 +303,7 @@ In Fig.~\ref{fig:01-fi}, we visualize how the various machine learning methods  
 \end{figure}
 
 
-For logistic regression, we have visualized the mean fitted coefficients and the standard variation in the top panel of Fig.~\ref{fig:01-fi}. Large positive or negative coefficients can be considered increasingly important, where positive (negative) coefficients will contribute to making positive (negative) predictions. In the three next panels, namely for the machine learning methods  decision trees, random forests, and gradient boosting, we visualize the mean impurity-based feature importance, along with the standard deviation. We observe that the single most important feature for all ML methods is the fifth principal component. Selecting the highest values of this eigenvector, we find that the corresponding features originate from the DFT band gap of the elemental solids among the elements in the compound as calculated by Materials Agnostic Platform for Informatics and Exploration (MagPie). 
+For logistic regression, we have visualized the mean fitted coefficients and the standard deviation in the top panel of Fig.~\ref{fig:01-fi}. Large positive or negative coefficients can be considered increasingly important, where positive (negative) coefficients will contribute to making positive (negative) predictions. In the three next panels, namely for the machine learning methods  decision trees, random forests, and gradient boosting, we visualize the mean impurity-based feature importance, along with the standard deviation. We observe that the single most important feature for all ML methods is the fifth principal component. Selecting the highest values of this eigenvector, we find that the corresponding features originate from the DFT band gap of the elemental solids among the elements in the compound as calculated by Materials Agnostic Platform for Informatics and Exploration (MagPie). 
 
 After the first ten principal components, we observe that the methods adapt the other principal components with varying degrees. The coefficients for the case of logistic regression experience large fluctuations, but the three remaining models find the first and second principal components important in addition to the fifth. In order of importance, we observe that the second component's largest values correspond to the electronegativity, maximum ionic character, and covalent radius among the elements in the composition. The data originates from elemental calculations from MagPie and are aggregated as either minimum, mean, standard deviation, or maximum. While the first principal component encompasses the largest explained variance, it does not provide any specific information on which features it represents.
 
@@ -348,7 +348,7 @@ After the first ten principal components, we observe that the methods adapt the 
 
 For the extended Ferrenti approach, the parameter grid search for principal components is visualized in Figure~\ref{fig:02-pca}. All methods experience an almost perfect recall score for the first principal component due to the largely imbalanced dataset with $2141$ suitable and $684$ unsuitable candidates, which results in  a ratio of $75 \ \% : 25 \ \%$. This result comes as a consequence of the ML methods being able to correctly label many suitable candidates compared to the number of unsuitable candidates. 
 %On the other hand, we find a small precision for the first component since the ML methods  predict many materials, both actually labeled suitable and unsuitable, as suitable candidates, and the latter case is particularly large. 
-On the other hand, we find a small precision for the first component since the ML methods  predict many materials as suitable regardless of whether they were labeled as suitable or unsuitable in the initial data labeling process, and the latter case is particularly numerous. 
+On the other hand, we find a low precision score for the first component since the ML methods  predict many materials as suitable regardless of whether they were labeled as suitable or unsuitable in the initial data labeling process, and the latter case is particularly numerous. 
 This trend is revealed when looking at the balanced accuracy score. For all figures, it remains the lowest score of the evaluation metrics largely due to the inaccuracy of true negatives for the cross-validations.  
 
 \begin{table}[t]
