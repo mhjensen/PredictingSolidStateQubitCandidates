@@ -183,7 +183,7 @@ Quantum technologies (QT) based on solid state platforms have attracted a lot of
 Among the promising applications that are already available we find important breakthroughs such as in vivo sensing of magnetic fields in cells \cite{Lesage_2013}, secure communication over large distances by separation of entangled photons \cite{Ursin2007} and, notably, various quantum information processing prototypes and architectures \cite{Arute_2019}.  
 Quantum computers are in high demand to meet the increasing need for computing power to solve complex and high-dimensional scientific problems. 
 %that are beyond the capability of existing high-performance computing %facilities.   
-Recent advances have highlighted the potential of quantum information processors to outperform state-of-the art high-performance computing facilities. Indeed, Google's $53$ qubit quantum computer based on superconducting electronics solved a computational problem that was beyond the capabilities of a $200.000$ core supercomputer \cite{Arute_2019}. Most recently, IBM announced its $127$ qubit quantum processor~\cite{IBM2021}. Simultaneously, the concepts of entanglement and teleportation may eventually facilitate advanced quantum communication protocols such as quantum cryptography and the quantum internet, spurring further investigations into technologies based on quantum mechanics.
+Recent advances have highlighted the potential of quantum information processors to outperform state-of-the art high-performance computing facilities. Indeed, Google's $53$ qubit quantum computer based on superconducting electronics solved a computational problem that was beyond the capabilities of a $200.000$ core supercomputer \cite{Arute_2019}. Most recently, IBM announced its $127$ qubit quantum processor~\cite{IBM2021}. Simultaneously, the concepts of entanglement and teleportation may eventually facilitate advanced quantum communication protocols such as quantum cryptography and the quantum internet \cite{quantum-internet-kimble}, spurring further investigations into technologies based on quantum mechanics.
 
 %Figure 1 introduction schematic 
 \begin{figure}[t]
@@ -213,7 +213,7 @@ The majority of discoveries of QT compatible characteristics in semiconductors h
 The fourth science paradigm of big data driven science reveals the potential of targeted search for promising material systems in which to expect QT compatible properties. 
 %, see for example Ref.~\cite{Acin2018}.
 Rather than searching through a host of signals for those that match our criteria, we aim to \textit{predict} which materials and signatures we should target for more detailed studies, following the framework illustrated in Fig.~\ref{fig:ht-workflow}. 
-This is made feasible by the availability of databases containing material properties for a wide range of different systems. In this work, the data in question are provided by bulk density functional theory (DFT) calculations to obtain the ground state properties of different elements and compounds. Combined with ML methods we provide a path towards precise classification of candidate materials. The inclusion of ML methods follows recent trends in applications of statistical learning, data science and machine learning for scientific discoveries, see for example Refs.~\cite{deiana2021,Carleo2019}. 
+This is made feasible by the availability of databases containing material properties for a wide range of different systems. In this work, the data in question are provided by bulk density functional theory (DFT) calculations to obtain the ground state properties of different elements and compounds. Combined with machine learning (ML) methods we provide a path towards precise classification of candidate materials. The inclusion of ML methods follows recent trends in applications of statistical learning, data science and machine learning for scientific discoveries, see for example Refs.~\cite{deiana2021,Carleo2019}. 
 
 Here we provide a framework for the data mining and automated discovery of promising solid-state semiconductor hosts for quantum emitters and spin centers using targeted database search and ML methods combined with knowledge from the field. 
 Analyzing the output of the ML methods reveals that, given a suitable initial set of labeled materials for training and testing, it is possible to discern the physical mechanisms that govern a material's suitability for quantum applications.  
@@ -257,12 +257,17 @@ The constructed dataset encompasses compounds formed by a plethora of combinatio
 Furthermore, we have utilized data obtained from high-throughput density functional theory calculations. Indeed, there are possible errors associated with every step, starting from an initial calculation, adding of data in the database, gathering of data, featurization of data, preprocessing of data, data mining, and finally training a model and making a prediction. Unfortunately, if an error has happened in the first part of the process, the error follows the entire process and will get increasingly harder to detect. Thus, our results depend on the quality of data in the databases we employ. 
 
 \subsection*{Data Mining}
-The complete dataset consists of $25.000$ materials. A subset of these materials is labeled into either suitable or unsuitable candidates for QT while the remainder will stay unlabeled. The labeled data are then grouped into training and sets for the ML methods. 
+The complete dataset consists of $25.000$ materials. A subset of these materials is labeled into either suitable or unsuitable candidates for QT while the remainder will stay unlabeled. The labeled data are then grouped into training and test sets for the ML methods. 
 
 Several challenges accompany the labeling process of labeling materials according to their suitability for QT. 
-Firstly, although QT compatible properties are becoming increasingly well studied for the case of, e.g., nitrogen-vacancy centers in diamond, single-photon emitters in silicon carbide and quantum dot structures \cite{Doherty_2013,Bathen2021,Aharonovich_2016}, relatively few candidate materials are known to be suitable \cite{Atatuere2018,Zhang2020}. An additional consideration is that the physical mechanisms promoting favorable properties are not fully understood, neither for the case of defect- or QD-based quantum technologies. 
-Thirdly, defining materials as unsuitable candidates for QT has proven to be surprisingly intricate. 
-We follow three separate procedures for labeling materials as suitable or unsuitable candidates for QT. 
+Although QT compatible properties are becoming increasingly well studied for the case of, e.g., nitrogen-vacancy centers in diamond, single-photon emitters in silicon carbide and quantum dot (QD) structures \cite{Doherty_2013,Bathen2021,Aharonovich_2016}, relatively few candidate materials are known to be suitable \cite{Atatuere2018,Zhang2020}. An additional consideration is that the physical mechanisms promoting favorable properties are not fully understood, neither for the case of defect- or QD-based quantum technologies.
+Conversely, defining materials as unsuitable candidates for QT is in many ways equally difficult.
+This is similar to the case for the suitable candidates in that it is not understood which mechanisms break the quantum properties.
+However, we can make some educated guesses and assume that the negation of the criteria we use to select suitable candidates should give unsuitable candidates.
+A side-effect of this selection is that the criteria for unsuitable candidates can become equally, or more, restrictive compared to the criteria for suitable candidates (we would assume that most materials are not optimal for the kind of QT we are concerned with in this article).
+We will then find ourselves in a situation with skewed data sets were we have fewer unsuitable than suitable candidates.
+This will not be a perfect method, but it will serve as a starting point and demonstration for how the labeling procedure could be improved.
+Below we follow three separate procedures for labeling materials as suitable or unsuitable candidates for QT. 
 
 \subsubsection*{The Ferrenti approach}
 The first approach to labeling a selection of materials in the dataset is based on the criteria proposed by \citeauthor{Ferrenti2020} \cite{Ferrenti2020}. 
@@ -295,7 +300,9 @@ Next, \textbf{unsuitable} candidates are labeled according to the reverse requir
 that crystallize in polar space groups, are calculated to be magnetic and have a band gap larger than $0.1$~eV in the MP database (to exclude metals but include lower-band gap semiconductors). 
 The resulting set of labeled materials contains $1581$ materials where $35 \ \%$
 are labeled as unsuitable and 
-$65 \ \%$ as suitable for QT applications.  
+$65 \ \%$ as suitable for QT applications.
+Here we see the first example where the criteria for the unsuitable candidates is more restrictive for our data set than the criteria for the suitable candidates.
+
 
 \subsubsection*{The extended Ferrenti approach}
 Here, we adjust the Ferrenti approach to expand the data labeling process beyond practical  considerations. The second approach is therefore named \emph{the extended Ferrenti approach} and involves removing stage two from the approach above. Moreover, we include a few additional elements that have shown promising properties but were initially excluded due to the lack of spin zero isotopes. 
@@ -375,7 +382,7 @@ Among other potentially suitable candidates we find ZnS, ZnSe, ZnO and ZnTe pres
 %Extended Ferrenti 
 In the labeled dataset of the extended Ferrenti approach, we find a single entry for each of SiC, Si, GaN, ZnS, GaP, AlAs and AlP, carbon in both diamond- and graphite-like structures, and AlN in three different configurations. The labeled dataset includes a larger variety of materials that are known to be quantum compatible as compared to the Ferrenti approach due to admitting more elements in the initial selection process. However, since we also included a more stringent band gap restriction of $1.5$~eV (to reduce the amount of materials in the training set), we find a more sparse representation of each known chemical formula present in the labeled data. 
 
-The labeled data for each approach is visualized in Fig.~\ref{fig:parallel-coordinates-approaches} as parallel coordinate plots for a few selected features informed by the criteria proposed by \citeauthor{Weber2010} \cite{Weber2010}. Parallel coordinate schemes  \cite{Inselberga1990, Inselberg1985} represent a multi-dimensional data tuple as one polyline crossing a parallel axis. The selected features are found on the x-axis, while the y-axis shows the value of the data. Thus, parallel coordinate plots can turn complex many-dimensional data into a compact  two-dimensional representation. Due to possible data cluttering, the figure visualizes a random sample of each class (suitable or unsuitable) with an upper limit of $250$ per class with transparent lines. The green and red polylines represent suitable and unsuitable candidates, respectively. 
+The labeled data for each approach is visualized in Fig.~\ref{fig:parallel-coordinates-approaches} as parallel coordinate plots for a few selected features informed by the criteria proposed by \citeauthor{Weber2010} \cite{Weber2010}. Parallel coordinate schemes  \cite{Inselberga1990, Inselberg1985} represent a multi-dimensional data tuple as one polyline crossing a parallel axis. The selected features are found on the $x$-axis, while the $y$-axis shows the value of the data. Thus, parallel coordinate plots can turn complex many-dimensional data into a compact  two-dimensional representation. Due to possible data cluttering, the figure visualizes a random sample of each class (suitable or unsuitable) with an upper limit of $250$ per class with transparent lines. The green and red polylines represent suitable and unsuitable candidates, respectively. 
 
 \begin{figure}[t] %!htp
     \centering
@@ -552,7 +559,7 @@ There appears to be a high degree of symmetry present for all materials, but we 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/vesta-images/fig6-all.png}
-    \caption{Illustrations of the crystal systems that the $9$ materials predicted by the empirical approach to $0.85$ confidence, and the $6$ materials predicted by all approaches to $0.75$ confidence, may belong to. Four different symmetry categories are observed; cubic, hexagonal, tetragonal and orthorombic. The viewpoints for all materials are down along the $c$ axis.   }
+    \caption{Illustrations of the crystal systems that the $9$ materials predicted by the empirical approach to $0.85$ confidence, and the $6$ materials predicted by all approaches to $0.75$ confidence, may belong to. Four different symmetry categories are observed; cubic, hexagonal, tetragonal and orthorombic. The viewpoints for all materials are down along the $c$-axis.   }
     \label{fig:crystalsystems}
 \end{figure}
 
@@ -658,7 +665,7 @@ We highlight these six compounds, along with the nine predicted by the empirical
     \input{figures/histograms/new/AverageBondLength_std_dev Average bond length_count_075.tex}
     \subcaption{}
 \end{subfigure}
-\caption{Histograms of predicted suitable materials as a function of the (a) PBE-calculated band gap from Materials Project, (b) maximum ionic character, (c) standard deviation of the radial distribution function (RDF) and (d) standard deviation of the average bond length. The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. The Ferrenti and extended Ferrenti approaches refer to the left y-axis and the empirical approach to the right.
+\caption{Histograms of predicted suitable materials as a function of the (a) PBE-calculated band gap from Materials Project, (b) maximum ionic character, (c) standard deviation of the radial distribution function (RDF) and (d) standard deviation of the average bond length. The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. The Ferrenti and extended Ferrenti approaches refer to the left $y$-axis and the empirical approach to the right.
     }
 \label{fig:histogram_new}
 \end{figure}
@@ -680,7 +687,7 @@ The trend of two data peaks is repeated for the maximum packing efficiency but i
 The ML methods in the empirical approach consistently identified the first principal component as the predominant one. Identifying the single most important feature in this principal component proved challenging as it is the combined impact of several features that is important. 
 Here, we find that the standard deviation of the radial distribution function (RDF) has a  particularly strong impact since it appears four times in different forms in the top ten list over dominating features. One configuration of the standard deviation of the RDF is demonstrated in Fig.~\ref{fig:histogram_new}(c), with two others being included in the Supplementary Material at \cite{supplementary}. Intriguingly, the standard deviation of the RDF exhibits substantial discrepancies between the Ferrenti approaches and the empirical approach. This reflects the observations from the principal component analysis where the first principal component is dominated by the RDF and similarly symmetry related features. For the empirical approach, there is a sharp peak in the preferred value for the standard deviation for the RDF, while the Ferrenti and extended Ferrenti approaches display an even distribution across a broader range. 
 
-We interpret the standard deviation  of the RDF such that zero std in the RDF means that there is no variation in the radial symmetry throughout the material. Similarly, zero standard deviation in the average bond length would mean that all bonds are identical throughout the crystal. Intriguingly, the peaks in the distributions of the predicted materials are not found for perfectly symmetric materials with identical bond lengths; instead, some variation in the bond and wavefunction distributions is found to be optimal for a material to be suitable for QT.  
+We interpret the standard deviation  of the RDF such that zero standard deviation in the RDF means that there is no variation in the radial symmetry throughout the material. Similarly, zero standard deviation in the average bond length would mean that all bonds are identical throughout the crystal. Intriguingly, the peaks in the distributions of the predicted materials are not found for perfectly symmetric materials with identical bond lengths; instead, some variation in the bond and wavefunction distributions is found to be optimal for a material to be suitable for QT.  
 Note that the maxima in Fig.~\ref{fig:histogram_new}(c) seem to appear for moderate standard deviations in the RDF, indicating that a certain degree of symmetry is likely necessary for a material to act as a suitable QT host. The exact degree and type of symmetry is still open to debate and merits further study. 
 Similar symmetry related features such as the standard deviation of the average bond length (see Fig.~\ref{fig:histogram_new}d), the site fingerprint of the chemical environment and the bond orientation (see the Supplementary Material) are also influential in guiding the ML algorithms upon classifying suitable and unsuitable materials for QT in the empirical approach. 
 
@@ -691,7 +698,7 @@ Considering the trends in machine learning selectivity in light of the specific 
 For the binary system of silicon carbide in different polytypes, on the other hand, intrinsic defects like the silicon vacancy and the divacancy are appropriate for our goals. 
 While these trends have yet to be verified on a grander scale, our findings provide strong indications that local variations in the crystal structure are paramount for QT compatible properties to manifest in a semiconductor host. 
 
-Our findings are corroborated by the fact that all four ML methods predict a small set of the unlabelled materials as suitable, while agreeing on a large part of these materials. 
+Our findings are corroborated by the fact that all four ML methods predict a small set of the unlabeled materials as suitable, while agreeing on a large part of these materials. 
 %Our findings are corroborated by the fact that all four ML methods exhibit similar results for all datasets. 
 The methods we have chosen are all well tested, with random forests and gradient boosting methods tending to outperform the others, resulting normally in a small bias and variance \cite{Hastie2009,Mehta2019,Murphy2012}. 
 
