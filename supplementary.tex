@@ -376,7 +376,8 @@ Overall the search for optimal hyperparameters in Fig.~\ref{fig:02-pca} for the 
 
 The optimal hyperparameters are summarized in Table~\ref{tab:02-pc}. We find that logistic regression with $175$ principal components performs more or less like a perfect classifier with overall high scores. The decision trees and random forests methods have similar balanced accuracy scores with $0.69$ and $0.70$, respectively, due to challenges associated with predicting true negative labels for $25$ principal components. Lastly, we find that gradient boosting performs optimally at $93$ principal components with a balanced accuracy score of $0.85$. 
 
-The relevant hyperparameters for logistic regression were the regularization strength and the maximum iterations, which were set to $0.46$ and $400$, respectively. Smaller regularization values resulted in worse scores, while increasing values did not noticeably affect the results. The decision trees and random forests methods both found an optimal maximum depth of seven, where smaller values resulted in low precision but high recall.  Therefore, the choice was made to facilitate a compromise between precision and recall. For gradient boosting, we find the optimal maximum depth as four due to a decline in overall metrics for increasing depth except for training accuracy. An increasing depth  could potentially result in overfitting.
+The relevant hyperparameters for logistic regression were the regularization strength and the maximum iterations, which were set to $0.46$ and $400$, respectively. Smaller regularization values resulted in worse scores, while increasing values did not noticeably affect the results. The decision trees and random forests methods both found an optimal maximum depth of seven, where smaller values resulted in low precision but high recall.  Therefore, the choice was made to facilitate a compromise between precision and recall. For gradient boosting, we find the optimal maximum depth to be four due to a decline in overall metrics for increasing depth.
+That is, except for the training accuracy, demonstrating a case of potential overfitting.
 
 
 The interpretation of feature importance for the extended Ferrenti approach is substantially more difficult than in the Ferrenti approach. We find for logistic regression and decision trees that no feature is different than any other in the cross-validation due to a large variety of accuracy. However, we find that random forests and gradient boosting experience the fifth principal component as important. 
@@ -419,7 +420,7 @@ This means that, if we consider, e.g., the compound SiC, the band gaps of both S
   \label{fig:03-pca}
 \end{figure}
 
-Lastly, we turn to the empirical approach to data labeling, which resulted in $404$ unsuitable and $202$ suitable candidates through the initial selection process. However, in contrast to the two labeled datasets discussed above, the majority of the entries was in this case labeled as unsuitable candidates. 
+Lastly, we turn to the data labeling using the empirical approach, which resulted in $404$ unsuitable and $202$ suitable candidates through the initial selection process. However, in contrast to the two labeled datasets discussed above, the majority of the entries was in this case labeled as unsuitable candidates. 
 
 The grid search for the optimal number of principal components is visualized in Fig.~\ref{fig:03-pca} for the empirical approach. Interestingly, we find that all ML methods  experience high scores for just a few principal components, where 
 %$1$
@@ -447,7 +448,7 @@ Logistic regression experiences improvement of all scores for an increasing numb
 }
 \end{table}
 
-The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all ML methods exhibit high evaluation metrics. Importantly, we find the difference in the number of principal components as most prominent, where logistic regression finds an optimum at $61$ with the F$1$-score of $0.98$. Decision trees uses only $9$ principal components to achieve an F$1$ score of $0.95$, while random forests needs $27$ principal components to gain an F$1$ score of $0.97$.
+The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all ML methods exhibit high evaluation metrics. Importantly, we find the difference in the number of principal components as most prominent, where logistic regression finds an optimum at $61$ with an F$1$-score of $0.98$. Decision trees uses only $9$ principal components to achieve an F$1$ score of $0.95$, while random forests needs $27$ principal components to gain an F$1$ score of $0.97$.
 
 \begin{figure}[ht!]
   \begin{subfigure}[b]{0.5\textwidth}
@@ -484,7 +485,7 @@ The optimal hyperparameters are summarized in Table~\ref{tab:03-pca}, where all 
   \label{fig:03-fi}
 \end{figure}
 
-Lastly, gradient boosting performs optimally at $13$ principal components with a mean F$1$-score of $0.96$. The relevant hyperparameters were the regularization term for logistic regression, which was set to $0.021$, and the maximum number of iterations at $400$. The decision trees uses a maximum depth of $6$, where larger values increased the training accuracy but not any other metric. The maximum depth for  random forests was set to $6$. For gradient boosting, which uses a weak learner, the depth of the trees was set to  $4$. 
+Lastly, gradient boosting performs optimally at $13$ principal components with a mean F$1$-score of $0.96$. The relevant hyperparameters were the regularization term for logistic regression, which was set to $0.021$, and the maximum number of iterations at $400$. The decision trees uses a maximum depth of $6$, where larger values only increased the training accuracy. The maximum depth for  random forests was set to $6$. For gradient boosting, which uses a weak learner, the depth of the trees was set to  $4$. 
 
 %OH: Commented out the three next paragraphs, since this is mentioned in main text.
 %The empirical approach differs in many aspects from the Ferrenti and extended Ferrenti approaches. Firstly, we find that the number of principal components necessary to obtain $95 \ \%$ variance is reduced to $103$ components, which is $41$ and $56$ less than the Ferrenti and extended Ferrenti approach, respectively. Thus, the variance of the training set is found to be described with fewer principal components, indicating a simpler model.   
@@ -502,7 +503,8 @@ Lastly, gradient boosting performs optimally at $13$ principal components with a
 
 \subsection*{Prediction statistics}
 
-Figure~\ref{fig:predictions} provides a visualization of the number of predicted material candidates from the (a) Ferrenti, (b) extended Ferrenti and (c) empirical approaches. Suitable and unsuitable candidates are marked in green and red, respectively. We observe that the number of predicted suitable candidates is similar for the Ferrenti and extended Ferrenti approaches, albeit higher in the case of the latter, for all four ML methods, while the empirical approach results in a substantially narrower selection of contender materials. Note that the confidence threshold was set to $0.5$ in this case. 
+Figure~\ref{fig:predictions} provides a visualization of the number of predicted material candidates from the (a) Ferrenti, (b) extended Ferrenti and (c) empirical approaches. Suitable and unsuitable candidates are marked in green and red, respectively. We observe that the number of predicted suitable candidates is similar for the Ferrenti and extended Ferrenti approaches, albeit higher in the case of the latter, for all four ML methods, while the empirical approach results in a substantially narrower selection of contender materials.
+Note that the confidence threshold was set to $0.5$ in this case. 
 
 For the Ferrenti approach, logistic regression finds a total of $12.380$ suitable candidates, while decision trees is the most conservative with $11.315$. Random forests has the most optimistic estimate with $14.278$, while gradient boosting finds $11.835$ suitable candidates. The four ML methods agree on $6804$ suitable candidates,  however, many of the materials are predicted with a confidence similar to that of a coin-flip.
 If we were to raise the minimum bar of a prediction to  
