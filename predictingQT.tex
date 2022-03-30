@@ -55,7 +55,8 @@
 \pgfplotsset{compat=1.17}
 \sisetup{separate-uncertainty}
 \usepackage{hyperref} 
-% \usepackage{longtable}
+
+%\usepackage{longtable}
 \usetikzlibrary{patterns,shapes.arrows, arrows.meta,bending, shapes,calc,fadings,decorations.pathreplacing,positioning,arrows.meta}
 \pgfplotsset{compat=newest}
 
@@ -173,7 +174,7 @@ Recent advances have highlighted the potential of quantum information processors
 %Figure 1 introduction schematic 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/ht-workflow-new-2.png}
+    \includegraphics[width=0.9\textwidth]{AllFigures/ht-workflow-new-2.png}
     \caption{Schematic of an example workflow in material informatics. Results from theory, experiment and computation are fed into material databases (arrow pointing to the center). A cycle involving material screening, machine learning and predictions leads to knowledge gain and ultimately applications in fields such as clean energy and quantum technology. 
     }
     \label{fig:ht-workflow}
@@ -225,7 +226,7 @@ We note that despite being immensely successful in describing a number of materi
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/flow_chart_2.png}
+    \includegraphics[width=0.9\textwidth]{AllFigures/flow_chart_2.png}
     \caption{The project workflow starting from an initial Materials Project (MP) query, and ending with a featurized dataset with entries from several other databases. 
     To limit the memory and computational usage, the data are partitioned into smaller subsets where the respective Pymatgen objects (Pymatgen is a robust, open-source Python library for materials analysis \cite{pymatgen}) are obtained through a query to be used in the following featurization steps. This process is repeated iteratively until all the data has been featurized. \emph{DOS} refers to density of states and \emph{band} to the electronic band structure. 
     }
@@ -372,15 +373,15 @@ The labeled data for each approach is visualized in Fig.~\ref{fig:parallel-coord
     \centering
     \begin{subfigure}{1\textwidth}
         \centering
-        \scalebox{0.85}{\input{figures/parallel-coordinates-plots/01-ferrenti-approach-v2.pgf}}
+        \scalebox{0.85}{\input{AllFigures/01-ferrenti-approach-v2.pgf}}
     \end{subfigure}
     \begin{subfigure}{1\textwidth}
         \centering
-          \scalebox{0.85}{\input{figures/parallel-coordinates-plots/02-extended-ferrenti-approach-v3.pgf}}
+          \scalebox{0.85}{\input{AllFigures/02-extended-ferrenti-approach-v3.pgf}}
     \end{subfigure}
     \begin{subfigure}{1\textwidth}
         \centering
-          \scalebox{0.85}{\input{figures/parallel-coordinates-plots/03-empirical-approach-v3.pgf}}
+          \scalebox{0.85}{\input{AllFigures/03-empirical-approach-v3.pgf}}
     \end{subfigure}
     \caption{Parallel coordinate plots for the different approaches. To limit data cluttering, we have randomly collected up to $250$ entries for each class. For the empirical approach, we have used all the $187$ suitable candidates. The axes show total magnetization (mag), space group (SG), ionic character (ionic char), covalent range (cov range) as calculated from elemental properties, number of elements (num elements) and energy gap (Eg) as extracted from the MP database.} 
     \label{fig:parallel-coordinates-approaches}
@@ -390,15 +391,15 @@ The labeled data for each approach is visualized in Fig.~\ref{fig:parallel-coord
     \centering
     \begin{subfigure}{0.35\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/01-ferrenti-approach.pdf}
+        \includegraphics[width=1\textwidth]{AllFigures/01-ferrenti-approach.pdf}
     \end{subfigure}%
     \begin{subfigure}{0.35\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/02-augmented-ferrenti-approach.pdf}
+        \includegraphics[width=1\textwidth]{AllFigures/02-augmented-ferrenti-approach.pdf}
     \end{subfigure}
     \begin{subfigure}{0.4\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/03-insightful-approach.pdf}
+        \includegraphics[width=1\textwidth]{AllFigures/03-insightful-approach.pdf}
     \end{subfigure}
     \caption{Two-dimensional scatter plots for the three different approaches. We have identified the eigenvectors corresponding to the two largest eigenvalues of the covariance-matrix, that is, the two most important principal components of the initial data from the Materials Project query. Then, we have transformed the sets of labeled data resulting from the three approaches and visualized them as scatter plots. Green squares display suitable candidates, along with the black (SiC), blue (diamond) and yellow (Si) symbols in the bottom panel, and red triangles represent unsuitable candidates.}
     \label{fig:2dscatterplotpca}
@@ -441,21 +442,21 @@ also experiences the best performance for just a few principal components.
 \begin{figure}[t]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/01-ferrenti-approach-PC-v2.tex}
+        \input{AllFigures/01-ferrenti-approach-PC-v2.tex}
         \label{fig:01-fi-e}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/01-ferrenti-approach-GB-v2.tex}
+        \input{AllFigures/01-ferrenti-approach-GB-v2.tex}
         \label{fig:01-fi-d}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/03-empirical-approach-PC-v2.tex}
+        \input{AllFigures/03-empirical-approach-PC-v2.tex}
         \label{fig:03-fi-e}
         \subcaption{}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/03-empirical-approach-GB-v2.tex}
+        \input{AllFigures/03-empirical-approach-GB-v2.tex}
         \label{fig:03-fi-d}
         \subcaption{}
     \end{subfigure}
@@ -534,7 +535,7 @@ There appears to be a high degree of symmetry present for all materials, but we 
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/vesta-images/fig6-all.png}
+    \includegraphics[width=0.85\textwidth]{AllFigures/fig6-all.png}
     \caption{Illustrations of the crystal systems that the $9$ materials predicted by the empirical approach to $0.85$ confidence, and the $6$ materials predicted by all approaches to $0.75$ confidence, may belong to. Four different symmetry categories are observed; cubic, hexagonal, tetragonal and orthorombic. The viewpoints for all materials are down along the $c$-axis.   }
     \label{fig:crystalsystems}
 \end{figure}
@@ -622,24 +623,533 @@ We highlight these six compounds, along with the nine predicted by the empirical
 \begin{figure}[ht]
     \begin{subfigure}[b]{1\textwidth}
     \centering
-    \input{figures/histograms/new/LegendHistPaper.tex}
+    \input{AllFigures/LegendHistPaper.tex}
   \end{subfigure}
   \par\bigskip
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/MP_Eg_count_075.tex}
+    \input{AllFigures/MP_Eg_count_075.tex}
     \subcaption{}
 \end{subfigure}
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/IonProperty_max ionic char_count_075.tex}
+% This file was created with tikzplotlib v0.9.16.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.866666666666667,0.8,0.466666666666667}
+\definecolor{color1}{rgb}{0.533333333333333,0.8,0.933333333333333}
+\definecolor{color2}{rgb}{0.83921568627451,0.152941176470588,0.156862745098039}
+\definecolor{color3}{rgb}{0.8,0.4,0.466666666666667}
+
+\begin{axis}[
+height=2.275590092707901in,
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!80!black},
+tick align=outside,
+tick pos=left,
+title={},
+width=2.8444876158848764in,
+x grid style={white!69.0196078431373!black},
+xlabel={Max ionic character},
+xmin=-0.0460725199741125, xmax=0.967522919456363,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ylabel={},
+ymin=0, ymax=1099.35,
+ytick style={color=black}
+]
+\path [draw=color0, very thick]
+(axis cs:0,0)
+--(axis cs:0,84)
+--(axis cs:0.0484973894464342,84)
+--(axis cs:0.0484973894464342,70)
+--(axis cs:0.0969947788928685,70)
+--(axis cs:0.0969947788928685,72)
+--(axis cs:0.145492168339303,72)
+--(axis cs:0.145492168339303,74)
+--(axis cs:0.193989557785737,74)
+--(axis cs:0.193989557785737,134)
+--(axis cs:0.242486947232171,134)
+--(axis cs:0.242486947232171,93)
+--(axis cs:0.290984336678605,93)
+--(axis cs:0.290984336678605,237)
+--(axis cs:0.33948172612504,237)
+--(axis cs:0.33948172612504,195)
+--(axis cs:0.387979115571474,195)
+--(axis cs:0.387979115571474,183)
+--(axis cs:0.436476505017908,183)
+--(axis cs:0.436476505017908,240)
+--(axis cs:0.484973894464342,240)
+--(axis cs:0.484973894464342,164)
+--(axis cs:0.533471283910777,164)
+--(axis cs:0.533471283910777,464)
+--(axis cs:0.581968673357211,464)
+--(axis cs:0.581968673357211,190)
+--(axis cs:0.630466062803645,190)
+--(axis cs:0.630466062803645,176)
+--(axis cs:0.678963452250079,176)
+--(axis cs:0.678963452250079,314)
+--(axis cs:0.727460841696513,314)
+--(axis cs:0.727460841696513,387)
+--(axis cs:0.775958231142948,387)
+--(axis cs:0.775958231142948,1047)
+--(axis cs:0.824455620589382,1047)
+--(axis cs:0.824455620589382,144)
+--(axis cs:0.872953010035816,144)
+--(axis cs:0.872953010035816,257)
+--(axis cs:0.92145039948225,257)
+--(axis cs:0.92145039948225,0);
+
+\path [draw=color1, very thick]
+(axis cs:0,0)
+--(axis cs:0,21)
+--(axis cs:0.0484973894464342,21)
+--(axis cs:0.0484973894464342,30)
+--(axis cs:0.0969947788928685,30)
+--(axis cs:0.0969947788928685,26)
+--(axis cs:0.145492168339303,26)
+--(axis cs:0.145492168339303,26)
+--(axis cs:0.193989557785737,26)
+--(axis cs:0.193989557785737,59)
+--(axis cs:0.242486947232171,59)
+--(axis cs:0.242486947232171,31)
+--(axis cs:0.290984336678605,31)
+--(axis cs:0.290984336678605,88)
+--(axis cs:0.33948172612504,88)
+--(axis cs:0.33948172612504,77)
+--(axis cs:0.387979115571474,77)
+--(axis cs:0.387979115571474,87)
+--(axis cs:0.436476505017908,87)
+--(axis cs:0.436476505017908,85)
+--(axis cs:0.484973894464342,85)
+--(axis cs:0.484973894464342,67)
+--(axis cs:0.533471283910777,67)
+--(axis cs:0.533471283910777,166)
+--(axis cs:0.581968673357211,166)
+--(axis cs:0.581968673357211,67)
+--(axis cs:0.630466062803645,67)
+--(axis cs:0.630466062803645,77)
+--(axis cs:0.678963452250079,77)
+--(axis cs:0.678963452250079,105)
+--(axis cs:0.727460841696513,105)
+--(axis cs:0.727460841696513,137)
+--(axis cs:0.775958231142948,137)
+--(axis cs:0.775958231142948,406)
+--(axis cs:0.824455620589382,406)
+--(axis cs:0.824455620589382,57)
+--(axis cs:0.872953010035816,57)
+--(axis cs:0.872953010035816,117)
+--(axis cs:0.92145039948225,117)
+--(axis cs:0.92145039948225,0);
+
+\end{axis}
+
+\begin{axis}[
+axis y line=right,
+height=2.275590092707901in,
+tick align=outside,
+width=2.8444876158848764in,
+x grid style={white!69.0196078431373!black},
+xmin=-0.0460725199741125, xmax=0.967522919456363,
+xtick pos=left,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ymin=0, ymax=17.85,
+ytick pos=right,
+ytick style={color=color2},
+yticklabel style={anchor=west, color=color2}
+]
+\path [draw=color3, very thick]
+(axis cs:0,0)
+--(axis cs:0,1)
+--(axis cs:0.0484973894464342,1)
+--(axis cs:0.0484973894464342,2)
+--(axis cs:0.0969947788928685,2)
+--(axis cs:0.0969947788928685,0)
+--(axis cs:0.145492168339303,0)
+--(axis cs:0.145492168339303,0)
+--(axis cs:0.193989557785737,0)
+--(axis cs:0.193989557785737,2)
+--(axis cs:0.242486947232171,2)
+--(axis cs:0.242486947232171,1)
+--(axis cs:0.290984336678605,1)
+--(axis cs:0.290984336678605,4)
+--(axis cs:0.33948172612504,4)
+--(axis cs:0.33948172612504,6)
+--(axis cs:0.387979115571474,6)
+--(axis cs:0.387979115571474,3)
+--(axis cs:0.436476505017908,3)
+--(axis cs:0.436476505017908,1)
+--(axis cs:0.484973894464342,1)
+--(axis cs:0.484973894464342,0)
+--(axis cs:0.533471283910777,0)
+--(axis cs:0.533471283910777,4)
+--(axis cs:0.581968673357211,4)
+--(axis cs:0.581968673357211,3)
+--(axis cs:0.630466062803645,3)
+--(axis cs:0.630466062803645,5)
+--(axis cs:0.678963452250079,5)
+--(axis cs:0.678963452250079,4)
+--(axis cs:0.727460841696513,4)
+--(axis cs:0.727460841696513,4)
+--(axis cs:0.775958231142948,4)
+--(axis cs:0.775958231142948,17)
+--(axis cs:0.824455620589382,17)
+--(axis cs:0.824455620589382,2)
+--(axis cs:0.872953010035816,2)
+--(axis cs:0.872953010035816,10)
+--(axis cs:0.92145039948225,10)
+--(axis cs:0.92145039948225,0);
+\end{axis}
+
+\end{tikzpicture}
+
     \subcaption{}
 \end{subfigure}%
 
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/GeneralizedRDF_std_dev Gaussian center=1.0 width=1.0_count_075.tex}
+% This file was created with tikzplotlib v0.9.16.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.866666666666667,0.8,0.466666666666667}
+\definecolor{color1}{rgb}{0.533333333333333,0.8,0.933333333333333}
+\definecolor{color2}{rgb}{0.83921568627451,0.152941176470588,0.156862745098039}
+\definecolor{color3}{rgb}{0.8,0.4,0.466666666666667}
+
+\begin{axis}[
+height=2.275590092707901in,
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!80!black},
+tick align=outside,
+tick pos=left,
+title={},
+width=2.8444876158848764in,
+x grid style={white!69.0196078431373!black},
+xlabel={Std. dev. RDF},
+xmin=-0.00174896633573773, xmax=0.0367282930504924,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ylabel={Number of materials},
+ymin=0, ymax=413.2,
+ytick style={color=black}
+]
+\path [draw=color0, very thick]
+(axis cs:0,0)
+--(axis cs:0,331)
+--(axis cs:0.0018410171955134,331)
+--(axis cs:0.0018410171955134,291)
+--(axis cs:0.00368203439102681,291)
+--(axis cs:0.00368203439102681,279)
+--(axis cs:0.00552305158654021,279)
+--(axis cs:0.00552305158654021,259)
+--(axis cs:0.00736406878205362,259)
+--(axis cs:0.00736406878205362,231)
+--(axis cs:0.00920508597756702,231)
+--(axis cs:0.00920508597756702,234)
+--(axis cs:0.0110461031730804,234)
+--(axis cs:0.0110461031730804,348)
+--(axis cs:0.0128871203685938,348)
+--(axis cs:0.0128871203685938,355)
+--(axis cs:0.0147281375641072,355)
+--(axis cs:0.0147281375641072,356)
+--(axis cs:0.0165691547596206,356)
+--(axis cs:0.0165691547596206,384)
+--(axis cs:0.018410171955134,384)
+--(axis cs:0.018410171955134,374)
+--(axis cs:0.0202511891506474,374)
+--(axis cs:0.0202511891506474,310)
+--(axis cs:0.0220922063461609,310)
+--(axis cs:0.0220922063461609,255)
+--(axis cs:0.0239332235416743,255)
+--(axis cs:0.0239332235416743,178)
+--(axis cs:0.0257742407371877,178)
+--(axis cs:0.0257742407371877,105)
+--(axis cs:0.0276152579327011,105)
+--(axis cs:0.0276152579327011,68)
+--(axis cs:0.0294562751282145,68)
+--(axis cs:0.0294562751282145,45)
+--(axis cs:0.0312972923237279,45)
+--(axis cs:0.0312972923237279,28)
+--(axis cs:0.0331383095192413,28)
+--(axis cs:0.0331383095192413,23)
+--(axis cs:0.0349793267147547,23)
+--(axis cs:0.0349793267147547,0);
+
+\path [draw=color1, very thick]
+(axis cs:0,0)
+--(axis cs:0,135)
+--(axis cs:0.0018410171955134,135)
+--(axis cs:0.0018410171955134,112)
+--(axis cs:0.00368203439102681,112)
+--(axis cs:0.00368203439102681,101)
+--(axis cs:0.00552305158654021,101)
+--(axis cs:0.00552305158654021,105)
+--(axis cs:0.00736406878205362,105)
+--(axis cs:0.00736406878205362,94)
+--(axis cs:0.00920508597756702,94)
+--(axis cs:0.00920508597756702,117)
+--(axis cs:0.0110461031730804,117)
+--(axis cs:0.0110461031730804,121)
+--(axis cs:0.0128871203685938,121)
+--(axis cs:0.0128871203685938,152)
+--(axis cs:0.0147281375641072,152)
+--(axis cs:0.0147281375641072,147)
+--(axis cs:0.0165691547596206,147)
+--(axis cs:0.0165691547596206,151)
+--(axis cs:0.018410171955134,151)
+--(axis cs:0.018410171955134,131)
+--(axis cs:0.0202511891506474,131)
+--(axis cs:0.0202511891506474,120)
+--(axis cs:0.0220922063461609,120)
+--(axis cs:0.0220922063461609,85)
+--(axis cs:0.0239332235416743,85)
+--(axis cs:0.0239332235416743,61)
+--(axis cs:0.0257742407371877,61)
+--(axis cs:0.0257742407371877,31)
+--(axis cs:0.0276152579327011,31)
+--(axis cs:0.0276152579327011,22)
+--(axis cs:0.0294562751282145,22)
+--(axis cs:0.0294562751282145,15)
+--(axis cs:0.0312972923237279,15)
+--(axis cs:0.0312972923237279,6)
+--(axis cs:0.0331383095192413,6)
+--(axis cs:0.0331383095192413,8)
+--(axis cs:0.0349793267147547,8)
+--(axis cs:0.0349793267147547,0);
+\end{axis}
+
+\begin{axis}[
+axis y line=right,
+height=2.275590092707901in,
+tick align=outside,
+width=2.8444876158848764in,
+x grid style={white!69.0196078431373!black},
+xmin=-0.00174896633573773, xmax=0.0367282930504924,
+xtick pos=left,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ymin=0, ymax=13.65,
+ytick pos=right,
+ytick style={color=color2},
+yticklabel style={anchor=west, color=color2}
+]
+\path [draw=color3, very thick]
+(axis cs:0,0)
+--(axis cs:0,6)
+--(axis cs:0.0018410171955134,6)
+--(axis cs:0.0018410171955134,3)
+--(axis cs:0.00368203439102681,3)
+--(axis cs:0.00368203439102681,5)
+--(axis cs:0.00552305158654021,5)
+--(axis cs:0.00552305158654021,3)
+--(axis cs:0.00736406878205362,3)
+--(axis cs:0.00736406878205362,2)
+--(axis cs:0.00920508597756702,2)
+--(axis cs:0.00920508597756702,2)
+--(axis cs:0.0110461031730804,2)
+--(axis cs:0.0110461031730804,6)
+--(axis cs:0.0128871203685938,6)
+--(axis cs:0.0128871203685938,4)
+--(axis cs:0.0147281375641072,4)
+--(axis cs:0.0147281375641072,5)
+--(axis cs:0.0165691547596206,5)
+--(axis cs:0.0165691547596206,13)
+--(axis cs:0.018410171955134,13)
+--(axis cs:0.018410171955134,4)
+--(axis cs:0.0202511891506474,4)
+--(axis cs:0.0202511891506474,6)
+--(axis cs:0.0220922063461609,6)
+--(axis cs:0.0220922063461609,5)
+--(axis cs:0.0239332235416743,5)
+--(axis cs:0.0239332235416743,1)
+--(axis cs:0.0257742407371877,1)
+--(axis cs:0.0257742407371877,1)
+--(axis cs:0.0276152579327011,1)
+--(axis cs:0.0276152579327011,2)
+--(axis cs:0.0294562751282145,2)
+--(axis cs:0.0294562751282145,0)
+--(axis cs:0.0312972923237279,0)
+--(axis cs:0.0312972923237279,0)
+--(axis cs:0.0331383095192413,0)
+--(axis cs:0.0331383095192413,1)
+--(axis cs:0.0349793267147547,1)
+--(axis cs:0.0349793267147547,0);
+\end{axis}
+
+\end{tikzpicture}
+
     \subcaption{}
 \end{subfigure}
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/new/AverageBondLength_std_dev Average bond length_count_075.tex}
+% This file was created with tikzplotlib v0.9.16.
+\begin{tikzpicture}
+
+\definecolor{color0}{rgb}{0.866666666666667,0.8,0.466666666666667}
+\definecolor{color1}{rgb}{0.533333333333333,0.8,0.933333333333333}
+\definecolor{color2}{rgb}{0.83921568627451,0.152941176470588,0.156862745098039}
+\definecolor{color3}{rgb}{0.8,0.4,0.466666666666667}
+
+\begin{axis}[
+height=2.275590092707901in,
+legend cell align={left},
+legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=white!80!black},
+tick align=outside,
+tick pos=left,
+title={},
+width=2.8444876158848764in,
+x grid style={white!69.0196078431373!black},
+xlabel={Std. dev. average bond length},
+xmin=-0.0263144046185111, xmax=0.838491250528538,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ylabel={},
+ymin=0, ymax=732.9,
+ytick style={color=black}
+]
+\path [draw=color0, very thick]
+(axis cs:0.0129949433427184,0)
+--(axis cs:0.0129949433427184,28)
+--(axis cs:0.0543732043545389,28)
+--(axis cs:0.0543732043545389,65)
+--(axis cs:0.0957514653663595,65)
+--(axis cs:0.0957514653663595,156)
+--(axis cs:0.13712972637818,156)
+--(axis cs:0.13712972637818,279)
+--(axis cs:0.178507987390001,279)
+--(axis cs:0.178507987390001,403)
+--(axis cs:0.219886248401821,403)
+--(axis cs:0.219886248401821,468)
+--(axis cs:0.261264509413642,468)
+--(axis cs:0.261264509413642,590)
+--(axis cs:0.302642770425462,590)
+--(axis cs:0.302642770425462,698)
+--(axis cs:0.344021031437283,698)
+--(axis cs:0.344021031437283,563)
+--(axis cs:0.385399292449103,563)
+--(axis cs:0.385399292449103,445)
+--(axis cs:0.426777553460924,445)
+--(axis cs:0.426777553460924,340)
+--(axis cs:0.468155814472744,340)
+--(axis cs:0.468155814472744,193)
+--(axis cs:0.509534075484565,193)
+--(axis cs:0.509534075484565,118)
+--(axis cs:0.550912336496385,118)
+--(axis cs:0.550912336496385,52)
+--(axis cs:0.592290597508206,52)
+--(axis cs:0.592290597508206,31)
+--(axis cs:0.633668858520026,31)
+--(axis cs:0.633668858520026,18)
+--(axis cs:0.675047119531847,18)
+--(axis cs:0.675047119531847,11)
+--(axis cs:0.716425380543667,11)
+--(axis cs:0.716425380543667,6)
+--(axis cs:0.757803641555488,6)
+--(axis cs:0.757803641555488,2)
+--(axis cs:0.799181902567308,2)
+--(axis cs:0.799181902567308,0);
+
+\path [draw=color1, very thick]
+(axis cs:0.0129949433427184,0)
+--(axis cs:0.0129949433427184,13)
+--(axis cs:0.0543732043545389,13)
+--(axis cs:0.0543732043545389,36)
+--(axis cs:0.0957514653663595,36)
+--(axis cs:0.0957514653663595,68)
+--(axis cs:0.13712972637818,68)
+--(axis cs:0.13712972637818,111)
+--(axis cs:0.178507987390001,111)
+--(axis cs:0.178507987390001,166)
+--(axis cs:0.219886248401821,166)
+--(axis cs:0.219886248401821,190)
+--(axis cs:0.261264509413642,190)
+--(axis cs:0.261264509413642,243)
+--(axis cs:0.302642770425462,243)
+--(axis cs:0.302642770425462,257)
+--(axis cs:0.344021031437283,257)
+--(axis cs:0.344021031437283,205)
+--(axis cs:0.385399292449103,205)
+--(axis cs:0.385399292449103,143)
+--(axis cs:0.426777553460924,143)
+--(axis cs:0.426777553460924,119)
+--(axis cs:0.468155814472744,119)
+--(axis cs:0.468155814472744,70)
+--(axis cs:0.509534075484565,70)
+--(axis cs:0.509534075484565,29)
+--(axis cs:0.550912336496385,29)
+--(axis cs:0.550912336496385,16)
+--(axis cs:0.592290597508206,16)
+--(axis cs:0.592290597508206,20)
+--(axis cs:0.633668858520026,20)
+--(axis cs:0.633668858520026,7)
+--(axis cs:0.675047119531847,7)
+--(axis cs:0.675047119531847,4)
+--(axis cs:0.716425380543667,4)
+--(axis cs:0.716425380543667,3)
+--(axis cs:0.757803641555488,3)
+--(axis cs:0.757803641555488,0)
+--(axis cs:0.799181902567308,0)
+--(axis cs:0.799181902567308,0);
+
+\end{axis}
+
+\begin{axis}[
+axis y line=right,
+height=2.275590092707901in,
+tick align=outside,
+width=2.8444876158848764in,
+x grid style={white!69.0196078431373!black},
+xmin=-0.0263144046185111, xmax=0.838491250528538,
+xtick pos=left,
+xtick style={color=black},
+y grid style={white!69.0196078431373!black},
+ymin=0, ymax=12.6,
+ytick pos=right,
+ytick style={color=color2},
+yticklabel style={anchor=west, color=color2}
+]
+\path [draw=color3, very thick]
+(axis cs:0.0129949433427184,0)
+--(axis cs:0.0129949433427184,2)
+--(axis cs:0.0543732043545389,2)
+--(axis cs:0.0543732043545389,3)
+--(axis cs:0.0957514653663595,3)
+--(axis cs:0.0957514653663595,1)
+--(axis cs:0.13712972637818,1)
+--(axis cs:0.13712972637818,5)
+--(axis cs:0.178507987390001,5)
+--(axis cs:0.178507987390001,6)
+--(axis cs:0.219886248401821,6)
+--(axis cs:0.219886248401821,10)
+--(axis cs:0.261264509413642,10)
+--(axis cs:0.261264509413642,7)
+--(axis cs:0.302642770425462,7)
+--(axis cs:0.302642770425462,12)
+--(axis cs:0.344021031437283,12)
+--(axis cs:0.344021031437283,7)
+--(axis cs:0.385399292449103,7)
+--(axis cs:0.385399292449103,7)
+--(axis cs:0.426777553460924,7)
+--(axis cs:0.426777553460924,4)
+--(axis cs:0.468155814472744,4)
+--(axis cs:0.468155814472744,4)
+--(axis cs:0.509534075484565,4)
+--(axis cs:0.509534075484565,0)
+--(axis cs:0.550912336496385,0)
+--(axis cs:0.550912336496385,1)
+--(axis cs:0.592290597508206,1)
+--(axis cs:0.592290597508206,0)
+--(axis cs:0.633668858520026,0)
+--(axis cs:0.633668858520026,0)
+--(axis cs:0.675047119531847,0)
+--(axis cs:0.675047119531847,0)
+--(axis cs:0.716425380543667,0)
+--(axis cs:0.716425380543667,0)
+--(axis cs:0.757803641555488,0)
+--(axis cs:0.757803641555488,0)
+--(axis cs:0.799181902567308,0)
+--(axis cs:0.799181902567308,0);
+\end{axis}
+
+\end{tikzpicture}
+
     \subcaption{}
 \end{subfigure}
 \caption{Histograms of predicted suitable materials as a function of the (a) PBE-calculated band gap from Materials Project, (b) maximum ionic character, (c) standard deviation of the radial distribution function (RDF) and (d) standard deviation of the average bond length. The total number of predicted materials is  $6804$ for the Ferrenti approach, $9227$ for the extended Ferrenti approach, and $214$ for the empirical approach. The Ferrenti and extended Ferrenti approaches refer to the left $y$-axis and the empirical approach to the right.
@@ -752,7 +1262,6 @@ MEB, LV and MHJ conceived the main theme of the project. OH developed the progra
 The authors declare no competing interests.
 
 \section*{Additional information}
-Correspondence and requests for materials should be addressed to \url{bathen@aps.ee.ethz.ch}. 
+Correspondence and requests for materials should be addressed to \url{bathen@aps.ee.ethz.ch}. Supplementary material is available at \url{https://github.com/mhjensen/PredictingSolidStateQubitCandidates}.
 
 \end{document}
-
