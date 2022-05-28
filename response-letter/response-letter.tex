@@ -1,0 +1,209 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Formal Letter
+% LaTeX Template
+% Version 2.0 (12/2/17)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Brian Moses
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt, a4paper]{letter} % Set the font size (10pt, 11pt and 12pt) and paper size (letterpaper, a4paper, etc)
+
+\input{structure.tex} % Include the file that specifies the document structure
+
+%\longindentation=0pt % Un-commenting this line will push the closing "Sincerely," and date to the left of the page
+
+%----------------------------------------------------------------------------------------
+%	YOUR INFORMATION
+%----------------------------------------------------------------------------------------
+
+\Who{Prof. Morten Hjorth-Jensen} % Your name
+
+\Title{, PhD} % Your title, leave blank for no title
+
+\authordetails{
+	Department of Physics\\ % Your department/institution
+	P.O. Box 1048, Blindern\\ % Your address
+	N-0316 Oslo, Norway\\ % Your city, zip code, country, etc
+	Email: morten.hjorth-jensen@fys.uio.no\\ % Your email address
+	Phone: (000) 111-1111\\ % Your phone number
+	URL: LaTeXTemplates.com % Your URL
+}
+
+%----------------------------------------------------------------------------------------
+%	HEADER CONTENTS
+%----------------------------------------------------------------------------------------
+
+\logo{UiO_logo.png} % Logo filename, your logo should have square dimensions (i.e. roughly the same width and height), if it does not, you will need to adjust spacing within the HEADER STRUCTURE block in structure.tex (read the comments carefully!)
+
+\headerlineone{UNIVERSITY} % Top header line, leave blank if you only want the bottom line
+
+\headerlinetwo{OF OSLO} % Bottom header line
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TO ADDRESS
+%----------------------------------------------------------------------------------------
+
+\begin{letter}{
+	Dr. Long-Qing Chen\\
+	Editor-in-Chief\\
+	\textit{npj Computational Materials} \\ 
+	npjcompumats@nature.com \\ 
+}
+
+%----------------------------------------------------------------------------------------
+%	LETTER CONTENT
+%----------------------------------------------------------------------------------------
+
+\opening{}
+
+\begin{center}
+   \textbf{Resubmission of the manuscript entitled “Predicting Solid State Material Platforms for Quantum Technologies” by O.L. Hebnes, et al.}
+\end{center}
+
+\noindent
+Dear Editor, 
+
+Please find enclosed a revised version of the manuscript entitled “Predicting Solid State Material Platforms for Quantum Technologies” by Oliver L. Hebnes, et al., submitted for publication as an original article in npj Computational Materials. There are two files in all: a Manuscript file and a Supplementary Information file. 
+
+Please find detailed responses to reviewer comments below.
+
+
+\closing{Sincerely,}
+
+%----------------------------------------------------------------------------------------
+%	OPTIONAL FOOTNOTE
+%----------------------------------------------------------------------------------------
+
+% Uncomment the 4 lines below to print a footnote with custom text
+%\def\thefootnote{}
+%\def\footnoterule{\hrule}
+%\footnotetext{\hspace*{\fill}{\footnotesize\em Footnote text}}
+%\def\thefootnote{\arabic{footnote}}
+
+%----------------------------------------------------------------------------------------
+
+
+\end{letter}
+
+
+
+\newpage 
+
+
+\noindent
+\textbf{Associate Editor:}
+
+The main revision I would like to see addressed is the first point of the second reviewer: What is the utility of the machine learning model if it returns the original classification? The other points they bring up around methodological clarity are important, but providing further justification around the need for the use of machine learning would help reinforce the principle of your study. 
+
+
+\textit{Response: }
+\begin{itemize}
+    \item	Compare empirical to known input. Ferrenti reproduces expectations of literature. Main point is compare that to empirical which gives different result. 
+    \item Actually, don’t get exactly what we expect from Ferrenti. Den vektlegger det vi forventer, men returnerer ikke eksakt kriteriene. E.g. band gap, ionic character. 
+    \item Wnated to see if ML sees something else than the criteria we introduced. How does this compare to empirical? 
+    \item It is a nice start to begin with some general criteria. However, as pointed out, the usefulness is limited. The point is that we actually demonstrate that the Ferrenti approaches are not the best way. 
+    \item In some cases it might be useful to impose causality, to see to what extent that works. When we see that it does not work, we let the ML models figure out the connections between materials and QT. We had several hypotheses for why these materials are QT compatible, and therefore forced the causality to verify the assumption. When it did not work, we instead started from no assumptions, and let the ML methods reason out the causality. This proved much more efficient. 
+    \item Empirical is main result, Ferrenti is kind of test/validation/benchmark. Highlight more. 
+    \item Database of Ferrenti is commonly used, this is benchmark set of materials and information. Compare our method to benchmark. 
+    \item We agree; Ferrenti not really useful 
+    \item Ferrenti paper is data mining, not ML. We put it in to compare data 
+\end{itemize}
+
+\noindent
+\textbf{Reviewer \#1: }
+
+In this work, the authors obtained machine learning models (logistic regression, decision trees, random forest, gradient boosting) to predict materials that may be suitable candidates as solid-state semiconductor hosts for quantum emitters and spin centers. The authors used three approaches, one from the literature, one modified from the literature, and one empirical, to label the data. The authors have done thorough analysis on the predicted materials from each method. The article is well-written. The methods used have been described well and the errors from machine learning models have been characterized well. The authors have also made their data and code available through Zenodo. What is lacking is means to prove that at least some of the predicted materials are indeed good candidates. This is understandable as an extensive study would be needed to achieve this. I recommend publication.  
+
+\textit{Response: }  
+
+\textit{We thank the reviewer for the careful reading of our manuscript and the positive evaluation. We agree that the proof of our findings is a crucial next step for this line of work. However, as pointed out, this requires time-consuming experimental work including material growth, defect creation and advanced characterization, and is outside of the scope of the present work. A follow up project has been started to grow crystalline thin films and investigate the potential presence of quantum compatible defect candidates in selected materials from the list of predictions. }
+
+\noindent
+\textbf{Reviewer \#2: }
+
+Reviewer \#2: \\
+This work uses a combination of data-mining and machine-learning to search for materials that are suitable for applications in “quantum technologies”, such as quantum computing, cryptography, and sensors. Three different search strategies, named Ferrenti, extended Ferrenti (both based on finding materials with specific properties such as non-magnetic, a minimum band gap, etc.) and empirical (based on searching for materials already used in quantum technologies), were used to search for potential materials in a set of online computational materials databases. The extracted data were then used to train machine-learning models to identify potential materials for quantum technologies applications. However, there are several details in the methodology that are unclear, and as well as other issues regarding the meaningfulness of the results that need to be addressed before the article can be considered for publication.
+
+\textit{Response:}  
+
+\textit{We thank the reviewer for the careful reading of our manuscript and the detailed feedback. The reviewer raises several critical points that could have been explained more clearly in the original version of the manuscript. We have attempted to address all concerns raised by the reviewer, and believe that the revised version of the manuscript contains answers that satisfy the reviewer’s concerns. } 
+
+Reviewer \#2: \\
+In particular, in the Ferrenti and extended Ferrenti searches, the authors define a set of properties of the materials and their component elements that are used to classify materials as either suitable or unsuitable for quantum technologies. They then train machine-learning models based on this classification to classify the same set of materials as suitable or unsuitable. It is unclear to me why this is useful: the machine-learning model will ultimately simply relearn the original classification criteria – the reason that this does not happen explicitly in this case is due to the use of principle component analysis to perform the feature reduction, which combines the training features and thus obscures the relationship between the final model results and the initial classification criteria. It is unclear if there are properties included in the search that are not included in the model training data, where the model could potentially be useful in identifying materials
+where certain desired properties are currently unknown. Therefore, the meaningfulness and usefulness of training machine-learning models on a data set constructed in this way is not clear.
+
+\textit{Response:} 
+
+\textit{Here ... }
+
+
+Reviewer \#2: \\
+In the machine-learning models trained on the extended Ferrenti approach, the authors note that the models predict unsuitable materials to be suitable, e.g. NaCl. How were these materials categorized by the original extended Ferrenti criteria? It is not necessarily clear that the Ferrenti/extended Ferrenti criteria listed on pages 5 and 6 of this work would reliably categorize ionic materials with cubic symmetry as unsuitable, so it is unsurprising that machine-learning models trained on such data would have these problems.
+
+\textit{Response:} 
+% OH: Jeg synes han svarer egentlig på sitt eget spørsmål her. For at et materiale skal bli "predikert" som en god kandidat av maskinlærings-algoritmene, så kan ikke materialet være en del av treningssettet som ML algoritmene blir trent på, ergo så er ikke materiale kategorisert som hverken bra eller dårlig av the original extended ferrenti criteria. Det betyr at materialet er utelukket av the extended ferrenti criteria, altså at den oppfyller ikke kravene for hverken en god eller dårlig kandidat basert på data miningen.
+\textit{The material NaCl involves two elements where more than half does not have a natural abundance of spin zero isotopes, and is therefore excluded from being labeled as suitable. In addition, NaCl is excluded from being labeled as unsuitable from the criteria due to its nonmagnetic label in Materials Project. We agree that it is not neccessarily clear that either Ferrenti or extended Ferrenti critera would categorize ionic materials with cubic symmetry as unsuitable, but it is clear from these criteria why NaCl is excluded from the labeling process that constitutes the criteria in the data mining. Therefore, NaCl is found unlabeled in the test data, and is predicted as an unsuitable candidate by the ML algorithms.}
+
+\textit{Argument for Ferrenti}  
+
+Reviewer \#2: \\
+In the Ferrenti and extended Ferrenti searches, the authors also state that they only include materials that have been calculated to be “non-magnetic”. However, it is unclear how this criterion would be implemented in practice: while ferromagnetic materials are usually easy enough to identify, other types of magnetic order such as antiferromagnetism can be more difficult. Many of the automated calculations inside these databases are based on the primitive cell, which might not be large enough to be able to properly represent the antiferromagnetic configuration. Therefore, the authors should clearly define their criteria for determining if a material is non-magnetic, e.g. including checks to see if larger cells have been explored.
+
+\textit{Response:}
+
+\textit{The data regarding a material's magnetic character is extracted from Materials Projects database. Indeed, the majority of these calculations are based on the primitive cell, however, Materials Project perform an initial relaxation of cell and lattice parameters using a $1000$ / (number of atoms in the cell) k-point mesh to ensure that all properties calculated are representative of the idealized unit cell for each respective structure. As a result, we can find Fe (https://materialsproject.org/materials/mp-13/) labeled as ferromagnetic and NiO (https://materialsproject.org/materials/mp-19009/) as antiferromagnetic in our data .}
+
+\textit{Additionally, Materials Project also include larger structures of the same material. We have included all structures and materials from Materials Project, but we have not checked which materials are represented as a larger cell in our data.}
+
+\textit{Marianne; The reviewer raises an important issue. As noted, we are in fact mainly probing ferromagnetic ordering in our criteria. This was not sufficiently clear in the original manuscript but has been remedied in the revised version, see the following sentence on page …: 
+Exploring larger cells was not done as the links between small and large cells of the same material in MP is not always clear. Therefore, this is an improvement that could be made to our method in a further work. This aspect has now been highlighted in the manuscript on page … 
+}
+
+Reviewer \#2: \\
+In the empirical approach, the data set is constructed based on the materials that are currently used in quantum technologies. The authors should discuss if there is any intrinsic bias in this data set, e.g. that these materials are selected based on what are readily available to researchers in this field, rather than the materials that are inherently the most suitable.
+
+\textit{Response:}
+\textit{We agree with the Reviewer. Availability of affordable and high quality crystals has of course limited the search for quantum compatible defects and solid state effects in semiconductors. Moreover, it is likely that the discovery of single photon emission and spin manipulation for the NV center in diamond has also guided the search for similar properties in other materials, with the search commencing with similar materials to diamond, such as different polytypes of SiC. The criteria of Weber et al are also interesting to consider in this regard, in particular the assumption that wide band gap materials are preferable. The recent discovery of telecom compatible SPEs in Si, a lower band gap material, show that this may have been a preemptory assumption. We hope that our work can contribute to widening the search for quantum compatible semiconductor platforms. 
+A note to this effect has now been added to page …:  
+}
+
+Reviewer \#2: \\
+The authors use the Materials Project as their primary database to search for ICSD entries. They then search for similar entries in other databases (OQMD, JARVIS-DFT, Citrination, etc.), and combine the data. However, it is unclear what additional data they are extracting from the other databases. How do they identify/define similar materials – are they based on the same ICSD number, on comparing the structures, etc.? If two different databases have different values for the same property, e.g. two different values of the band gap (perhaps due to different U parameters being used), how do they decide which value to use?
+
+\textit{Response:}
+
+\textit{From the initial criterion, we define that a material is required to have an ICSD identifier (ID) in Materials Project. This ID is present in AFLOW, AFLOW-ML, JARVIS-DFT and OQMD, and we performed an additional analysis to uncover any difference in space groups reported from Materials Project and the other databases, where we had an average match of $97\%$.}
+
+\textit{For the experimental values from Citrine, we could only verify the chemical formula since the data is lacking structures.}
+
+Reviewer \#2: \\
+Other minor issues include the following: 
+
+\begin{enumerate}
+    \item On page 12, what do the authors mean by “unfortunate structures”? 
+    \item The authors use the “.” as the notation to represent both the decimal point and the separator for thousands in large numbers (e.g. writing twenty-five thousand as “25.000”). Generally in English-language publications, “,” is used to separate thousands. \\ 
+    \textit{Response}: \\
+    \textit{Thank you for pointing out this oversight. This has now been remedied according to the referee's suggestion. } 
+    \item The authors should note that AFLOW also uses PBE+U in some calculations as described in Ref. 24 of this work, particularly for materials taken from the ICSD. 
+    \item Finally, the article also contains a lot of repetition, making it unnecessarily long. For example, the “Comparing the approaches” subsection on pages 14 and 15 is mainly just repeating the results from the previous subsections - lot of this could be cut, with the remainder incorporated into the Discussion section. 
+\end{enumerate}
+
+
+\end{document}
