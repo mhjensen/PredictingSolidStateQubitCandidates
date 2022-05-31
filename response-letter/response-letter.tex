@@ -20,6 +20,8 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[11pt, a4paper]{letter} % Set the font size (10pt, 11pt and 12pt) and paper size (letterpaper, a4paper, etc)
+\usepackage{color}
+\newcommand{\mrk}[1]{\textcolor{red}{#1}}
 
 \input{structure.tex} % Include the file that specifies the document structure
 
@@ -114,17 +116,29 @@ The main revision I would like to see addressed is the first point of the second
 
 
 \textit{Response: }
-\begin{itemize}
-    \item	Compare empirical to known input. Ferrenti reproduces expectations of literature. Main point is compare that to empirical which gives different result. 
-    \item Actually, don’t get exactly what we expect from Ferrenti. Den vektlegger det vi forventer, men returnerer ikke eksakt kriteriene. E.g. band gap, ionic character. 
-    \item Wnated to see if ML sees something else than the criteria we introduced. How does this compare to empirical? 
-    \item It is a nice start to begin with some general criteria. However, as pointed out, the usefulness is limited. The point is that we actually demonstrate that the Ferrenti approaches are not the best way. 
-    \item In some cases it might be useful to impose causality, to see to what extent that works. When we see that it does not work, we let the ML models figure out the connections between materials and QT. We had several hypotheses for why these materials are QT compatible, and therefore forced the causality to verify the assumption. When it did not work, we instead started from no assumptions, and let the ML methods reason out the causality. This proved much more efficient. 
-    \item Empirical is main result, Ferrenti is kind of test/validation/benchmark. Highlight more. 
-    \item Database of Ferrenti is commonly used, this is benchmark set of materials and information. Compare our method to benchmark. 
-    \item We agree; Ferrenti not really useful 
-    \item Ferrenti paper is data mining, not ML. We put it in to compare data 
-\end{itemize}
+
+\textit{We appreciate the consideration of our manuscript and have carefully addressed all reviewer concerns. The manuscript has undergone a major revision to facilitate the suggested changes. We hope that the methodological clarity has now been improved, and that the logic of the implemented approaches is clear. } 
+
+\textit{In short (we will revisit this issue below), the Ferrenti approaches are, in fact, not exactly reproducing the original classification. Some of the expected features, such as the band gap, are recognized by important by the ML methods trained on the Ferrenti and extended Ferrenti approaches. However, other features that were not part of the original selection criteria were also recognized as important (e.g., ...ADD), and the exact band gap criteria (0.5~eV and 1.5~eV) are not reproduced. Hence, there is some difference between the training data and the predicted materials. This indicates that there are certain patterns that the ML methods are picking up beyond our original definition. } 
+\textit{Not sufficiently clear; add comment. }
+
+\textit{In some cases it can be useful to impose causality, as done in the Ferrenti approach, to verify whether the expectations are correct. However, we find discrepancies between the selection criteria and the predicted materials (e.g., prediction of NaCl and low band gap materials as suitable). Hence, the expected properties are not able to capture the full physics of the problem. Hence, we instead train the algorithms on knowledge from experiment and let the ML models figure out the connections between materials and QT. We had several hypotheses for why these materials are QT compatible, and therefore forced the causality to verify the assumption. When it did not work, we instead started from no assumptions, and let the ML methods reason out the causality. This proved much more efficient. } 
+
+\textit{The main purpose of the Ferrenti approaches was to contrast the expectations of the literature (this was the guide for the data mining process) against the results of the empirical approach where the models were allowed to draw their own conclusions from material classifications  based on knowledge from the field. However, this contrast was not sufficiently clear;} \textit{add comment. }
+
+\textit{A major change to the manuscript that was implemented to highlight the empirical approach as the main finding was to move most of the discussion on the extended Ferrenti approach to the Supplementary. The extended Ferrenti approach was included because we wanted to remove the effect of practical considerations from the Ferrenti approach, however, this has no detectable effect on the predictions. The same features were recognized as important in the Ferrenti and extended Ferrenti approaches. Therefore, the presence of both in the discussion shadows the importance of the empirical approach. Hence, we have kept only the Ferrenti and empirical approaches to contrast them against one another. }
+
+%\begin{itemize}
+ %   \item	Compare empirical to known input. Ferrenti reproduces expectations of literature. Main point is compare that to empirical which gives different result. 
+ %   \item Actually, don’t get exactly what we expect from Ferrenti. Den vektlegger det vi forventer, men returnerer ikke eksakt kriteriene. E.g. band gap, ionic character. 
+%    \item Wnated to see if ML sees something else than the criteria we introduced. How does this compare to empirical?
+ %   \item It is a nice start to begin with some general criteria. However, as pointed out, the usefulness is limited. The point is that we actually demonstrate that the Ferrenti approaches are not the best way. 
+%    \item In some cases it might be useful to impose causality, to see to what extent that works. When we see that it does not work, we let the ML models figure out the connections between materials and QT. We had several hypotheses for why these materials are QT compatible, and therefore forced the causality to verify the assumption. When it did not work, we instead started from no assumptions, and let the ML methods reason out the causality. This proved much more efficient. 
+ %   \item Empirical is main result, Ferrenti is kind of test/validation/benchmark. Highlight more. 
+  %  \item Database of Ferrenti is commonly used, this is benchmark set of materials and information. Compare our method to benchmark. 
+   % \item We agree; Ferrenti not really useful 
+    %\item Ferrenti paper is data mining, not ML. We put it in to compare data 
+%\end{itemize}
 
 \noindent
 \textbf{Reviewer \#1: }
@@ -153,13 +167,26 @@ where certain desired properties are currently unknown. Therefore, the meaningfu
 
 \textit{Here ... }
 
+\textit{The Reviewer raises an interesting discussion. We agree that there are portions of our work that should be clarified. We conceive two main themes in the Reviewer's question: (i) the logic of training and testing on the same data set, and (ii) the logic of using preset criteria to design a data set.} 
+
+\textit{Firstly, we would like to point out that the ML methods were not trained and applied to exactly the same data. The criteria that were specified in the Ferrenti approaches left many materials without a label altogether. We trained the models on only the labeled data, and then performed machine learning on the unlabeled data, that had not been grouped at all. The data was hence divided into multiple portions, where some was in the test set, and some in the  training set. Therefore, the testing and training was not performed on the same data. For the empirical approach, we also put the unlabeled data from the Ferrenti approaches in the test set for ML.}
+
+\textit{Secondly, the ML search does in fact not exactly reproduce the criteria set in the initial selection process. For the Ferrenti/Extended Ferrenti approaches, some of the properties we used to guide the labeling are recognized as important by the ML models (e.g., the band gap), but the selection criteria are not fully reproduced. For example, many materials are suggested with band gaps below 0.5~eV in the Extended Ferrenti approach, whereas the selection criterion was set to 1.5~eV. Hence, the models are recognizing the expected properties as important, but there are differences from expectation. The ML models seem to be recognizing some pattern in the data that was not exactly anticipated. From a materials science perspective, it seems that the exact value of the band gap is not predominant, although the feature itself is important. }
+
+\textit{Finally, as mentioned above, a driving force behind selecting to report on the Ferrenti approaches was the comparison to the Empirical one. The literature generally expects the findings from the Ferrenti approach. Hence, an analysis from the ML perspective on which features this would entail (i.e., from Matminer) was necessary to compare with the findings from the Empirical approach - the main result of this work. Additionally, the agreement in predictions from the three approaches could lend weight to a prediction and merit further experimental studies.  }
+
+\textit{Importantly, however, the above considerations were not sufficiently clear in the original version of the manuscript. Therefore, we have ... }
+
 
 Reviewer \#2: \\
 In the machine-learning models trained on the extended Ferrenti approach, the authors note that the models predict unsuitable materials to be suitable, e.g. NaCl. How were these materials categorized by the original extended Ferrenti criteria? It is not necessarily clear that the Ferrenti/extended Ferrenti criteria listed on pages 5 and 6 of this work would reliably categorize ionic materials with cubic symmetry as unsuitable, so it is unsurprising that machine-learning models trained on such data would have these problems.
 
 \textit{Response:} 
-% OH: Jeg synes han svarer egentlig på sitt eget spørsmål her. For at et materiale skal bli "predikert" som en god kandidat av maskinlærings-algoritmene, så kan ikke materialet være en del av treningssettet som ML algoritmene blir trent på, ergo så er ikke materiale kategorisert som hverken bra eller dårlig av the original extended ferrenti criteria. Det betyr at materialet er utelukket av the extended ferrenti criteria, altså at den oppfyller ikke kravene for hverken en god eller dårlig kandidat basert på data miningen.
-\textit{The material NaCl involves two elements where more than half does not have a natural abundance of spin zero isotopes, and is therefore excluded from being labeled as suitable. In addition, NaCl is excluded from being labeled as unsuitable from the criteria due to its nonmagnetic label in Materials Project. We agree that it is not neccessarily clear that either Ferrenti or extended Ferrenti critera would categorize ionic materials with cubic symmetry as unsuitable, but it is clear from these criteria why NaCl is excluded from the labeling process that constitutes the criteria in the data mining. Therefore, NaCl is found unlabeled in the test data, and is predicted as an unsuitable candidate by the ML algorithms.}
+\textit{The material NaCl involves two elements where more than half does not have a natural abundance of spin zero isotopes, and is therefore excluded from being labeled as suitable. In addition, NaCl is excluded from being labeled as unsuitable from the criteria due to its nonmagnetic label in Materials Project. We agree that it is not neccessarily clear that either Ferrenti or extended Ferrenti critera would categorize ionic materials with cubic symmetry as unsuitable, but it is clear from these criteria why NaCl is excluded from the labeling process that constitutes the criteria in the data mining. Therefore, NaCl is found unlabeled in the test data, while the ML algorithms in both Ferrenti and extended Ferrenti alltogether predicts the material as suitable.}  
+
+\textit{The following note was added to this effect on page 11:} \\ 
+\mrk{Note that NaCl was excluded from being labeled as both unsuitable and suitable in the Ferrenti approach and was therefore found in the test set. For the empirical approach, NaCl was included in the labeled data in the training set as an unsuitable candidate. }
+
 
 \textit{Argument for Ferrenti}  
 
@@ -168,41 +195,66 @@ In the Ferrenti and extended Ferrenti searches, the authors also state that they
 
 \textit{Response:}
 
-\textit{The data regarding a material's magnetic character is extracted from Materials Projects database. Indeed, the majority of these calculations are based on the primitive cell, however, Materials Project perform an initial relaxation of cell and lattice parameters using a $1000$ / (number of atoms in the cell) k-point mesh to ensure that all properties calculated are representative of the idealized unit cell for each respective structure. As a result, we can find Fe (https://materialsproject.org/materials/mp-13/) labeled as ferromagnetic and NiO (https://materialsproject.org/materials/mp-19009/) as antiferromagnetic in our data .}
+\textit{The reviewer raises an important issue. 
+The data regarding a material's magnetic character is extracted from the Materials Projects database. Indeed, the majority of these calculations are based on the primitive cell, however, Materials Project performs an initial relaxation of cell and lattice parameters using a $1000$ / (number of atoms in the cell) k-point mesh to ensure that all properties calculated are representative of the idealized unit cell for each respective structure. As a result, we can find Fe (https://materialsproject.org/materials/mp-13/) labeled as ferromagnetic and NiO (https://materialsproject.org/materials/mp-19009/) as antiferromagnetic in our data set.} 
 
-\textit{Additionally, Materials Project also include larger structures of the same material. We have included all structures and materials from Materials Project, but we have not checked which materials are represented as a larger cell in our data.}
+\textit{Materials Project also includes larger structures of the same material. We have included all structures and materials from Materials Project, but we have not checked which materials are represented as a larger cell in our data. We have thereby not verified whether antiferromagnetic ordering has been investigated for all cases. This is an improvement that could be made to our method in a further work.}
 
-\textit{Marianne; The reviewer raises an important issue. As noted, we are in fact mainly probing ferromagnetic ordering in our criteria. This was not sufficiently clear in the original manuscript but has been remedied in the revised version, see the following sentence on page …: 
-Exploring larger cells was not done as the links between small and large cells of the same material in MP is not always clear. Therefore, this is an improvement that could be made to our method in a further work. This aspect has now been highlighted in the manuscript on page … 
-}
+\textit{These points were not sufficiently clear in the original manuscript which has been remedied in the revised version. The following sentence was added to the Data Mining section on page 5 to clarify the part about ferromagnetic ordering: } \\
+\mrk{Note that larger cells are sometimes needed to verify antiferromagnetic ordering so the present criteria mainly target ferromagnetic ordering under the labels magnetic/non-magnetic.} 
+
+\textit{The following clarifications were added to the Methods section under Databases:} \\ 
+\mrk{The data regarding a material's magnetic character is extracted from the Materials Projects database. Indeed, the majority of these calculations are based on the primitive cell, however, Materials Project performs an initial relaxation of cell and lattice parameters using a $1000$ / (number of atoms in the cell) k-point mesh to ensure that all properties calculated are representative of the idealized unit cell for each respective structure. As a result, we can find, e.g., Fe labeled as ferromagnetic and NiO as antiferromagnetic in our data set.} 
+
+\mrk{MP includes larger structures of the same material. We have included all structures and materials from Materials Project, but we have not checked which materials are represented as a larger cell in our data. We have thereby not verified whether antiferromagnetic ordering has been investigated for all cases. This is an improvement that could be made to our method in a further work.}
+
+%As noted, we are in fact mainly probing ferromagnetic ordering in our criteria. This was not sufficiently clear in the original manuscript but has been remedied in the revised version, see the following sentence on page …: Exploring larger cells was not done as the links between small and large cells of the same material in MP is not always clear. Therefore, this is an improvement that could be made to our method in a further work. This aspect has now been highlighted in the manuscript on page … 
+
+
 
 Reviewer \#2: \\
 In the empirical approach, the data set is constructed based on the materials that are currently used in quantum technologies. The authors should discuss if there is any intrinsic bias in this data set, e.g. that these materials are selected based on what are readily available to researchers in this field, rather than the materials that are inherently the most suitable.
 
 \textit{Response:}
-\textit{We agree with the Reviewer. Availability of affordable and high quality crystals has of course limited the search for quantum compatible defects and solid state effects in semiconductors. Moreover, it is likely that the discovery of single photon emission and spin manipulation for the NV center in diamond has also guided the search for similar properties in other materials, with the search commencing with similar materials to diamond, such as different polytypes of SiC. The criteria of Weber et al are also interesting to consider in this regard, in particular the assumption that wide band gap materials are preferable. The recent discovery of telecom compatible SPEs in Si, a lower band gap material, show that this may have been a preemptory assumption. We hope that our work can contribute to widening the search for quantum compatible semiconductor platforms. 
-A note to this effect has now been added to page …:  
-}
+\textit{We agree with the Reviewer. Availability of affordable and high quality crystals has of course limited the search for quantum compatible defects and solid state effects in semiconductors. Moreover, it is likely that the discovery of single photon emission and spin manipulation for the NV center in diamond has also guided the search for similar properties in other materials, with the search commencing with similar materials to diamond, such as different polytypes of SiC. The criteria of Weber \textit{et al.} (Ref.~[8] of the main text) are also interesting to consider in this regard, in particular the assumption that wide band gap materials are preferable. The recent discovery of telecom compatible SPEs in Si (Refs.~[54-55] in the main text), a lower band gap material, show that this may have been a premature assumption. We hope that our work can contribute to widening the search for quantum compatible semiconductor platforms. 
+A discussion on this has now been added to the Discussion section on page 16: } \\ 
+\mrk{One should note that there is a certain degree of bias inherent to the data set labeled in the empirical approach. Firstly, experimental searches will always be limited by the availability and cost of materials and processing. Secondly, the discovery of the quantum compatible properties of the NV center in diamond naturally led early searchers to comparable materials such as silicon carbide. However, the broad range of materials predicted and listed in Table~III and the Supplementary Information at [39] indicates that the ML methods are detecting underlying properties which manifest in materials systems of several kinds. }
 
 Reviewer \#2: \\
 The authors use the Materials Project as their primary database to search for ICSD entries. They then search for similar entries in other databases (OQMD, JARVIS-DFT, Citrination, etc.), and combine the data. However, it is unclear what additional data they are extracting from the other databases. How do they identify/define similar materials – are they based on the same ICSD number, on comparing the structures, etc.? If two different databases have different values for the same property, e.g. two different values of the band gap (perhaps due to different U parameters being used), how do they decide which value to use?
 
 \textit{Response:}
 
-\textit{From the initial criterion, we define that a material is required to have an ICSD identifier (ID) in Materials Project. This ID is present in AFLOW, AFLOW-ML, JARVIS-DFT and OQMD, and we performed an additional analysis to uncover any difference in space groups reported from Materials Project and the other databases, where we had an average match of $97\%$.}
+\textit{From the initial criterion, we define that a material is required to have an ICSD identifier (ID) in Materials Project. This ID is included in the AFLOW, AFLOW-ML, JARVIS-DFT and OQMD databases as well. 
 
-\textit{For the experimental values from Citrine, we could only verify the chemical formula since the data is lacking structures.}
+Due to the various different techniques of approximating the bandgap, either demonstrated experimentally or estimated using the DFT-calculations with the functionals PBE or PBE+U, we do not choose one but rather let them all be represented as columns (features) in our data.}
+
+%If two different databases have different values for the same property, we employed the value from ... } 
+
+\textit{Furthermore, we performed an additional analysis to uncover any difference in space groups reported from Materials Project and the other databases, where we had an average match of $97 \ \%$, which is close to an ideal match. We note that the small deviation might arise due to errors in either database, and is not necessarily reflected in the remaining features of the data. For the experimental values from Citrine, we could only verify the chemical formula since the experimental data is lacking information regarding the structure (e.g. space group, symmetry) of the material.}
+
+\textit{We agree with the reviewer that this was not sufficiently clear in the original manuscript. To clarify these points, the above information has now been added to the Methods section, under "Databases": } \\ 
+\mrk{Note that from the initial criterion, we define that a material is required to have an ICSD identifier (ID) in Materials Project. This ID is included in the AFLOW,  AFLOW-ML, JARVIS-DFT and OQMD databases as well. If two different databases have different values for the same property, such as the band gap, we added both of them as columns (features) to our data to avoid any data cluttering. An additional analysis to uncover any difference in space groups reported from Materials Project and the other databases, where we had an average match of $97 \ \%$, which is close to an ideal match. We note that the small deviation might arise due to errors in either database, and is not necessarily reflected in the remaining features of the data. For the experimental values from Citrine, we could only verify the chemical formula since the experimental data is lacking information regarding the structure (e.g. space group, symmetry) of the material.}
 
 Reviewer \#2: \\
 Other minor issues include the following: 
 
 \begin{enumerate}
-    \item On page 12, what do the authors mean by “unfortunate structures”? 
+    \item On page 12, what do the authors mean by “unfortunate structures”? \\ 
+    \textit{Response:} \\ 
+    \textit{This phrase has now been replaced by the following;} \\ 
+    \mrk{Complex structures (e.g., nanostructures or 2D materials)}.  
     \item The authors use the “.” as the notation to represent both the decimal point and the separator for thousands in large numbers (e.g. writing twenty-five thousand as “25.000”). Generally in English-language publications, “,” is used to separate thousands. \\ 
     \textit{Response}: \\
     \textit{Thank you for pointing out this oversight. This has now been remedied according to the referee's suggestion. } 
-    \item The authors should note that AFLOW also uses PBE+U in some calculations as described in Ref. 24 of this work, particularly for materials taken from the ICSD. 
-    \item Finally, the article also contains a lot of repetition, making it unnecessarily long. For example, the “Comparing the approaches” subsection on pages 14 and 15 is mainly just repeating the results from the previous subsections - lot of this could be cut, with the remainder incorporated into the Discussion section. 
+    \item The authors should note that AFLOW also uses PBE+U in some calculations as described in Ref. 24 of this work, particularly for materials taken from the ICSD. \\
+    \textit{Response:} \\ 
+    \textit{Thank you for pointing this out, we have now added the detail to the description of AFLOW in our Methods section; \mrk{with the $+U$ correction}.}
+    \item Finally, the article also contains a lot of repetition, making it unnecessarily long. For example, the “Comparing the approaches” subsection on pages 14 and 15 is mainly just repeating the results from the previous subsections - lot of this could be cut, with the remainder incorporated into the Discussion section. \\ 
+    \textit{Response:} \\ 
+    \textit{The reviewer makes a good point. We have now attempted to shorten the manuscript substantially. As mentioned above, much of the discussion on the Extended Ferrenti approach has now been moved to the Supplementary Information. Superfluous information has been removed from the main text and in some cases moved to the Methods section. The paper is now shorter by a full page.} \\ 
+    \textit{Regarding the “Comparing the approaches” subsection, we agree that there were many repetitions, which have now been removed. However, we elected to keep the subsection itself, as it  contains an important result of the work: a discussion on the $47$ materials that all three approaches and all four ML methods agree on above a $0.5$ threshold, and the $6$ materials likewise agreed upon to $0.75$ confidence. These materials were not discussed elsewhere in the text and the portion of Table III displaying their properties was first referenced here. Therefore we believe that this subsection should be kept. However, since this information got somewhat lost in translation, we have changed the name of the subsection to} \\ 
+    \mrk{"Overlapping predictions between the approaches"}. 
 \end{enumerate}
 
 

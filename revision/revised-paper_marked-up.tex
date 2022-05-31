@@ -246,7 +246,9 @@ Below we \mrk{follow separate} procedures for labeling materials as suitable or 
 
 \subsubsection*{The Ferrenti approach}
 The first approach to labeling a selection of materials in the dataset is based on the criteria proposed by \citeauthor{Ferrenti2020} \cite{Ferrenti2020}. 
-They suggest a data mining process consisting of four stages by systematically evaluating the suitability of host materials taken from the Materials Project. In this framework, we label \textbf{suitable} candidates by the following steps: 
+They suggest a data mining process consisting of four stages by systematically evaluating the suitability of host materials taken from the Materials Project. 
+\mrk{Note that this data mining process alone was intended for further experimental studies and not necessarily for a targeted machine learning search. Nonetheless, we adapt the selection criteria from Ref.~\cite{Ferrenti2020} for the present purposes.}
+In the \mrk{Ferrenti approach} framework, \textbf{suitable} candidates \mrk{are labeled} by the following steps: 
 \begin{enumerate}
     \item Include materials that;
     \begin{itemize}
@@ -266,10 +268,12 @@ They suggest a data mining process consisting of four stages by systematically e
     \item Ensure that the energy above hull is less than $0.2$~eV per atom.
 \end{enumerate}
 
-These inclusion criteria are based on the work of \citeauthor{Weber2010} \cite{Weber2010} and targeted primarily at semiconductors that can host deep level defects with spin qubit capabilities. In this context, long spin coherence times are needed, and the possibility of having an environment free of nuclear spins and permanent magnetism is therefore desirable. 
+These inclusion criteria are based on the work of \citeauthor{Weber2010} \cite{Weber2010} and targeted primarily at semiconductors that can host deep level defects with spin qubit capabilities. In this context, long spin coherence times are needed, \mrk{necessitating an environment that can be depleted of nuclear spins and permanent magnetism.} 
+%and the possibility of having an environment free of nuclear spins and permanent magnetism is therefore desirable. 
 Moreover, non-polar materials are assumed to be preferable to obtain defect based single-photon emitters with sharp zero-phonon lines and indistinguishable single-photon emission.  
 Transition metal elements are eliminated if they have unpaired electrons because the presence of permanent electric dipole moments may have a detrimental impact on the optical coherence of defect emission. 
-Finally, the energy above hull requirement is included to ensure that the selected compounds are thermodynamically stable. 
+Finally, the energy above hull requirement is included to ensure that the selected compounds are thermodynamically stable.
+\mrk{Note that larger cells are sometimes needed to verify antiferromagnetic ordering so the criteria mainly target ferromagnetic ordering under the labels magnetic/non-magnetic.}
 
 Next, \textbf{unsuitable} candidates are labeled according to the reverse requirements of the above; as materials in the ICSD database \cite{Allen1987,Zagorac2019} 
 that crystallize in polar space groups, are calculated to be magnetic and have a band gap larger than $0.1$~eV in the MP database (to exclude metals but include lower-band gap semiconductors). 
@@ -277,6 +281,8 @@ The resulting set of labeled materials contains $1581$ materials where $35 \ \%$
 are labeled as unsuitable and 
 $65 \ \%$ as suitable for QT applications.
 Here we see the first example of how the criteria for labeling unsuitable candidates are more restrictive than those for the suitable candidates.
+
+\mrk{Performing machine learning on a data set derived using preconceived notions for which material properties are important is likely to reproduce several of the initial selection criteria. Nonetheless, the Ferrenti approach was included in the present work to highlight expectations from the literature and contrast them with the findings from the other approaches. Additionally, one should note that ML methods are capable of recognizing other patterns than those intended for the data, opening up the possibility that also the Ferrenti approach could yield new insights.} 
 
 
 \subsubsection*{The extended Ferrenti approach}
@@ -288,22 +294,28 @@ The following steps constitute the process of labeling \textbf{suitable} candida
     \begin{itemize}
         \item contain elements where more than half have a natural abundance of spin zero isotopes, including Al, P, Ga, As, B and N, 
         \item crystallize in non-polar space groups,
-        \item are present in the ICSD,
-        \item are calculated to be nonmagnetic. 
+        \mrk{are present in the ICSD,
+        and are calculated to be nonmagnetic.} 
     \end{itemize}
     \item Only keep materials that have a band gap larger than $1.5$~eV in the MP database. The higher band gap requirement (as compared to the Ferrenti approach) is included here to avoid labeling an unfeasibly large number of materials. 
     \item Ensure that the energy above hull is less than $0.2$~eV per atom. 
 \end{enumerate}
 
-For \textbf{unsuitable} candidates, \mrk{the same strategy as for the first Ferrenti approach was implemented}. The result is a somewhat unbalanced set of labeled materials, with up to $75 \ \%$ of the materials found in the suitable group. However, the labeled data encompasses $78 \ \%$ more materials than  the Ferrenti approach, consisting of $2141$ suitable and $684$ unsuitable materials.
+For \textbf{unsuitable} candidates, \mrk{the same strategy as for the Ferrenti approach was implemented}. The result is a somewhat unbalanced set of labeled materials with up to $75 \ \%$ of the materials found in the suitable group\mrk{ and $78 \ \%$ more materials than for the Ferrenti approach.} 
+%However, the labeled data encompasses $78 \ \%$ more materials than  the Ferrenti approach, consisting of $2141$ suitable and $684$ unsuitable materials.
 
-\mrk{The findings from both the data mining and machine learning procedures for the extended Ferrenti approach did not differ substantially from those obtained using the Ferrenti approach. This is attributed to the similarities in the selection processes. Therefore, detailed discussion on the findings from the extended Ferrenti approach can be found in the Supplementary Material at \cite{supplementary}. Qualitative conclusions drawn for the Ferrenti approach herein also hold for the extended Ferrenti approach, indicating that the removal of so-called practical considerations did not have a significant impact on the results. }
+\mrk{The findings from both the data mining and machine learning procedures for the extended Ferrenti approach did not differ substantially from those obtained using the Ferrenti approach. This is attributed to the similarities in the selection processes. Therefore, detailed discussion on the findings from the extended Ferrenti approach can be found in the Supplementary Information at \cite{supplementary}. Qualitative conclusions drawn for the Ferrenti approach herein also hold for the extended Ferrenti approach, indicating that the removal of so-called practical considerations did not have a significant impact on the results. }
 
 \subsubsection*{The empirical approach}
-The third approach differs substantially from the others in terms of material labeling, as we apply knowledge from the field (see for instance Refs.~\cite{Atatuere2018,Toth2019,Zhang2020,Son2020} for an overview) to pick our promising material host candidates.  
-In other words, we restrict ourselves to materials where quantum compatible properties have been either experimentally demonstrated or theoretically predicted. 
-We therefore name this scheme \emph{the empirical approach}. Due to the concern of ending up with too small datasets for training and testing of the ML methods, we will also include some  materials that are promising in the sense that they have suitable properties for accommodating deep level defects that can potentially exhibit quantum effects --- even though such effects may not yet have been shown. These material choices were motivated by the criteria and predictions for QT compatible deep level defects defined by \citeauthor{Weber2010} \cite{Weber2010}. 
-We have also included materials where properties like single-photon emission and spin manipulation have been observed but attributed to excitonic effects or quantum dots (formed by self-assembly or lithographic structuring) rather than being defect related.
+%The third approach differs substantially from the others in terms of material labeling, as 
+\mrk{In the \emph{empirical approach},} we apply knowledge from the field (see for instance  Refs.~\cite{Atatuere2018,Toth2019,Zhang2020,Son2020} for an overview) to \mrk{guide the search for} promising material \mrk{hosts.}  
+In other words, \mrk{the labeled data contains candidates} where quantum compatible properties have been either experimentally demonstrated or theoretically predicted\mrk{, including the materials suggested in Ref.~\cite{Weber2010} as promising deep level defect hosts.} 
+%We therefore name this scheme \emph{the empirical approach}. 
+%Due to the concern of ending up with too small datasets for training and testing of the ML methods, we will also include some  materials that are promising in the sense that they have suitable properties for accommodating deep level defects that can potentially exhibit quantum effects --- even though such effects may not yet have been shown. 
+%These material choices were motivated by the criteria and predictions for QT compatible deep level defects defined by \citeauthor{Weber2010} \cite{Weber2010}. 
+%\mrk{The theoretical predictions were motivated by the criteria for having deep level defects exhibit quantum compatible properties \cite{Weber2010}.} 
+%material choices were motivated by the criteria and predictions for QT compatible deep level defects defined by \citeauthor{Weber2010} \cite{Weber2010}. 
+\mrk{Materials where single-photon emission and spin manipulation have been observed but attributed to excitonic effects or quantum dots (formed by self-assembly or lithographic structuring) rather than being defect related were also included.} 
 
 
 Table~\ref{tab:qt-materials} contains an overview of known semiconductor materials with demonstrated quantum compatible characteristics. The table forms the basis for picking suitable candidates for the empirical approach. The properties being studied arise from mechanisms related to, e.g., point defects, bound excitons, and both self-assembled and lithographically structured quantum dots and nanostructures such as 2D materials. 
@@ -347,7 +359,7 @@ The materials AlP, GaP, AlAs, ZnTe and CdS were manually screened for tetrahedra
 
 Following the three screening steps in the empirical approach, a total of $187$ entries were labeled as suitable candidates for the training set. 
 Notably, the candidates labeled as suitable in the empirical approach contain only compounds that are either elementary (unary) or binary. 
-Since the set of labeled data constituting suitable candidates in the empirical approach contains rather few entries, we add $400$ candidates that are labeled as \textbf{unsuitable}. These are picked at random from the pool of unsuitable candidates from the two previous approaches, in addition to those that were marked as unsuitable during the manual screening process. 
+Since the set of labeled data constituting suitable candidates in the empirical approach contains rather few entries, \mrk{$400$ materials were added and labeled as \textbf{unsuitable}}. These \mrk{were} picked at random from the pool of unsuitable candidates from the two previous approaches, in addition to those that were marked as unsuitable during the manual screening process. 
 
 \subsubsection*{Comparing the approaches}
 %The three different approaches to data mining place a particular emphasis on each of their specific goals. The Ferrenti approach relies on choosing only elements with spin zero isotopes and compounds that crystallize in nonpolar spacegroups together with practical filters, while the extended Ferrenti approach allows a larger variety of elements and removes the practical reasons for excluding candidate materials. Thus, the first approach targets a more narrow prediction space than the second approach does. However, the most selective approach is the empirical one, relying exclusively on previous findings rather than assuming which material properties are influential. 
@@ -365,11 +377,11 @@ Among other potentially suitable candidates we find ZnS, ZnSe, ZnO and ZnTe pres
     \centering
     \begin{subfigure}{1\textwidth}
         \centering
-        \scalebox{0.85}{\input{figures/parallel-coordinates-plots/01-ferrenti-approach-v2.pgf}}
+        \scalebox{0.85}{\input{AllFigures/01-ferrenti-approach-v2.pgf}}
     \end{subfigure}
     \begin{subfigure}{1\textwidth}
         \centering
-          \scalebox{0.85}{\input{figures/parallel-coordinates-plots/03-empirical-approach-v3.pgf}}
+          \scalebox{0.85}{\input{AllFigures/03-empirical-approach-v3.pgf}}
     \end{subfigure}
     \caption{Parallel coordinate plots for the two different approaches. To limit data cluttering, we have randomly collected up to $250$ entries for each class. For the empirical approach, we have used all the $187$ suitable candidates. The axes show total magnetization (mag), space group (SG), ionic character (ionic char), covalent range (cov range) as calculated from elemental properties, number of elements (num elements) and energy gap (Eg) as extracted from the MP database.} 
     \label{fig:parallel-coordinates-approaches}
@@ -379,11 +391,11 @@ Among other potentially suitable candidates we find ZnS, ZnSe, ZnO and ZnTe pres
     \centering
     \begin{subfigure}{0.35\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/01-ferrenti-approach.pdf}
+        \includegraphics[width=1\textwidth]{AllFigures/01-ferrenti-approach.pdf}
     \end{subfigure}%
     \begin{subfigure}{0.35\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{figures/pca-2d-plots/03-insightful-approach.pdf}
+        \includegraphics[width=1\textwidth]{AllFigures/03-insightful-approach.pdf}
     \end{subfigure}
     \caption{Two-dimensional scatter plots for the two different approaches. We have identified the eigenvectors corresponding to the two largest eigenvalues of the covariance-matrix, that is, the two most important principal components of the initial data from the Materials Project query. Then, we have transformed the sets of labeled data resulting from the two approaches and visualized them as scatter plots. Green squares display suitable candidates, along with the black (SiC), blue (diamond) and yellow (Si) symbols in the right panel, and red triangles represent unsuitable candidates.}
     \label{fig:2dscatterplotpca}
@@ -426,21 +438,21 @@ also experiences the best performance for just a few principal components.
 \begin{figure}[t]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/01-ferrenti-approach-PC-v2.tex}
+        \input{AllFigures/01-ferrenti-approach-PC-v2.tex}
         \label{fig:01-fi-e}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/01-ferrenti-approach-GB-v2.tex}
+        \input{AllFigures/01-ferrenti-approach-GB-v2.tex}
         \label{fig:01-fi-d}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/03-empirical-approach-PC-v2.tex}
+        \input{AllFigures/03-empirical-approach-PC-v2.tex}
         \label{fig:03-fi-e}
         \subcaption{}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{figures/feature-importance/03-empirical-approach-GB-v2.tex}
+        \input{AllFigures/03-empirical-approach-GB-v2.tex}
         \label{fig:03-fi-d}
         \subcaption{}
     \end{subfigure}
@@ -475,13 +487,16 @@ An overview of the number of predicted suitable candidates as a function of a gi
 
 \subsubsection*{The Ferrenti approach}
 
-From the predicted dataset of $23.623$ materials 
-the four ML methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. All four ML methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to, e.g., $0.75$ instead of $0.5$, the above ML algorithms would only agree on $1784$ suitable candidates. 
+From the predicted dataset of $23.623$ materials  
+%the four ML methods consistently predict at least $11.000$ materials as promising candidates in the case of the Ferrenti approach. 
+all four ML methods agree on a total of $6804$ suitable candidates, however, many of these materials are predicted with an incidence similar to that of a coin flip. If we were to raise the minimum confidence cut-off for a prediction to, e.g., $0.75$ instead of $0.5$, the above ML algorithms would only agree on $1784$ suitable candidates. 
 We find that all four ML methods admit almost all materials with a chemical formula matching the known suitable candidates (see Table~\ref{tab:qt-materials}) that were present in the labeled data. This can allow materials with \mrk{complex structures (e.g., nanostructures or 2D materials)} to be labeled as suitable candidates. Notably, the ML methods do not maintain the band gap restriction from the training set definition, where all materials with band gaps lower than $0.5$~eV were eliminated. 
 This trend is not carried over to the predicted data. Indeed, \mrk{many} entries with band gaps lower than $0.5$~eV are predicted as suitable candidates by all four ML methods employed herein 
 %indicating that the cut-off value we set for the band gap ($0.5$~eV for the Ferrenti approach) is not recognized by the ML algorithms 
 --- despite the principal component analysis revealing that the band gap is an important feature for the machine learning classification in the Ferrenti approach. \mrk{This indicates that the ML methods are not exactly recognizing the initial selection criteria, instead finding other patterns in the dataset.} 
 On the other hand, due to the known  underestimation of band gaps by the PBE  functional, the band gaps could in reality be larger for many of the materials. 
+
+\mrk{The ML methods predict materials as suitable that are not expected according to, e.g., Ref.~\cite{Weber2010}. Indeed, NaCl is predicted as a suitable candidate to minimum confidences of $0.83$ and $0.61$ for two different configurations, despite the strong electrostatic interactions between Na and Cl and the ionic character of their bonding. Note that NaCl was excluded from being labeled as both unsuitable and suitable in the Ferrenti approach and was therefore found in the test set. For the empirical approach, NaCl was included in the labeled data in the training set as an unsuitable candidate. }
 
 \begin{table}[t]
     \centering 
@@ -516,7 +531,7 @@ There appears to be a high degree of symmetry present for all materials, but \mr
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/vesta-images/fig6-all.png}
+    \includegraphics[width=0.85\textwidth]{AllFigures/fig6-all.png}
     \caption{Illustrations of the crystal systems that the $9$ materials predicted by the empirical approach to $0.85$ confidence, and the $6$ materials predicted by all approaches to $0.75$ confidence, may belong to. Four different symmetry categories are observed; cubic, hexagonal, tetragonal and orthorombic. The viewpoints for all materials are down along the $c$-axis.   }
     \label{fig:crystalsystems}
 \end{figure}
@@ -529,7 +544,8 @@ In the case of BC$_2$N we find two compositions with the same chemical formula; 
 The compounds InAs (cubic, mp-$20305$), CuI (cubic, mp-$22895$ and hexagonal, mp-$569346$) and ZnCd$_3$Se$_4$ (cubic, mp-$1078597$) are listed in the MP database with band gaps of $0.3$, $1.2$, $1.2$ and $1.7$~eV, respectively. 
 To the best of our knowledge, ZnCd$_3$Se$_4$ has yet to be synthesized, while self-assembled InAs quantum dots are  exciting possible materials to use in quantum technology \cite{Liu2018}. 
 CuI has recently been synthesized as single-crystal epitaxial films and was shown to exhibit remarkable optoelectronic properties \cite{Ahn2020}. Interestingly, the material exhibits a large ionic character with more similarities to some of the oxide compounds in the dataset than, e.g., the materials that are more covalent in character like Si, SiC and  diamond.  
-The prediction of CuI in two configurations indicates that ionic character alone is not an obstacle for a material to be quantum compatible. It is unknown at this time whether any potentially favorable properties of CuI would originate from deep level defects or  nanostructuring (e.g., quantum dots). NaCl was not predicted as suitable for QT in the empirical approach\mrk{, in contrast to the Ferrenti (and extended Ferenti) approach. This underlines that an empirical approach, based on experimental data, may be more suitable for predicting materials for a certain applications and understanding the underlying mechanisms than the assumption-based methodology.}  
+The prediction of CuI in two configurations indicates that ionic character alone is not an obstacle for a material to be quantum compatible. It is unknown at this time whether any potentially favorable properties of CuI would originate from deep level defects or  nanostructuring (e.g., quantum dots). NaCl was not predicted as suitable for QT in the empirical approach\mrk{, in contrast to the Ferrenti (and extended Ferenti) approach}. 
+%This underlines that an empirical approach, based on experimental data, may be more suitable for predicting materials for a certain applications and understanding the underlying mechanisms than the assumption-based methodology.}
 
 Out of the nine predicted materials (threshold of $0.85$) we note that both instances of CuI are stated in the MP database to decompose into trigonal CuI, which was not present in our predictions. Hexagonal CdSe decomposes into cubic CdSe (in the list of $9$), the cubic BN decomposes to hexagonal BN (mp-$984$, not in the predictions), and ZnCd$_3$Se$_4$ decomposes to ZnSe $+$ CdSe (in the list). Finally, both compounds of the BC$_2$N structure are listed to decompose into hexagonal BN $+$ C. 
 However, synthesis may still be possible depending on the growth conditions. 
@@ -583,19 +599,25 @@ Among these, \mrk{only a single material is present in the list of $66$ candidat
 MgSe is notable for its available spin-zero isotopes in accordance with the criteria set by \citeauthor{Weber2010} \cite{Weber2010} and \citeauthor{Ferrenti2020} \cite{Ferrenti2020}. We note that these properties may favor defects acting as spin centers with qubit potential and MgSe is thus identified as an interesting host material in this regard.   
 
 %\subsubsection*{Comparing the approaches}
-\section*{\mrk{Discussion}}
+\subsubsection*{Overlapping predictions between the approaches}
+
+%\section*{\mrk{Discussion}}
 %Comparing the three approaches Ferrenti, extended Ferrenti and empirical (see also Table~\ref{tab:probabilites}), we observe that the extended Ferrenti approach is the least restricted also for the predicted materials and admits the largest number of entries regardless of the confidence threshold. 
 %The Ferrenti approach also predicts a large amount of materials as suitable compared to the empirical approach, but the resulting data are otherwise not very different from the extended version. The empirical approach, on the other hand, predicts fewer suitable candidates that are possible to examine  manually. 
-\mrk{The amount of materials predicted by the empirical approach is restricted enough to enable close scrutiny of the various suggested candidates. The same cannot be said for the Ferrenti (and extended Ferrenti) approach, however, as seen from Table~\ref{tab:probabilites}.} Manual verification through a literature survey will often not be possible, however, and perfecting automatic data mining and analysis is therefore an important goal of material informatics \cite{rickman2019}. 
+\mrk{The amount of materials predicted by the empirical approach is restricted enough to enable close scrutiny of the various suggested candidates. The same cannot be said for the Ferrenti (and extended Ferrenti) approach, however, as seen from Table~\ref{tab:probabilites}.} Manual verification through a literature survey will often not be possible\mrk{,} and perfecting automatic data mining and analysis is therefore an important goal of material informatics \cite{rickman2019}. 
 
 Despite notable differences, as mentioned above, there is \mrk{some overlap of predicted materials between the approaches}. 
 %We find that $119$ of the $214$ candidates predicted as suitable by the empirical approach (threshold at $0.5$) were also selected by all ML methods in the extended Ferrenti approach. Similarly, $78$ of the $214$ materials are also predicted as suitable by all ML methods in the Ferrenti approach. 
-All approaches \mrk{(including the extended Ferrenti approach)} and their corresponding ML methods agree on a total of $47$ potential candidates to $0.5$ confidence, where $8$ are elementary (unary), $29$ binary, and $10$ tertiary (see the Supplementary Information at \cite{supplementary} for the full list). 
-Several interesting materials that were also discussed above for the predictions by the empirical approach are present among these $47$, including BP, CdSe, GeC, InP and Ge. However, \mrk{it also contains} certain materials that cannot be classified as semiconductors, such as P, I, N$_2$ and H$_2$. We note that none of these were included by the empirical approach when the threshold was set to $0.75$ or above. 
+All approaches \mrk{(including the extended Ferrenti approach) and their corresponding ML methods agree on a total of $47$ potential candidates to $0.5$ confidence 
+%where $8$ are elementary (unary), $29$ binary, and $10$ tertiary 
+(see the Supplementary Information at \cite{supplementary} for the full list).} 
+Several interesting materials that were also discussed above for the predictions by the empirical approach are present among these $47$, including BP, CdSe, GeC, InP and Ge. However, certain materials that cannot be classified as semiconductors \mrk{are also included}, such as P, I, N$_2$ and H$_2$. We note that none of these were included by the empirical approach when the threshold was set to $0.75$ or above. 
 
-Importantly, there are $6$ materials that all approaches (Ferrenti, extended Ferrenti and empirical) and ML methods agree on above a $0.75$ threshold. These are ZnGeAs$_2$ (tetragonal mp-$4008$), CdSnP$_2$ (tetragonal mp-$5213$), GeSe (cubic mp-$10759$), InP (cubic mp-$20351$), InP (hexagonal mp-$966800$) and SiSn (cubic mp-$1009813$). Here, we can distinguish three groupings in crystal structure and they agree with those discussed above; cubic, hexagonal and tetragonal (illustrated in Fig.~\ref{fig:crystalsystems}). The relevant material properties are summarized in the lower part of Table~\ref{tab:materialproperties}. 
-Note that hexagonal InP is listed in the MP database as decomposing into cubic InP while SiSn is stated to decompose into Si $+$ Sn. 
-We can deduce a series of similar trends as for the $9$ materials from the empirical approach --- e.g., the same space groups are manifesting, we find only binary or tertiary compounds, and $a=b$ for all materials while $c$ is different for hexagonal InP (unstable). However, consistent four-fold coordination and the bond angle trends we observed for the first $9$ materials are not maintained as GeSe is six-fold coordinated. 
+Importantly, there are $6$ materials that all approaches (Ferrenti, extended Ferrenti and empirical) and ML methods agree on above a $0.75$ threshold. These are ZnGeAs$_2$ (tetragonal mp-$4008$), CdSnP$_2$ (tetragonal mp-$5213$), GeSe (cubic mp-$10759$), InP (cubic mp-$20351$), InP (hexagonal mp-$966800$) and SiSn (cubic mp-$1009813$). Here, we can distinguish three groupings in crystal structure: cubic, hexagonal and tetragonal (illustrated in Fig.~\ref{fig:crystalsystems}). The relevant material properties are summarized in the lower part of Table~\ref{tab:materialproperties}, 
+%Note that hexagonal InP is listed in the MP database as decomposing into cubic InP while SiSn is stated to decompose into Si $+$ Sn. 
+\mrk{with comparable trends to those for the $9$ materials predicted by the empirical approach in terms of, e.g., crystal structure. The six-fold coordination of GeSe is an outlier as compared to the four-fold coordination of the other materials. }
+%We can deduce a series of similar trends as for the $9$ materials from the empirical approach --- e.g., the same space groups are manifesting, we find only binary or tertiary compounds, and $a=b$ for all materials while $c$ is different for hexagonal InP. 
+%However, consistent four-fold coordination and the bond angle trends  observed for the first $9$ materials are not maintained as GeSe is six-fold coordinated. 
 We highlight these six compounds, along with the nine predicted by the empirical approach to $0.85$ confidence, as particularly interesting for future in-depth theoretical and experimental studies. 
 
 %histograms 
@@ -627,43 +649,50 @@ We highlight these six compounds, along with the nine predicted by the empirical
 \label{fig:histogram_new}
 \end{figure}
 
+\section*{Discussion}
 Taking a closer look at the reasoning behind the choices made by the different ML methods during the classification process, we can start to identify important driving forces for manifestation of quantum compatible properties in semiconductors. 
-The analysis of the principal components extracted from the ML methods revealed that the most important principal component for both the Ferrenti and extended Ferrenti approaches encompasses features related to the band gap and chemical environment. This means that the band gap criterion imposed in the training set selection is at least somewhat satisfied. In other words, the Ferrenti approaches appear to reproduce the logic of the initial selection process. For the empirical approach, on the other hand, band gap related features were not recognized as important in the dominant principal component. 
+The analysis of the principal components extracted from the ML methods revealed that the most important principal component for \mrk{the Ferrenti approach} encompasses features related to the band gap and chemical environment. This means that the band gap criterion imposed in the training set selection is at least somewhat satisfied. 
+%In other words, the Ferrenti approaches appear to reproduce the logic of the initial selection process. 
+\mrk{The Ferrenti approach does not entirely reproduce the logic of the initial selection process however as many low band gap materials were highlighted as suitable by the ML methods. } 
+For the empirical approach, on the other hand, band gap related features were not recognized as important in the dominant principal component. 
 
-Figure~\ref{fig:histogram_new}(a) displays the number of predicted suitable materials as a function of band gap (from the MP database), and reveals that all approaches predicted a substantial amount of materials with a low band gap (below $0.5$~eV). Moreover, the distribution of materials that were identified as suitable is rather broad with the Ferrenti approaches exhibiting a peak around a $2.5$~eV band gap. 
+Figure~\ref{fig:histogram_new}(a) displays the number of predicted suitable materials as a function of band gap (from the MP database), and reveals that \mrk{both} approaches predicted a substantial amount of materials with a low band gap (below $0.5$~eV). 
+Moreover, the distribution of materials that were identified as suitable is rather broad with the Ferrenti \mrk{approach} exhibiting a peak around a $2.5$~eV band gap. 
 Coincidentally, the band gap of, e.g., 4$H$-SiC is usually computed at around $2.5$~eV using the PBE functional. 
-The empirical approach exhibits a more scattered data distribution with local maxima around $1$-$2$ and $4$~eV. 
+The empirical approach exhibits a more scattered data distribution. % with local maxima around $1$-$2$ and $4$~eV. 
 
 The secondmost important principal component in the Ferrenti approach encompasses properties such as the ionic character, covalent radius and maximum packing efficiency (see the Supplementary Information at \cite{supplementary} for the predicted material distributions of the latter two features).  
-Intriguingly, as shown in Figure~\ref{fig:histogram_new}(b), the predicted candidates distribute over a broad range of ionic characters for all three approaches - even peaking at a relatively high ionic character of $0.8$. 
-We note that this may be a result of the distribution of the initial dataset of $25.000$ materials that peaks around a similar value (not shown). The minor peak in the empirical approach's predicted materials around $0.4$ ionic character is not present for the Ferrenti approach, extended Ferrenti approach nor the overall data distribution. For comparison, all SiC entries in the dataset have maximum ionic characters of $\sim 0.1$. 
-Further, we find that the covalent radii of the materials (see the Supplementary Information) exhibit two distinct peaks in the data distribution. 
+Intriguingly, as shown in  Figure~\ref{fig:histogram_new}(b), the predicted candidates distribute over a broad range of ionic characters for \mrk{both the Ferrenti and empirical} approaches - even peaking at a relatively high ionic character of $0.8$. 
+We note that this may be a result of the distribution of the initial dataset of \mrk{$25,000$} materials \mrk{with a maximum} around a similar value (not shown). The minor peak in the empirical approach's predicted materials around $0.4$ ionic character is not present for the Ferrenti approach \mrk{nor} the overall data distribution. For \mrk{reference}, all SiC entries in the dataset have maximum ionic characters of $\sim 0.1$. 
+\mrk{Furthermore, the} covalent radii of the materials (see the Supplementary Information) exhibit two distinct peaks in the data distribution. 
 The trend of two data peaks is repeated for the maximum packing efficiency but is much more prominent for the empirical approach. This indicates that the material density, or in other words the bond length, is an important parameter for QT suitability.  
 
-The ML methods in the empirical approach consistently identified the first principal component as the predominant one. Identifying the single most important feature in this principal component proved challenging as it is the combined impact of several features that is important. 
-Here, we find that the standard deviation of the radial distribution function (RDF) has a  particularly strong impact since it appears four times in different forms in the top ten list over dominating features. One configuration of the standard deviation of the RDF is demonstrated in Fig.~\ref{fig:histogram_new}(c), with two others being included in the Supplementary Information at \cite{supplementary}. Intriguingly, the standard deviation of the RDF exhibits substantial discrepancies between the Ferrenti approaches and the empirical approach. This reflects the observations from the principal component analysis where the first principal component is dominated by the RDF and similarly symmetry related features. For the empirical approach, there is a sharp peak in the preferred value for the standard deviation for the RDF, while the Ferrenti and extended Ferrenti approaches display an even distribution across a broader range. 
+The ML methods in the empirical approach consistently identified the first principal component as the predominant one. Identifying the single most important feature in this principal component proved challenging as it is the combined impact of several features that \mrk{matters}. 
+Here,\mrk{the} standard deviation of the radial distribution function (RDF) has a  particularly strong impact since it appears four times in different forms in the top ten list over dominating features. One configuration of the standard deviation of the RDF is demonstrated in \mrk{Figure}~\ref{fig:histogram_new}(c), with two others being included in the Supplementary Information at \cite{supplementary}. Intriguingly, the standard deviation of the RDF exhibits substantial discrepancies between the \mrk{Ferrenti} and the empirical approach. For the empirical approach, there is a sharp peak in the preferred value for the standard deviation for the RDF, while the Ferrenti \mrk{approach displays} an even distribution across a broader range. 
+\mrk{These observations emphasize the importance of symmetry related material properties for QT suitability. }
 
 We interpret the standard deviation  of the RDF such that zero standard deviation in the RDF means that there is no variation in the radial symmetry throughout the material. Similarly, zero standard deviation in the average bond length would mean that all bonds are identical throughout the crystal. Intriguingly, the peaks in the distributions of the predicted materials are not found for perfectly symmetric materials with identical bond lengths; instead, some variation in the bond and wavefunction distributions is found to be optimal for a material to be suitable for QT.  
 Note that the maxima in Fig.~\ref{fig:histogram_new}(c) seem to appear for moderate standard deviations in the RDF, indicating that a certain degree of symmetry is necessary for a material to act as a suitable QT host. The exact degree and type of symmetry is still open to debate and merits further study. 
-Similar symmetry related features such as the standard deviation of the average bond length (see Fig.~\ref{fig:histogram_new}d), the site fingerprint of the chemical environment and the bond orientation (see the Supplementary Information at \cite{supplementary}) are also influential in guiding the ML algorithms upon classifying suitable and unsuitable materials for QT in the empirical approach. 
+Similar symmetry related features such as the standard deviation of the average bond length (see Figure~\ref{fig:histogram_new}d), the site fingerprint of the chemical environment and the bond orientation (see the Supplementary Information at \cite{supplementary}) are also influential in guiding the ML algorithms upon classifying suitable and unsuitable materials for QT in the empirical approach. 
 
 
-Interestingly, none of the nine materials predicted by the empirical approach above a $0.85$ threshold, nor of the six materials predicted by all approaches to $0.75$ confidence, are elemental. At most three different elements are present, but the emphasis is clearly on binary compounds. This resonates with the observations from the principal component analysis; an optimal degree of crystalline order likely exists for a material to manifest QT compatible properties, but some variations throughout the crystal in, e.g., bond length and symmetry are needed. This is in contrast to the expectations that guided the formulation of the test and training sets in the Ferrenti and extended Ferrenti approaches. Where most previous works have highlighted features such as band gap, polarity and ionic character as vital for a semiconductor to manifest quantum compatible features, our results reveal that local variations in the crystal structure related to symmetry and bond angles, length and orientation should be considered as well and may be more important. 
+Interestingly, none of the nine materials predicted by the empirical approach above a $0.85$ threshold, nor of the six materials predicted by all approaches to $0.75$ confidence, are elemental. At most three different elements are present, but the emphasis is clearly on binary compounds. This resonates with the observations from the principal component analysis; an optimal degree of crystalline order likely exists for a material to manifest QT compatible properties, but some variations throughout the crystal in, e.g., bond length and symmetry are needed. This is in contrast to the expectations that guided the formulation of the test and training sets in the Ferrenti \mrk{approach}. Where most previous works have highlighted features such as band gap, polarity and ionic character as vital for a semiconductor to manifest quantum compatible features, our results reveal that local variations in the crystal structure related to symmetry and bond angles, length and orientation should be considered as well and may be more important. 
 
-Considering the trends in machine learning selectivity in light of the specific defect centers we know to be quantum compatible reveals fascinating characteristics. None of the known quantum emitters or spin centers seem to appear in completely uniform systems. For example, in the high symmetry materials of diamond and silicon, QT compatible defects are not intrinsic; neither the silicon vacancy in silicon nor the carbon vacancy in diamond, for example,  have exhibited single-photon emission or controllable spin coherence. Instead, we find that quantum effects often appear after impurities are introduced, as evidenced by the phosphorous and carbon impurities in silicon \cite{He2019,Redjem2020} and the nitrogen-vacancy, germanium-vacancy, tin-vacancy and lead-vacancy centers in diamond \cite{Thiering2020}. 
+Considering the trends in machine learning selectivity in light of the specific defect centers we know to be quantum compatible reveals fascinating characteristics. None of the known quantum emitters or spin centers seem to appear in completely uniform systems. For example, in the high symmetry materials of diamond and silicon, QT compatible defects are not intrinsic; neither the silicon vacancy in silicon nor the carbon vacancy in diamond, for example,  have exhibited single-photon emission or controllable spin coherence. Instead, \mrk{quantum} effects often appear after impurities are introduced, as evidenced by the phosphorous and carbon impurities in silicon \cite{He2019,Redjem2020} and the nitrogen-vacancy, germanium-vacancy, tin-vacancy and lead-vacancy centers in diamond \cite{Thiering2020}. 
 For the binary system of silicon carbide in different polytypes, on the other hand, intrinsic defects like the silicon vacancy and the divacancy are appropriate for our goals. 
 While these trends have yet to be verified on a grander scale, our findings provide strong indications that local variations in the crystal structure are paramount for QT compatible properties to manifest in a semiconductor host. 
 
-Our findings are corroborated by the fact that all four ML methods predict a small set of the unlabeled materials as suitable, while agreeing on a large part of these materials. 
-The methods we have chosen are all well tested, with random forests and gradient boosting methods tending to outperform the others, resulting normally in a small bias and variance \cite{Hastie2009,Mehta2019,Murphy2012}. 
+\mrk{One should note that there is a certain degree of bias inherent to the data set labeled in the empirical approach. Firstly, experimental searches will always be limited by the availability and cost of materials and processing. Secondly, the discovery of the quantum compatible properties of the NV center in diamond naturally led early searchers to comparable materials such as silicon carbide. However, the broad range of materials predicted and listed in Table~\ref{tab:materialproperties} and the Supplementary Information at \cite{supplementary} indicates that the ML methods are detecting underlying properties which manifest in materials systems of several kinds. }
 
-To summarize, the data extraction tools developed in this work resulted in a dataset of over $25.000$ materials and more than $4800$ physics-informed features. Three different approaches (Ferrenti, extended Ferrenti and empirical) for data labeling were employed for training and testing of four ML algorithms. 
-We find a much clearer separation between suitable and unsuitable candidates after data labeling in the empirical approach than for the two Ferrenti ones. 
-Additionally, substantially fewer principal components are needed for obtaining optimal performance of the ML algorithms for the empirical approach. 
-The principal component analyses of the ML methods' performance imply that the Ferrenti and extended Ferrenti approaches, with their strong focus on band gap and bonding character when assessing a material's quantum compatibility, largely replicate the specifications of the data labeling process. 
-Valuable insight is gained from the empirical approach which highlights the importance of symmetry related properties in the bond orientations and wavefunctions. 
+To summarize, the data extraction tools developed in this work resulted in a dataset of over \mrk{$25,000$} materials and more than $4800$ physics-informed features. Three different approaches (Ferrenti, extended Ferrenti and empirical) for data labeling were employed for training and testing of four ML algorithms. 
+\mrk{The clear separation between suitable and unsuitable candidates after data labeling, along with the smaller number of principal components needed for obtaining optimal performance of the ML algorithms, indicate that the empirical approach based on findings from the literature is suitable for performing this type of guided search through materials databases.} 
+%We find a much clearer separation between suitable and unsuitable candidates after data labeling in the empirical approach than for the two Ferrenti ones. 
+%Additionally, substantially fewer principal components are needed for obtaining optimal performance of the ML algorithms for the empirical approach. 
+The principal component analyses of the ML methods' performance imply that the Ferrenti \mrk{approach with its} strong focus on band gap and bonding character when assessing a material's quantum compatibility \mrk{to some extent reproduces} the specifications of the data labeling process, \mrk{as expected.} 
+Valuable insight is gained from \mrk{comparing the important features of the Ferrenti with those for} the empirical approach which highlights the importance of symmetry related properties in the bond orientations and wavefunctions \mrk{over expected features related to band gap and bonding}. 
 
-The findings presented here firmly establish that material informatics (from data mining via featurization to machine learning predictions) is a viable and important route to new discoveries in important fields.  Our focus has been on predicting new candidate materials to host single-photon emitters and spin centers for quantum technology applications, but the framework we have developed is suitable for other fields as well. We suggest two possible paths to further exploit our findings. One aspect is the pursuit of experimental verification of QT compatible effects in the materials predicted as suitable by the four ML methods. Another, perhaps even more important, route is to use the features and trends identified during the data mining and prediction process to understand the distinct material characteristics that enable quantum effects to manifest, opening  thereby up for new discoveries in the field of quantum technologies. 
+The findings presented here firmly establish that material informatics (from data mining via featurization to machine learning predictions) is a viable and important route to new discoveries in important fields. 
+Our focus has been on predicting new candidate materials to host single-photon emitters and spin centers for quantum technology applications, but the \mrk{developed framework} is suitable for other fields as well. \mrk{Two possible paths are suggested to further exploit the findings presented herein.} One aspect is the pursuit of experimental verification of QT compatible effects in the materials predicted as suitable by \mrk{machine learning}. Another, perhaps even more important, route is to use the features and trends identified during the data mining and prediction process\mrk{es} to understand the distinct material characteristics that enable quantum effects to manifest, opening  thereby up for new discoveries in the field of quantum technologies. 
 
 
 \section*{Methods}
@@ -676,12 +705,18 @@ The Open Quantum Materials Database (OQMD) \cite{Saal2013, Kirklin2015} contains
 JARVIS-DFT \cite{Choudhary2020} is an open-source database based on the VASP software and consists of roughly $40.000$ three-dimensional materials using the vdW-DF-OptB88 (OPT) functional \cite{Thonhauser2007, Klimes2011}. Structures included in the database are originally taken from the Materials Project \cite{Jain2013, Jain2018}, and then re-optimized using the OPT functional. Finally, the combination of the OPT and modified Becke-Johnson (mBJ) functionals \cite{Tran2009} is used to obtain a representative band gap for each structure \cite{Choudhary2018a}. Data extraction from JARVIS-DFT was done in January of $2021$, were we utilized the version made available on 30.04.2021 (see Ref. \cite{Choudhary2020}).
 %at \url{figshare.com}.
 
-The AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} repository is an automatic software framework for the calculations of a wide range of inorganic material properties. They utilize the PBE functional within VASP to relax and optimize the structure from the ICSD. Data extraction was performed in the period of January to February of $2021$.
+The AFLOW \cite{Curtarolo2012, Curtarolo2012a, Calderon2015} repository is an automatic software framework for the calculations of a wide range of inorganic material properties. They utilize the PBE functional \mrk{with the $+U$ correction} within VASP to relax and optimize all structures from the ICSD. Data extraction was performed in the period of January to February of $2021$.
 
 AFLOW-ML \cite{Isayev2017} is an application programming interface (API) that uses machine learning to predict thermo-mechanical and electronic properties based on the chemical composition and atomic structure alone, which are denoted as \textit{fragment descriptors}. Initially, the API decides whether a given material is a metal or an insulator, where the latter is confirmed with an additional regression method to predict the band gap. The accuracy is validated by a five-fold cross-validation process for each ML method, where they report a $93 \ \%$ prediction success of their initial binary classification method. In this work we utilized the Property Labeled Material Fragments (PLMF) openly available at their website 
 (see Ref. \cite{Isayev2017}).
 %\url{aflowlib.org}. 
 We extract the crystallographic information files (CIF) for the crystals from Materials Project, use the CIF files as input to AFLOW-ML, which then returns an anticipated band gap. This process was executed during January of $2021$. 
+
+\mrk{Note that from the initial criterion, we define that a material is required to have an ICSD identifier (ID) in Materials Project. This ID is included in the AFLOW,  AFLOW-ML, JARVIS-DFT and OQMD databases as well. If two different databases have different values for the same property, such as the band gap, we added both of them as columns (features) to our data to avoid any data cluttering. An additional analysis to uncover any difference in space groups reported from Materials Project and the other databases, where we had an average match of $97 \ \%$, which is close to an ideal match. We note that the small deviation might arise due to errors in either database, and is not necessarily reflected in the remaining features of the data. For the experimental values from Citrine, we could only verify the chemical formula since the experimental data is lacking information regarding the structure (e.g. space group, symmetry) of the material.}
+
+\mrk{The data regarding a material's magnetic character is extracted from the Materials Projects database. Indeed, the majority of these calculations are based on the primitive cell, however, Materials Project performs an initial relaxation of cell and lattice parameters using a $1000$ / (number of atoms in the cell) k-point mesh to ensure that all properties calculated are representative of the idealized unit cell for each respective structure. As a result, we can find, e.g., Fe labeled as ferromagnetic and NiO as antiferromagnetic in our data set.} 
+
+\mrk{MP includes larger structures of the same material. We have included all structures and materials from Materials Project, but we have not checked which materials are represented as a larger cell in our data. We have thereby not verified whether antiferromagnetic ordering has been investigated for all cases. This is an improvement that could be made to our method in a further work.}
 
 \subsection*{Material Informatics}  
 Matminer \cite{Ward2018} is an open source toolkit for material analysis written in Python. Matminer provides modules to extract information from a wide variety of databases. Additionally, they provide the tools to construct possibly thousands of features from calculations based on a material's composition, structure and electronic properties from DFT calculations, and have frameworks for visualization and automatic machine learning. 
@@ -703,6 +738,9 @@ In this work we have applied four well-known and tested ML methods for classific
     \item Gradient boosting.
 \end{enumerate}
 Logistic regression \cite{Hastie2009} is a simple and frequently used method for binary and multi-category classification problems. In addition to logistic regression, we have also applied and tested the predictions made by decision trees and ensemble methods like random forests and gradient boosting, the latter through the application of the computationally efficient XGBoost library \cite{xgboost2016}. Gradient boosting and random forests use decision trees as weak learners and improve their predictability. For random forests this is implemented through a collection of randomized decision trees where a subset of the features in the datasets are selected randomly when building a decision tree. Boosting methods like gradient boosting use decision trees as weak learners and improve upon these by an iterative process that involves the estimation of the gradients of the cost/loss function  \cite{Hastie2009}. Pure decision trees can easily lead to overfitting of the data under study, leading to a ML method that exhibits a high variance. Ensemble methods like random forests and gradient boosting on the other hand tend to soften the overfitting problem, resulting in both a small bias and a reduced variance of the employed method, see for example Refs.~\cite{Hastie2009,Mehta2019} for an in-depth discussion of the bias-variance trade-off in machine learning. Gradient boosting implemented through the  XGBoost library \cite{xgboost2016} is widely used by data scientists to achieve state-of-the-art results on many machine learning challenges. 
+
+\mrk{Our findings are corroborated by the fact that all four ML methods predict a small set of the unlabeled materials as suitable, while agreeing on a large part of these materials. 
+The methods we have chosen are all well tested, with random forests and gradient boosting methods tending to outperform the others, resulting normally in a small bias and variance \cite{Hastie2009,Mehta2019,Murphy2012}.}
 
 \section*{Data availability} 
 The datasets that support the findings of this study are available online at \cite{Ohebbi2021}.
