@@ -169,7 +169,7 @@ Most recently, IBM announced its $127$ qubit quantum processor~\cite{IBM2021}. S
 %Figure 1 introduction schematic 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/ht-workflow-new-2.png}
+    \includegraphics[width=0.9\textwidth]{figure1.png}
     \caption{Schematic of an example workflow in material informatics. Results from theory, experiment and computation are fed into material databases (arrow pointing to the center). A cycle involving material screening, machine learning and predictions leads to knowledge gain and ultimately applications in fields such as clean energy and quantum technology. 
     }
     \label{fig:ht-workflow}
@@ -221,7 +221,7 @@ We note that despite being immensely successful in describing a number of materi
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.9\textwidth]{figures/flow_chart_2.png}
+    \includegraphics[width=0.9\textwidth]{figure2.png}
     \caption{The project workflow starting from an initial Materials Project (MP) query, and ending with a featurized dataset with entries from several other databases. 
     To limit the memory and computational usage, the data \mrk{is} partitioned into smaller subsets where the respective Pymatgen objects (Pymatgen is a robust, open-source Python library for materials analysis \cite{pymatgen}) are obtained through a query to be used in the following featurization steps. This process is repeated iteratively until all the data has been featurized. \emph{DOS} refers to density of states and \emph{band} to the electronic band structure. 
     }
@@ -360,14 +360,15 @@ These $12$ entries are calculated to be thermodynamically unstable in terms of t
  
 \begin{figure}[t] %!htp
     \centering
-    \begin{subfigure}{1\textwidth}
-        \centering
-        \scalebox{0.85}{\input{AllFigures/01-ferrenti-approach-v2.pgf}}
-    \end{subfigure}
-    \begin{subfigure}{1\textwidth}
-        \centering
-          \scalebox{0.85}{\input{AllFigures/03-empirical-approach-v3.pgf}}
-    \end{subfigure}
+    %\begin{subfigure}{1\textwidth}
+    %    \centering
+    %    \scalebox{0.85}{\input{AllFigures/01-ferrenti-approach-v2.pgf}}
+    %\end{subfigure}
+    %\begin{subfigure}{1\textwidth}
+     %   \centering
+     %     \scalebox{0.85}{\input{AllFigures/03-empirical-approach-v3.pgf}}
+    %\end{subfigure}
+    \includegraphics[width=0.8\textwidth]{figure3.pdf}
     \caption{Parallel coordinate plots for the two different approaches. \mrk{To limit data cluttering up to $250$ entries for each class were randomly collected.}  
     %For the empirical approach, we have used all the $187$ suitable candidates. 
     The axes show total magnetization (mag), space group (SG), ionic character (ionic char), covalent range (cov range) as calculated from elemental properties, number of elements (num elements) and energy gap (Eg) as extracted from the MP database.} 
@@ -396,11 +397,11 @@ Following the three screening steps in the empirical approach, a total of $187$ 
     \centering
     \begin{subfigure}{0.35\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{AllFigures/01-ferrenti-approach.pdf}
+        \includegraphics[width=1\textwidth]{figure4a.pdf}
     \end{subfigure}%
     \begin{subfigure}{0.35\textwidth}
         \centering
-        \includegraphics[width=1\textwidth]{AllFigures/03-insightful-approach.pdf}
+        \includegraphics[width=1\textwidth]{figure4b.pdf}
     \end{subfigure}
     \caption{Two-dimensional scatter plots for the \mrk{Ferrenti and empirical} approaches. \mrk{The eigenvectors corresponding to the two largest eigenvalues of the covariance-matrix were identified}, that is, the two most important principal components of the initial data from the Materials Project query. Then, \mrk{the labeled datasets were transformed and visualized as 2D scatter plots.} Green squares display suitable candidates, along with the black (SiC), blue (diamond) and yellow (Si) symbols \mrk{for the empirical approach}, and red triangles represent unsuitable candidates.}
     \label{fig:2dscatterplotpca}
@@ -436,7 +437,7 @@ This \mrk{strongly indicates that the empirical approach may be capable of separ
 \mrk{Four well-tested ML algorithms were applied to the labeled data} to classify specific materials as candidate systems for QT\mrk{, yielding multiple sets of predicted candidates. The ML methods employed herein} are logistic regression, decision trees, and the ensemble methods random forests and gradient boosting \cite{Mehta2019,Hastie2009,Murphy2012}. 
 %These four ML methods were applied to the labeled datasets that were optimized using each of the three approaches (Ferrenti, extended Ferrenti and empirical) outlined above, yielding twelve sets of candidates that were predicted as suitable material hosts for QT applications.  
 %\mrk{To} reduce the dimensionality while preserving most of the variance in the data, \mrk{a principal component analysis  \cite{Jolliffe2002} was performed} for each of the three approaches (Ferrenti, extended Ferrenti and empirical).
-\mrk{Principal component analysis was again performed, but now on the three training sets separately}\footnote{In the main text we discuss the Ferrenti dataset and the empirical one. The corresponding results for the extended Ferrenti set are listed in the supplementary material.}
+\mrk{Principal component analysis was again performed, but now on the three training sets separately} \footnote{In the main text we discuss the Ferrenti dataset and the empirical one. The corresponding results for the extended Ferrenti set are listed in the Supplementary Information.}
 % \mrk{A principal component analysis was performed where first the} 
 % eigenvalues of the covariance matrices of the three training sets are identified in order of decreasing value, resulting in \mrk{distinct PCA models for each data labeling approach}
 (as opposed to the case of Fig.~\ref{fig:2dscatterplotpca} where all panels are based on the same model). 
@@ -453,21 +454,21 @@ also experiences the best performance for just a few principal components.
 \begin{figure}[t]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{AllFigures/01-ferrenti-approach-PC-v2.tex}
+        \includegraphics{figure5a}
         \label{fig:01-fi-e}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{AllFigures/01-ferrenti-approach-GB-v2.tex}
+        \includegraphics{figure5b}
         \label{fig:01-fi-d}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{AllFigures/03-empirical-approach-PC-v2.tex}
+        \includegraphics{figure5c}
         \label{fig:03-fi-e}
         \subcaption{}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
-        \input{AllFigures/03-empirical-approach-GB-v2.tex}
+        \includegraphics{figure5d}
         \label{fig:03-fi-d}
         \subcaption{}
     \end{subfigure}
@@ -551,7 +552,7 @@ There appears to be a high degree of symmetry present for all materials, but \mr
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.85\textwidth]{AllFigures/fig6-all.png}
+    \includegraphics[width=0.85\textwidth]{figure6.png}
     \caption{\mrk{Example illustrations} of the crystal systems that the $9$ materials predicted by the empirical approach to $0.85$ confidence, and the $6$ materials predicted by all approaches to $0.75$ confidence\mrk{,} belong to. Four different symmetry categories are observed; cubic, hexagonal, tetragonal and orthorombic. The viewpoints for all materials are down along the $c$-axis.   }
     \label{fig:crystalsystems}
 \end{figure}
@@ -656,24 +657,24 @@ We highlight these six compounds, along with the nine predicted by the empirical
 \begin{figure}[t]
     \begin{subfigure}[b]{1\textwidth}
     \centering
-    \input{figures/histograms/revised/LegendHistogram.tex}
+    \includegraphics{figure7-legend.pdf}
   \end{subfigure}
   \par\bigskip
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/revised/MP_Eg_count_075.tex}
+    \includegraphics{figure7a.pdf}
     \subcaption{}
 \end{subfigure}
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/revised/IonProperty_max ionic char_count_075.tex}
+    \includegraphics{figure7b.pdf}
     \subcaption{}
 \end{subfigure}%
 
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/revised/GeneralizedRDF_std_dev Gaussian center=1.0 width=1.0_count_075.tex}
+    \includegraphics{figure7c.pdf}
     \subcaption{}
 \end{subfigure}
 \begin{subfigure}[b]{0.45\textwidth}
-    \input{figures/histograms/revised/AverageBondLength_std_dev Average bond length_count_075.tex}
+    \includegraphics{figure7d.pdf}
     \subcaption{}
 \end{subfigure}
 \caption{Histograms of predicted suitable materials as a function of the (a) \mrk{band gap}, (b) maximum ionic character, (c) standard deviation of the radial distribution function (RDF) and (d) standard deviation of the average bond length. The total number of predicted materials is  $6804$ for the Ferrenti approach, and $214$ for the empirical approach. The Ferrenti \mrk{approach refers} to the left $y$-axis and the empirical approach to the right.
