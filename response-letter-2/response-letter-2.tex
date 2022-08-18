@@ -1,0 +1,201 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Professional Formal Letter
+% LaTeX Template
+% Version 2.0 (12/2/17)
+%
+% This template originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Brian Moses
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt, a4paper]{letter} % Set the font size (10pt, 11pt and 12pt) and paper size (letterpaper, a4paper, etc)
+\usepackage{color}
+\usepackage{siunitx}
+\newcommand{\mrk}[1]{\textcolor{red}{#1}}
+
+\input{structure.tex} % Include the file that specifies the document structure
+
+%\longindentation=0pt % Un-commenting this line will push the closing "Sincerely," and date to the left of the page
+
+%----------------------------------------------------------------------------------------
+%	YOUR INFORMATION
+%----------------------------------------------------------------------------------------
+
+\Who{} % Your name
+
+\Title{  } % Your title, leave blank for no title
+
+\authordetails{%
+	Morten Hjorth-Jensen \\ 
+	Department of Physics\\ % Your department/institution
+	P.O. Box 1048, Blindern\\ % Your address
+	N-0316 Oslo, Norway\\ % Your city, zip code, country, etc
+	Email: \\ 
+	morten.hjorth-jensen \\ 
+	@fys.uio.no % Your email address
+}
+
+%----------------------------------------------------------------------------------------
+%	HEADER CONTENTS
+%----------------------------------------------------------------------------------------
+
+\logo{UiO_logo.png} % Logo filename, your logo should have square dimensions (i.e. roughly the same width and height), if it does not, you will need to adjust spacing within the HEADER STRUCTURE block in structure.tex (read the comments carefully!)
+
+\headerlineone{UNIVERSITY} % Top header line, leave blank if you only want the bottom line
+
+\headerlinetwo{OF OSLO} % Bottom header line
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TO ADDRESS
+%----------------------------------------------------------------------------------------
+
+\begin{letter}{
+	Dr. Long-Qing Chen\\
+	Editor-in-Chief\\
+	\textit{npj Computational Materials} \\ 
+	npjcompumats@nature.com \\ 
+}
+
+%----------------------------------------------------------------------------------------
+%	LETTER CONTENT
+%----------------------------------------------------------------------------------------
+
+\opening{}
+
+\begin{center}
+   \textbf{Resubmission of the manuscript entitled “Predicting Solid State Material Platforms for Quantum Technologies” by O. L. Hebnes, et al.}
+\end{center}
+
+\noindent
+Dear Editor, 
+
+Please find enclosed a revised version of the manuscript entitled “Predicting Solid State Material Platforms for Quantum Technologies” by Oliver L. Hebnes, et al., submitted for publication as an original article in \textit{npj Computational Materials}. There are four files in all: the npj checklist, a marked-up Manuscript file, a clean Manuscript file and a Supplementary Information file. Changes are marked in red in the marked-up Manuscript.
+
+The manuscript has undergone a minor revision. The changes outlined by the Editor have been implemented. Furthermore, additional clarification has been added on the Ferrenti approach, as suggested by Reviewer 2. Indeed - only materials that satisfy all of the criteria are labeled as suitable, while only materials that fail all of the criteria are classified as unsuitable. Finally, we have opted to rename the Ferrenti (and extended Ferrenti) approach in the style of the empirical approach, i.e., descriptive of the logic behind the labeling procedure. The Ferrenti and extended Ferrenti approaches have therefore been labeled the criteria-based and extended criteria-based approaches. 
+
+Please find detailed responses to the comments of the Reviewer and Editor below.
+
+%\closing{Sincerely,}
+Sincerely,  
+
+\noindent Prof. Morten Hjorth-Jensen and Dr. Marianne E. Bathen \\
+On behalf of all the authors 
+
+
+%----------------------------------------------------------------------------------------
+%	OPTIONAL FOOTNOTE
+%----------------------------------------------------------------------------------------
+
+% Uncomment the 4 lines below to print a footnote with custom text
+%\def\thefootnote{}
+%\def\footnoterule{\hrule}
+%\footnotetext{\hspace*{\fill}{\footnotesize\em Footnote text}}
+%\def\thefootnote{\arabic{footnote}}
+
+%----------------------------------------------------------------------------------------
+
+
+\end{letter}
+
+
+
+\newpage 
+
+
+\noindent
+\textbf{Reviewer \#2: }
+
+Reviewer \#2:
+
+In the revised version of this work, the authors address all of the issues raised in the previous round of review, including clarifying methodological details, making the text more concise, clarifying the limitations of fitting to the Ferrenti and empirical data classications, and fixing all of the minor issues. In particular, from the response to the referees, it appears that the Ferrenti approach does not classify the entire data set as either suitable or unsuitable: only materials that satisfy all of the criteria are labeled as suitable, while only materials that fail all of the criteria are classified as unsuitable. Therefore, most of the data set will be unlabeled, consisting of entries that satisfy some criteria but not others. \textcolor{blue}{If this is the case, then the authors should make this explicitly clear in the text of the manuscript itself.}
+
+
+\textit{Response:}  
+
+\textit{... \\
+We have added the following clarification to the Data Mining section: \\
+\textcolor{red}{Crucially, only materials that satisfy \emph{all} of the reverse requirements are labeled unsuitable.
+In other words, unlabeled materials will satisfy some of the selection criteria, but not all.}
+} 
+
+
+Reviewer \#2: \\
+\textcolor{blue}{They should also clarify if materials that satisfy some Ferrenti criteria but not others would be expected to be suitable or unsuitable – this would help with the interpreting the results, e.g. for NaCl.} The fact that most of the data is unlabeled by the initial Ferrenti classification would help justify the application of machine-learning approaches to this work, and this helps to clarify the purpose of this work.
+
+\textit{Response:} 
+
+\textit{Indeed, finding suitable candidates in a pool consisting of thousands of unlabeled materials acts as the main motivation behind using machine-learning methods. Therefore, we have added the following clarification to the Data Mining section:}
+
+\textcolor{red}{However, there could still be potential suitable materials among the remaining $23500$ unlabeled materials, yet impractical to manually identify them. This serves as the main motivation behind using ML-methods for predicting suitable or unsuitable materials for QT applications.}
+
+\newpage
+
+\noindent 
+\textbf{Editorial requests:} 
+
+\begin{itemize}
+    \item TITLE PAGE 
+    \begin{itemize}
+        \item The affiliations have been corrected.  
+        \item The abstract has been shortened to less than 150 words. 
+    \end{itemize}
+    \item MAIN TEXT 
+    \begin{itemize}
+        \item The ordering of manuscript components has been correcting according to the specifications. 
+        \item Figure captions have been included. 
+        \item Results and discussion have been combined. 
+        \item The headings have been modified to only include one level of subheadings. 
+    \end{itemize}
+\end{itemize}
+
+MAIN TEXT
+* Please ensure that the manuscript components are ordered as follows: Title page, Abstract, Introduction, Results, Discussion, Methods, Data Availability statement, Code Availability statement, Acknowledgements, Author Contributions, Competing Interests, References, Figure captions. 
+Results and Discussion can be combined to be "Results and Discussion". Please modify the headings accordingly.
+* We allow only one level of subheadings in the Results section. Please remove secondary subheadings such as “The Ferrenti approach”.
+
+LANGUAGE AND STYLE
+* Please remove language such as "new", "novel", "unique", "for the first time", "unprecedented", "excellent", etc. Novelty should be clear from the context.
+* Please make sure that mathematical terms throughout your manuscript and Supplementary Information (including in figures, figure axes, and captions) conform strictly to the following guidelines. Equations should be supplied in editable format, and not as images. Scalar variables (e.g. x, V, χ) should be typeset in italic, whereas multi-letter variables should be formatted in roman. Constants (e.g. ħ, G, c) should be typeset in italics (the only exceptions being e, i, π, which should be typeset in Roman) and vectors (such as r, the wavevector k, or the magnetic field vector B) should be typeset in bold without italics. In contrast, subscripts and superscripts should only be italicised if they too are variables or constants. Those that are labels (such as the 'c' in the critical temperature, T_c, the 'F' in the Fermi energy, E_F, or the 'crit' in the critical current, I_crit) should be typeset in roman. To avoid doubt, unit dimensions should be expressed using
+negative integers (e.g. kg m^-1 s^-2, not kg/ms^2) or the word 'per'.
+
+END NOTES
+* Please ensure the references are in the standard Nature format and follow the sequence: author list, title of paper, name of journal, volume number, initial-final page numbers or article number (year).
+* Please use correct abbreviations for the journal names such as ‘Nat. Phys.’ (ref 2) etc. please fix ALL in the references.
+* In the case of references with more than six authors, please change to first author et al (ref 1 etc).
+* Please provide all required citing information for references, for example, name of journal and volume/page number of ref 4.
+* Please update any preprints (e.g. ref 15) in the reference list with details of the published paper, if possible. If the paper has not been published, please cite the preprint in the style: Babichev, S. A., Ries, J. & Lvovsky, A. I. Quantum scissors: teleportation of single-mode optical states by means of a nonlocal single photon. Preprint at http://arXiv.org/quant-ph/0208066 (2002).
+* Example of book citation: Meyer, H. A. The Role of Abdominal Fat 2nd edn, Vol. 2 (Academic, 1970).
+* Example of books that form part of a series of books: Dupuis, F., Nielsen, J. B. & Salvail, L. Actively secure two-party evaluation of any quantum operation, in Advances in Cryptology – CRYPTO 2012 794–811 (Lecture Notes in Computer Science vol. 7417, Springer, 2012). Please modify references for books accordingly.
+
+DISPLAY ITEMS
+* Please check whether your manuscript or Supplementary Information contain third-party images, such as figures from the literature, stock photos, clip art or commercial satellite and map data. We strongly discourage the use or adaptation of previously published images, but if this is unavoidable, please request the necessary rights documentation to re-use such material from the relevant copyright holders and return this to us when you submit your revised manuscript.
+* Please ensure that table titles are brief - they should not occupy more than one line in the final proof.
+* In each figure (e.g. Figure 5b) where error bars are used, they must be defined. One statement at the end of each figure is sufficient if the error bars are equivalent throughout the figure.
+* Figures should be uploaded as a whole, please avoid uploading figure panels.
+
+SUPPLEMENTARY INFORMATION
+* We do not edit Supplementary Information files; they will be uploaded with the published article as they are submitted with the final version of your manuscript. Any tracked changes should be removed from the file and the file should be provided as a PDF file. Supplementary Figures do not need to be provided separately.
+* The only section headings permitted in the Supplementary Information are Supplementary Figures, Supplementary Tables, Supplementary Methods, Supplementary Notes, Supplementary Discussion, Supplementary References. All other section headings and numbering should be removed or relabelled.
+* In the Supplementary Information file and the main manuscript text, supplementary items must be labelled and cited using only the following formats: Supplementary Figure 1, Supplementary Table 1, Supplementary Methods, Supplementary Note 1, Supplementary Discussion, and Supplementary References. Please note the use of "Supplementary" and that we do not use the "S" prefix.
+---------------------------------------------------------------------
+Please remove tables and figures from the main manuscript text file. All tables and figures must be uploaded as separate files for typesetting.
+
+This revision step provides you with the opportunity to make minor changes to the manuscript. Please edit carefully and re-submit the manuscript files at the below link.
+
+
+\end{document}
